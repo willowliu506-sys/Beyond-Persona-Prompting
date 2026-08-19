@@ -1,0 +1,157 @@
+% Original template author: Joseph Rowell
+% Version: 3.0
+% This work is licensed under a Creative Commons Attribution 4.0 International License.
+\documentclass[12pt, a4paper]{report}
+\usepackage[a4paper, total={6.25in, 8.25in}]{geometry} %%%%%% CHECK MARGIN REQ. 8.25 in?
+\input{Packages.tex}
+\usepackage{multicol}
+\hypersetup{pdftitle = {Beyond Persona Prompting: A Cognitive-Process-Based Framework for ADHD Student Simulation with Large Language Models}, pdfauthor = {Qingqing Liu}, pdfstartview=FitH, pdfkeywords = {large language models, simulated students, ADHD, learner modelling, working memory}, pdfpagemode = FullScreen, colorlinks, anchorcolor = black, citecolor = blue, urlcolor = blue, filecolor = green, linkcolor = blue, plainpages = false}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancy}
+\rhead{}
+\chead{}
+\lhead{University College London}
+\lfoot{\date{}}
+\cfoot{}
+\rfoot{\thepage}
+% Top and Bottom Line Rules
+
+\renewcommand{\headrulewidth}{0.4pt} %0.4pt
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyheadoffset{8pt}
+\fancyfootoffset{8pt}
+% Line spacing
+\renewcommand{\baselinestretch}{1.5} %1.5
+
+\date{September 1, 2026}
+
+\title{Beyond Persona Prompting: \\ A Cognitive-Process-Based Framework for ADHD Student Simulation with Large Language Models}
+\author{\\ \Large{Qingqing Liu}
+\\ Student Number: 25098690
+\\ Supervisor: Dr Sahan Bulathwela
+\\ Faculty of Engineering
+\\ Department of Computer Science
+\\ 
+\\
+\\ University College London
+\\
+A Project Report Presented in Partial Fulfilment of the Degree \\ \textit{MSc Artificial Intelligence for Sustainable Development}
+\\ \\
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%Adjust logo positions here
+% \AddToShipoutPicture*{\parbox[t][\paperheight][t]{\paperwidth}{%
+%           \includegraphics[width=\paperwidth]{\BackgroundPicturea{Logos/ucl_long%_logo.png}{3in}{3in}}
+%           }}
+% \AddToShipoutPicture*{\centering\BackgroundPictureb{Logos/Bentham2011_065_c623d.jpg}{3in}{3.7in}}
+\AddToShipoutPictureBG*{%
+  \AtPageUpperLeft{%
+    \raisebox{-\height}{%
+      \includegraphics[width=\paperwidth]{Logos/UCL page header.png}%
+    }}
+}
+\AddToShipoutPicture*{%
+      \parbox[t][\paperheight][t]{\paperwidth}{%
+          \includegraphics[width=1.2\paperwidth]{Logos/UCL page footer.png}
+      }}
+      
+
+\thispagestyle{headings}
+\maketitle
+\FloatBarrier
+\pagenumbering{roman}
+
+\thispagestyle{empty}
+\begin{abstract}
+\input{0 Abstract}
+
+\keywords{large language models - simulated students - ADHD - learner modelling - working memory}
+% \vspace{-10mm} %To remove added white space after
+\end{abstract}
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+Copyright \copyright  \thinspace 2026 by Qingqing Liu \\ All Rights Reserved
+\end{center}
+\vspace*{\fill}
+\newpage
+
+
+\thispagestyle{empty}
+\chapter*{Acknowledgements}
+
+
+\thispagestyle{empty}
+\chapter*{Declaration}
+I, Qingqing Liu, declare that the thesis has been composed by myself and that the work has not been submitted for any other degree or professional qualification. I confirm that the work submitted is my own, except where work which has formed part of jointly-authored publications has been included and referenced. The report may be freely copied and distributed provided the source is explicitly acknowledged. \\
+%Add signature png here.
+% \begin{figure}[H]
+% \includegraphics{Logos/signature.PNG}
+% \end{figure}
+\vspace{-2cm}
+\noindent\begin{tabular}{ll}
+ & September 1, 2026 \\
+\makebox[2.5in]{\hrulefill} & \makebox[2.5in]{\hrulefill}\\
+\textit{Signature} & \textit{Date}\\
+\end{tabular}
+
+
+
+\tableofcontents
+
+\thispagestyle{plain}
+\listoffigures
+\listoftables
+%\lstlistoflistings
+\listofalgorithms
+
+
+%\begin{singlespace}
+\chapter*{List of Abbreviations}
+\begin{sortedlist} %sort alphabetically
+  \sortitem{ACU:     Atomic Content Unit}
+  \sortitem{ADHD:    Attention-Deficit/Hyperactivity Disorder}
+  \sortitem{CPB:     Cognitive-Process-Based}
+  \sortitem{LLM:     Large Language Model}
+  \sortitem{LTM:     Long-Term Memory}
+  \sortitem{NT:      Neurotypical}
+  \sortitem{RQ:      Research Question}
+  \sortitem{WM:      Working Memory}
+  \end{sortedlist}
+% \end{singlespace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{1 Project Plan}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{2 Introduction and Background}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{3 Methodology}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{4 Results and Analysis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{5 Discussion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{6 Conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{7 Future Work}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\bibname}{References}
+\bibliographystyle{ieeetr}
+%\bibliography{Bibliography.bib}
+\bibliography{references.bib}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% APPENDIX
+\begin{appendices}
+\chapter{Supplementary Materials}\label{appendix:supplementary-materials}
+% Add prompts, rubrics, data schemas, and supplementary results here.
+
+\chapter{Source Code}\label{appendix:source-code}
+The project source code and dissertation materials are available at:\\
+\url{https://github.com/willowliu506-sys/Beyond-Persona-Prompting}
+
+
+\end{appendices}
+% INDEX?
+
+\end{document}
