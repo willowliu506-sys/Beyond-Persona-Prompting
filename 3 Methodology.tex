@@ -16,7 +16,73 @@
 
 \mbox{}\par
 
-\input{Chapters/Chapter_3/3.2_Teaching_Materials_and_Dataset_Construction}
+\section{Teaching Materials and Dataset Construction}
+\label{sec:teaching-materials-dataset}
+
+\subsection{Source Materials}
+\label{subsec:source-materials}
+
+The instructional corpus comprised seven English-language lessons adapted from Sections 1.1--1.7 of \textit{OpenStax Principles of Finance 2e}. The lessons covered the definition and role of finance, the use of data and technology, careers in finance, financial markets and participants, microeconomic and macroeconomic influences, and financial instruments. A single subject area was used to reduce variation attributable to disciplinary genre while retaining a mixture of definitions, factual relations, comparisons, processes, examples, and causal or conditional information suitable for short-answer assessment.
+
+Each lesson file retained the lesson identifier, title, subject, source attribution, language, learning objectives, clean instructional source, teaching rounds, and assessment linkage. Source-file names and SHA-256 hashes were recorded to preserve provenance. The final corpus was frozen as dataset version \texttt{1.0.0} in \path{processed_teaching_materials_v2/frozen_v1_0_0}. The frozen release contains separate \texttt{lessons} and \texttt{questions} directories, a machine-readable validation report, and a manifest containing the SHA-256 hash of every experimental lesson and assessment file.
+
+\subsection{Coreference Resolution and Text Preprocessing}
+\label{subsec:coreference-preprocessing}
+
+The source summaries were preprocessed before teaching-round segmentation so that each sentence could be interpreted without relying on an antecedent located in a previous round. Context-dependent sentence openings, including unresolved uses of \textit{it}, \textit{they}, and similarly underspecified noun phrases, were replaced with explicit referents where necessary. This operation was restricted to reference resolution: it was not intended to introduce new instructional claims, simplify the underlying finance content, or alter the order in which information was presented.
+
+Following preprocessing, each sentence was reviewed for local interpretability. The review asked whether a student receiving the sentence as part of a short teaching round could identify the subject, relation, and relevant object or outcome without access to an earlier round. The resulting context-independent text formed the clean instructional source from which all experimental conditions were derived.
+
+\subsection{Teaching-Round Segmentation}
+\label{subsec:teaching-round-segmentation}
+
+The preprocessed lessons were divided into teaching rounds containing two or three complete source sentences. Original sentences were not split merely to equalise round length, because syntactic splitting could interrupt a relation or create a fragment that remained difficult to interpret despite coreference resolution. The segmentation procedure instead sought a practical balance between local coherence and moderately comparable round length while preserving source order.
+
+Rounds were assigned identifiers of the form \texttt{R01}, \texttt{R02}, and so forth within each lesson. Sentences were assigned nested identifiers such as \texttt{R01\_S01} and \texttt{R01\_S02}. Each round stored its ordered sentence objects, reconstructed \texttt{instructional\_text}, deterministic surface-word count, and offline \texttt{processing\_demand\_bits} annotation. These identifiers provide the common keys linking source content, distractor placement, mechanism logs, memory entries, assessment questions, checklist criteria, and later evaluation records.
+
+Surface words were counted using a frozen deterministic rule for the English materials: alphanumeric sequences were counted as one word, with internal apostrophes and hyphens retained within a token. Word count was stored as a descriptive length measure rather than treated as an equivalent of semantic information or cognitive load.
+
+\subsection{Dataset Characterisation}
+\label{subsec:dataset-characterisation}
+
+The frozen corpus contains 83 teaching rounds and 201 sentences, comprising 3,719 surface words. Lesson length ranged from 10 to 14 rounds, 26 to 32 sentences, and 474 to 671 surface words. The final assessment contains 42 independent questions, seven cross-round integrative questions, and 137 checklist criteria. Forty-two question-targeted distractor assignments were materialised in the lesson files.
+
+\begin{table}[htbp]
+\centering
+\caption{Descriptive characteristics of the frozen instructional corpus and assessment dataset.}
+\label{tab:dataset-characterisation}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrrr}
+\toprule
+Lesson & Teaching rounds & Sentences & Surface words & Independent questions & Integrative questions & Checklist criteria & Distractors \\
+\midrule
+L01 & 14 & 31 & 671 & 6 & 1 & 19 & 6 \\
+L02 & 12 & 26 & 525 & 6 & 1 & 17 & 6 \\
+L03 & 11 & 27 & 523 & 6 & 1 & 21 & 6 \\
+L04 & 11 & 27 & 475 & 6 & 1 & 21 & 6 \\
+L05 & 12 & 31 & 499 & 6 & 1 & 21 & 6 \\
+L06 & 10 & 27 & 474 & 6 & 1 & 19 & 6 \\
+L07 & 13 & 32 & 552 & 6 & 1 & 19 & 6 \\
+\midrule
+\textbf{Total} & \textbf{83} & \textbf{201} & \textbf{3,719} & \textbf{42} & \textbf{7} & \textbf{137} & \textbf{42} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+The dataset contains both two- and three-sentence rounds rather than forcing a uniform sentence count. Processing demand and word count were therefore retained as explicit round-level covariates. The corpus was designed for controlled within-corpus comparison; its distributions should not be interpreted as representative of finance textbooks in general.
+
+\subsection{Distractor Construction}
+\label{subsec:distractor-construction}
+
+A bilingual bank of short classroom events was developed to represent externally noticeable but instructionally irrelevant occurrences, such as a bird passing a window, a siren outside the classroom, or an object falling to the floor. The English labels were used in the present instructional corpus. Distractors were enclosed in square brackets so that they could be detected deterministically by the processing workflow without relying on an LLM to infer whether a phrase constituted a distraction.
+
+Distractor placement was linked to the final independent assessment questions. Each of the six independent questions in a lesson declared one or more source sentence identifiers, and one of those source sentences was selected as the question's \texttt{target\_sentence\_id}. A single bracketed distractor was inserted immediately before that target sentence. The assignment stored the question identifier, distractor event, target sentence identifier, and the intended mechanism relationship. Removing the bracketed label from a distracted round was required to recover the clean \texttt{instructional\_text} exactly after whitespace normalisation.
+
+The placement rule controls which sentence is directly affected by a question-targeted distraction; it does not require the underlying knowledge to occur only once in the lesson. The same or related information may legitimately appear in another teaching round and may subsequently enter the learner's Long-Term Memory. This design reflects cumulative lesson learning and avoids treating cross-round semantic reinforcement as a preprocessing error. Consequently, a correct downstream answer does not demonstrate that a targeted mechanism failed: the answer may be supported by knowledge acquired elsewhere in the lesson.
+
+The seven integrative questions were not assigned a dedicated distractor because they require knowledge from multiple teaching rounds and were not included in the primary matched manipulation of question-targeted Attention effects.
 
 \section{Cognitive-Process-Based Framework}
 
