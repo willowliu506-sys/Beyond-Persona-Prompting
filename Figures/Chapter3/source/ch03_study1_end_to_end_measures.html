@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Study 1 End-to-End Propagation Measures</title>
+  <link rel="stylesheet" href="../../Shared/flowchart_style.css">
+  <style>
+    @page { size: 1270px 470px; margin: 0; }
+    html, body, .canvas { width: 1270px; height: 470px; }
+
+    .section-label {
+      position: absolute;
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 16px;
+      color: var(--neutral-text);
+      text-align: left;
+    }
+
+    .mechanism-label {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 20px;
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 16px;
+      color: var(--blue-text);
+      text-align: center;
+      z-index: 5;
+    }
+
+    .cumulative-line {
+      position: absolute;
+      height: 0;
+      border-top: var(--arrow-width) solid var(--arrow);
+      z-index: 2;
+    }
+
+    .cumulative-line::after {
+      content: "";
+      position: absolute;
+      right: -1px;
+      top: -4.25px;
+      width: 7px;
+      height: 7px;
+      border-top: var(--arrow-width) solid var(--arrow);
+      border-right: var(--arrow-width) solid var(--arrow);
+      transform: rotate(45deg);
+    }
+
+    .source-stem,
+    .target-stem {
+      position: absolute;
+      width: 0;
+      border-left: var(--border-width) solid var(--arrow);
+      z-index: 2;
+    }
+
+    .metric-label {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font);
+      text-align: center;
+      line-height: 16px;
+      color: var(--blue-text);
+      background: #FFFFFF;
+      z-index: 5;
+    }
+
+    .metric-label strong {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .metric-label span {
+      margin-top: 2px;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--neutral-text);
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas" role="img" aria-label="Study 1 cumulative end-to-end measures tracing information from the source to available input, explicit long-term memory and the final answer">
+    <div class="section-label" style="left:35px;top:32px;width:180px;">Reference information flow</div>
+
+    <div class="node neutral-node" style="left:35px;top:105px;width:130px;height:60px;"><span>Source<br><i>S</i></span></div>
+
+    <div class="mechanism-label" style="left:169px;top:72px;width:145px;">Attention</div>
+    <div class="arrow-right" style="left:169px;top:135px;width:145px;"></div>
+    <div class="node neutral-node" style="left:318px;top:105px;width:160px;height:60px;"><span>Post-Attention<br>Input <i>P</i></span></div>
+
+    <div class="mechanism-label" style="left:482px;top:72px;width:150px;">Working Memory</div>
+    <div class="arrow-right" style="left:482px;top:135px;width:150px;"></div>
+    <div class="node neutral-node" style="left:636px;top:105px;width:140px;height:60px;"><span>Available<br>Input <i>A</i></span></div>
+
+    <div class="mechanism-label" style="left:780px;top:72px;width:142px;">Encoding</div>
+    <div class="arrow-right" style="left:780px;top:135px;width:142px;"></div>
+    <div class="node neutral-node" style="left:926px;top:105px;width:140px;height:60px;"><span>Explicit<br>LTM <i>L</i></span></div>
+
+    <div class="mechanism-label" style="left:1070px;top:72px;width:36px;">QA</div>
+    <div class="arrow-right" style="left:1070px;top:135px;width:36px;"></div>
+    <div class="node neutral-node" style="left:1110px;top:105px;width:125px;height:60px;"><span>Answer<br><i>Y</i></span></div>
+
+    <div class="section-label" style="left:180px;top:205px;width:200px;">Cumulative outcomes</div>
+
+    <div class="source-stem" style="left:100px;top:165px;height:95px;"></div>
+    <div class="cumulative-line" style="left:100px;top:260px;width:606px;"></div>
+    <div class="target-stem" style="left:706px;top:165px;height:95px;"></div>
+    <div class="metric-label" style="left:335px;top:224px;width:136px;height:34px;">
+      <strong>SWAR</strong><span>Source to A</span>
+    </div>
+
+    <div class="source-stem" style="left:100px;top:165px;height:175px;"></div>
+    <div class="cumulative-line" style="left:100px;top:340px;width:896px;"></div>
+    <div class="target-stem" style="left:996px;top:165px;height:175px;"></div>
+    <div class="metric-label" style="left:480px;top:304px;width:136px;height:34px;">
+      <strong>E2ESR</strong><span>Source to LTM</span>
+    </div>
+
+    <div class="source-stem" style="left:100px;top:165px;height:255px;"></div>
+    <div class="cumulative-line" style="left:100px;top:420px;width:1072px;"></div>
+    <div class="target-stem" style="left:1172px;top:165px;height:255px;"></div>
+    <div class="metric-label" style="left:548px;top:384px;width:176px;height:34px;">
+      <strong>Checklist Score</strong><span>Source to Answer</span>
+    </div>
+  </main>
+</body>
+</html>

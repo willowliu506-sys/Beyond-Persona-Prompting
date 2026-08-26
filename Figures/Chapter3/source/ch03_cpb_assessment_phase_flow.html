@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CPB Assessment Phase Flow</title>
+  <link rel="stylesheet" href="../../Shared/flowchart_style.css">
+  <style>
+    @page { size: 870px 230px; margin: 0; }
+    html, body, .canvas { width: 870px; height: 230px; }
+
+    .state-symbol {
+      display: inline-block;
+      margin-top: 3px;
+      font-weight: 400;
+    }
+
+    sub {
+      font-size: 10px;
+      line-height: 0;
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas" role="img" aria-label="CPB assessment phase in which explicit long-term memory and an assessment question jointly enter LTM-constrained answering to produce a student answer">
+    <div class="node neutral-node" style="left:30px;top:35px;width:180px;height:64px;">
+      <span>Explicit LTM<br><span class="state-symbol"><i>L</i><sub>r,c</sub></span></span>
+    </div>
+
+    <div class="line-h" style="left:214px;top:67px;width:246px;"></div>
+    <div class="arrow-down" style="left:460px;top:67px;height:34px;"></div>
+
+    <div class="node neutral-node" style="left:30px;top:130px;width:220px;height:64px;">
+      <span>Assessment Question</span>
+    </div>
+    <div class="arrow-right" style="left:254px;top:162px;width:92px;"></div>
+
+    <div class="node blue-node" style="left:350px;top:105px;width:220px;height:80px;">
+      <span>LTM-Constrained<br>Answering</span>
+    </div>
+    <div class="arrow-right" style="left:574px;top:145px;width:92px;"></div>
+
+    <div class="node neutral-node" style="left:670px;top:113px;width:170px;height:64px;">
+      <span>Student Answer<br><span class="state-symbol"><i>Y</i><sub>q,c</sub></span></span>
+    </div>
+  </main>
+</body>
+</html>

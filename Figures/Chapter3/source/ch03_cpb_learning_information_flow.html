@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CPB Learning Information Flow</title>
+  <link rel="stylesheet" href="../../Shared/flowchart_style.css">
+  <style>
+    @page { size: 1424px 180px; margin: 0; }
+    html, body, .canvas { width: 1424px; height: 180px; }
+
+    .state-symbol {
+      display: inline-block;
+      margin-top: 3px;
+      font-weight: 400;
+    }
+
+    sub {
+      font-size: 10px;
+      line-height: 0;
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas" role="img" aria-label="Horizontal CPB learning information flow from a frozen teaching round through attention, working-memory processing and shared knowledge encoding to explicit long-term memory">
+    <div class="node neutral-node" style="left:30px;top:52px;width:150px;height:76px;">
+      <span>Frozen Teaching<br>Round<br><span class="state-symbol"><i>S</i><sub>r</sub></span></span>
+    </div>
+    <div class="arrow-right arrow-long" style="left:184px;top:90px;"></div>
+
+    <div class="node blue-node" style="left:224px;top:52px;width:140px;height:76px;">
+      <span>Attention<br>Filter</span>
+    </div>
+    <div class="arrow-right arrow-long" style="left:368px;top:90px;"></div>
+
+    <div class="node neutral-node" style="left:408px;top:52px;width:165px;height:76px;">
+      <span>Post-Attention<br>Input<br><span class="state-symbol"><i>P</i><sub>r,c</sub></span></span>
+    </div>
+    <div class="arrow-right arrow-long" style="left:577px;top:90px;"></div>
+
+    <div class="node blue-node" style="left:617px;top:52px;width:190px;height:76px;">
+      <span>Working-Memory<br>Processing</span>
+    </div>
+    <div class="arrow-right arrow-long" style="left:811px;top:90px;"></div>
+
+    <div class="node neutral-node" style="left:851px;top:52px;width:145px;height:76px;">
+      <span>Available Input<br><span class="state-symbol"><i>A</i><sub>r,c</sub></span></span>
+    </div>
+    <div class="arrow-right arrow-long" style="left:1000px;top:90px;"></div>
+
+    <div class="node blue-node" style="left:1040px;top:52px;width:170px;height:76px;">
+      <span>Shared Knowledge<br>Encoder</span>
+    </div>
+    <div class="arrow-right arrow-long" style="left:1214px;top:90px;"></div>
+
+    <div class="node neutral-node" style="left:1254px;top:52px;width:140px;height:76px;">
+      <span>Explicit LTM<br><span class="state-symbol"><i>L</i><sub>r,c</sub></span></span>
+    </div>
+  </main>
+</body>
+</html>

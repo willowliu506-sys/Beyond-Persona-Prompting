@@ -1,0 +1,38 @@
+{
+  "latex-workshop.latex.outDir": "%DIR%/build",
+  "latex-workshop.latex.recipe.default": "first",
+  "latex-workshop.latex.tools": [
+    {
+      "name": "ucl-pdflatex",
+      "command": "/Library/TeX/texbin/pdflatex",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-output-directory=%OUTDIR%",
+        "%DOC%"
+      ],
+      "env": {}
+    },
+    {
+      "name": "ucl-bibtex",
+      "command": "/bin/sh",
+      "args": [
+        "%DIR%/.vscode/run-bibtex-if-needed.sh",
+        "%OUTDIR%/%DOCFILE%"
+      ],
+      "env": {}
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "UCL thesis: pdfLaTeX -> BibTeX -> pdfLaTeX x2",
+      "tools": [
+        "ucl-pdflatex",
+        "ucl-bibtex",
+        "ucl-pdflatex",
+        "ucl-pdflatex"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Memory Restriction Prompt Example</title>
+  <link rel="stylesheet" href="../../Shared/flowchart_style.css">
+  <style>
+    @page { size: 1200px 840px; margin: 0; }
+    html, body, .canvas { width: 1200px; height: 840px; }
+
+    .prompt-node {
+      display: block;
+      padding: 30px 42px;
+      text-align: left;
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 34px;
+    }
+
+    .role-label {
+      margin: 0 0 14px;
+      color: var(--blue-text);
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 34px;
+    }
+
+    .prompt-text {
+      margin: 0;
+    }
+
+    .prompt-text + .prompt-text {
+      margin-top: 4px;
+    }
+
+    .instruction-block {
+      margin-top: 28px;
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas" role="img" aria-label="Memory restriction and core student instruction prompt used during assessment">
+    <div class="node blue-node prompt-node" style="left:50px;top:40px;width:1100px;height:760px;">
+      <section>
+        <div class="role-label">[MEMORY_RESTRICTION]</div>
+        <p class="prompt-text">Answer using only information explicitly stated in the learned memory provided for this assessment.</p>
+        <p class="prompt-text">Do not use prior knowledge, general domain knowledge, common sense, or plausible inference to add definitions, relationships, causes, examples, or details that the learned memory does not explicitly contain.</p>
+        <p class="prompt-text">The presence of a technical term or category name in memory does not provide its definition or its relationship to another term.</p>
+        <p class="prompt-text">Every factual claim in your answer must be directly supported by a statement in the learned memory, allowing only meaning-preserving paraphrase.</p>
+        <p class="prompt-text">If the memory supports only part of the answer, give only that supported part and state that the remaining information was not retained in your learned memory.</p>
+        <p class="prompt-text">If the information needed to answer the question is not explicitly present, state that you do not know based on what you learned.</p>
+        <p class="prompt-text">Do not attempt to be helpful by completing missing knowledge.</p>
+      </section>
+
+      <section class="instruction-block">
+        <div class="role-label">[CORE_STUDENT_INSTRUCTION]</div>
+        <p class="prompt-text">You are answering an assessment question as a student.</p>
+        <p class="prompt-text">Answer the question directly and naturally.</p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

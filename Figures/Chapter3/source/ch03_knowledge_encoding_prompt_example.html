@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Knowledge Encoding Prompt Example</title>
+  <link rel="stylesheet" href="../../Shared/flowchart_style.css">
+  <style>
+    @page { size: 1000px 600px; margin: 0; }
+    html, body, .canvas { width: 1000px; height: 600px; }
+
+    .prompt-node {
+      display: block;
+      padding: 30px 42px;
+      text-align: left;
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 34px;
+    }
+
+    .role-label {
+      margin: 0 0 14px;
+      color: var(--green-text);
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 34px;
+    }
+
+    .prompt-text {
+      margin: 0;
+    }
+
+    .prompt-text + .prompt-text {
+      margin-top: 4px;
+    }
+
+    .user-block {
+      margin-top: 28px;
+    }
+
+    .placeholder {
+      margin-top: 12px;
+      letter-spacing: 0;
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas" role="img" aria-label="System and user prompt used to produce a brief long-term memory entry from received classroom information">
+    <div class="node green-node prompt-node" style="left:50px;top:40px;width:900px;height:520px;">
+      <section>
+        <div class="role-label">[SYSTEM]</div>
+        <p class="prompt-text">Turn the received classroom information into one brief long-term memory entry in your own words.</p>
+        <p class="prompt-text">Capture the main ideas and relationships as you understood them from the information provided.</p>
+        <p class="prompt-text">Do not use outside knowledge or fill in information that was not provided.</p>
+        <p class="prompt-text">Return only the memory entry as plain text, with no heading, bullets, commentary, or line breaks.</p>
+      </section>
+
+      <section class="user-block">
+        <div class="role-label">[USER]</div>
+        <p class="prompt-text">Received classroom information:</p>
+        <p class="prompt-text placeholder">{available_input}</p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

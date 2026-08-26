@@ -1,0 +1,189 @@
+/*
+ * Canonical Thesis Flowchart Style
+ * Version: 1.0
+ * Scope: All dissertation flowcharts
+ * Keep figure-specific geometry in each HTML file; do not override the visual tokens below.
+ */
+
+:root {
+  --font: -apple-system, system-ui, sans-serif;
+  --arrow: #5F5E5A;
+  --green-fill: #E1F5EE;
+  --green-strong: #9FE1CB;
+  --green-stroke: #0F6E56;
+  --green-text: #085041;
+  --blue-fill: #E6F1FB;
+  --blue-strong: #B5D4F4;
+  --blue-stroke: #185FA5;
+  --blue-text: #0C447C;
+  --neutral-fill: #F1EFE8;
+  --neutral-stroke: #5F5E5A;
+  --neutral-text: #444441;
+  --node-radius: 8px;
+  --group-radius: 12px;
+  --node-font-size: 14px;
+  --phase-font-size: 13px;
+  --node-font-weight: 500;
+  --node-line-height: 16px;
+  --border-width: 0.5px;
+  --arrow-width: 1.5px;
+  --arrow-short: 16px;
+  --arrow-long: 36px;
+  --arrow-clearance: 4px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+
+.canvas {
+  position: relative;
+  overflow: hidden;
+  background: #FFFFFF;
+  font-family: var(--font);
+}
+
+.panel {
+  position: absolute;
+  border-style: solid;
+  border-width: var(--border-width);
+  border-radius: var(--group-radius);
+}
+
+.node {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-style: solid;
+  border-width: var(--border-width);
+  border-radius: var(--node-radius);
+  font-family: var(--font);
+  font-size: var(--node-font-size);
+  font-weight: var(--node-font-weight);
+  line-height: var(--node-line-height);
+  z-index: 3;
+}
+
+.phase-title {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16px;
+  font-family: var(--font);
+  font-size: var(--phase-font-size);
+  font-weight: var(--node-font-weight);
+  line-height: var(--node-line-height);
+  z-index: 4;
+}
+
+.green-panel {
+  background: var(--green-fill);
+  border-color: var(--green-stroke);
+}
+
+.green-node {
+  background: var(--green-fill);
+  border-color: var(--green-stroke);
+  color: var(--green-text);
+}
+
+.green-strong-node {
+  background: var(--green-strong);
+  border-color: var(--green-stroke);
+  color: var(--green-text);
+}
+
+.blue-panel {
+  background: var(--blue-fill);
+  border-color: var(--blue-stroke);
+}
+
+.blue-node {
+  background: var(--blue-fill);
+  border-color: var(--blue-stroke);
+  color: var(--blue-text);
+}
+
+.blue-strong-node {
+  background: var(--blue-strong);
+  border-color: var(--blue-stroke);
+  color: var(--blue-text);
+}
+
+.neutral-node {
+  background: var(--neutral-fill);
+  border-color: var(--neutral-stroke);
+  color: var(--neutral-text);
+}
+
+.line-h,
+.line-v,
+.arrow-right,
+.arrow-down {
+  position: absolute;
+}
+
+.line-h,
+.line-v {
+  z-index: 2;
+}
+
+.arrow-right,
+.arrow-down {
+  z-index: 4;
+}
+
+.line-h,
+.arrow-right {
+  height: 0;
+  border-top: var(--arrow-width) solid var(--arrow);
+}
+
+.line-v,
+.arrow-down {
+  width: 0;
+  border-left: var(--arrow-width) solid var(--arrow);
+}
+
+.arrow-right::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: -4.25px;
+  width: 7px;
+  height: 7px;
+  border-top: var(--arrow-width) solid var(--arrow);
+  border-right: var(--arrow-width) solid var(--arrow);
+  transform: rotate(45deg);
+}
+
+.arrow-down::after {
+  content: "";
+  position: absolute;
+  left: -4.25px;
+  bottom: -1px;
+  width: 7px;
+  height: 7px;
+  border-right: var(--arrow-width) solid var(--arrow);
+  border-bottom: var(--arrow-width) solid var(--arrow);
+  transform: rotate(45deg);
+}
+
+.arrow-short {
+  width: var(--arrow-short);
+}
+
+.arrow-long {
+  width: var(--arrow-long);
+}

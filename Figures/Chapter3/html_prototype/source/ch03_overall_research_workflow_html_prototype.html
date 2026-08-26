@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Shared Experimental Workflow - HTML Prototype</title>
+  <link rel="stylesheet" href="../../../Shared/flowchart_style.css">
+  <style>
+    @page { size: 680px 330px; margin: 0; }
+    html, body, .canvas { width: 680px; height: 330px; }
+  </style>
+</head>
+<body>
+  <main class="canvas" role="img" aria-label="Shared experimental workflow with teaching and assessment phases">
+    <section class="panel green-panel" style="left:30px;top:40px;width:280px;height:240px;"></section>
+    <div class="phase-title" style="left:30px;top:50px;width:280px;color:#0F6E56;">Teaching / learning phase</div>
+
+    <div class="node green-node" style="left:70px;top:80px;width:200px;height:44px;">Instructional Material</div>
+    <div class="arrow-down" style="left:170px;top:124px;height:14px;"></div>
+
+    <div class="node green-node" style="left:70px;top:140px;width:200px;height:44px;">Learner-Specific Processing</div>
+    <div class="arrow-down" style="left:170px;top:184px;height:14px;"></div>
+
+    <div class="node green-strong-node" style="left:70px;top:200px;width:200px;height:56px;">Frozen Post-Exposure<br>Information State</div>
+
+    <div class="line-h" style="left:270px;top:228px;width:70px;"></div>
+    <div class="line-v" style="left:340px;top:108px;height:120px;"></div>
+    <div class="line-h" style="left:340px;top:108px;width:30px;"></div>
+
+    <section class="panel blue-panel" style="left:370px;top:40px;width:280px;height:240px;z-index:2;"></section>
+    <div class="phase-title" style="left:370px;top:50px;width:280px;color:#185FA5;">Assessment phase</div>
+
+    <div class="node blue-strong-node" style="left:410px;top:80px;width:200px;height:56px;">Frozen Post-Exposure State<br>+ Assessment Question</div>
+    <div class="arrow-down" style="left:510px;top:136px;height:12px;"></div>
+
+    <div class="node blue-node" style="left:410px;top:150px;width:200px;height:44px;">Student Answer</div>
+    <div class="arrow-down" style="left:510px;top:194px;height:12px;"></div>
+
+    <div class="node blue-node" style="left:410px;top:210px;width:200px;height:44px;">Criterion-Level Scoring</div>
+  </main>
+</body>
+</html>

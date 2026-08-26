@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Working-Memory Mechanism Flow</title>
+  <link rel="stylesheet" href="../../Shared/flowchart_style.css">
+  <style>
+    @page { size: 900px 720px; margin: 0; }
+    html, body, .canvas { width: 900px; height: 720px; }
+
+    .connector-layer {
+      position: absolute;
+      inset: 0;
+      width: 900px;
+      height: 720px;
+      z-index: 2;
+      color: var(--arrow);
+    }
+
+    .connector {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: var(--arrow-width);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .decision-node {
+      position: absolute;
+      width: 220px;
+      height: 100px;
+      z-index: 3;
+      overflow: visible;
+    }
+
+    .decision-shape {
+      fill: var(--blue-fill);
+      stroke: var(--blue-stroke);
+      stroke-width: var(--border-width);
+    }
+
+    .decision-label {
+      fill: var(--blue-text);
+      font-family: var(--font);
+      font-size: var(--node-font-size);
+      font-weight: var(--node-font-weight);
+      text-anchor: middle;
+    }
+
+    .edge-label {
+      position: absolute;
+      z-index: 5;
+      padding: 0 5px;
+      background: #FFFFFF;
+      color: var(--neutral-text);
+      font-family: var(--font);
+      font-size: var(--phase-font-size);
+      font-weight: var(--node-font-weight);
+      line-height: var(--node-line-height);
+    }
+
+    .state-symbol {
+      display: inline-block;
+      margin-top: 3px;
+      font-weight: 400;
+    }
+
+    sub {
+      font-size: 10px;
+      line-height: 0;
+    }
+
+    .merge-point {
+      position: absolute;
+      left: 446.5px;
+      top: 488.5px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--arrow);
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas" role="img" aria-label="Working-memory mechanism from post-attention input through a frozen processing-demand and capacity comparison to available input and knowledge encoding">
+    <svg class="connector-layer" viewBox="0 0 900 720" aria-hidden="true">
+      <defs>
+        <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M2 1 L8 5 L2 9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </marker>
+      </defs>
+
+      <path class="connector" d="M450 100 V126" marker-end="url(#arrowhead)"></path>
+      <path class="connector" d="M450 210 V230" marker-end="url(#arrowhead)"></path>
+      <path class="connector" d="M450 330 V370" marker-end="url(#arrowhead)"></path>
+      <path class="connector" d="M340 280 H220 V492 H450"></path>
+      <path class="connector" d="M450 446 V492"></path>
+      <path class="connector" d="M450 492 V516" marker-end="url(#arrowhead)"></path>
+      <path class="connector" d="M450 596 V626" marker-end="url(#arrowhead)"></path>
+    </svg>
+
+    <div class="node neutral-node" style="left:330px;top:24px;width:240px;height:76px;">
+      <span>Post-Attention Input<br><span class="state-symbol"><i>P</i><sub>r,c</sub></span></span>
+    </div>
+
+    <div class="node blue-node" style="left:310px;top:130px;width:280px;height:80px;">
+      <span>Compare Frozen Demand <i>D</i>(<i>R</i><sub>r</sub>)<br>with Capacity <i>C</i><sup>WM</sup><sub>c</sub></span>
+    </div>
+
+    <svg class="decision-node" style="left:340px;top:230px;" viewBox="0 0 220 100" aria-hidden="true">
+      <polygon class="decision-shape" points="110,0 220,50 110,100 0,50"></polygon>
+      <text class="decision-label" x="110" y="55"><tspan font-style="italic">D</tspan> &gt; <tspan font-style="italic">C</tspan>?</text>
+    </svg>
+
+    <div class="node blue-strong-node" style="left:330px;top:370px;width:240px;height:76px;">
+      <span>Remove Earliest<br>Available Sentence</span>
+    </div>
+
+    <div class="merge-point" aria-hidden="true"></div>
+
+    <div class="node neutral-node" style="left:335px;top:520px;width:230px;height:76px;">
+      <span>Available Input<br><span class="state-symbol"><i>A</i><sub>r,c</sub></span></span>
+    </div>
+
+    <div class="node blue-node" style="left:340px;top:630px;width:220px;height:60px;">
+      <span>Knowledge Encoding</span>
+    </div>
+
+    <div class="edge-label" style="left:257px;top:265px;">No</div>
+    <div class="edge-label" style="left:463px;top:340px;">Yes</div>
+  </main>
+</body>
+</html>

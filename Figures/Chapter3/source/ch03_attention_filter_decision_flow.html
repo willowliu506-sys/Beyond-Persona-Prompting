@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Attention Filter Decision Flow</title>
+  <link rel="stylesheet" href="../../Shared/flowchart_style.css">
+  <style>
+    @page { size: 900px 650px; margin: 0; }
+    html, body, .canvas { width: 900px; height: 650px; }
+
+    .connector-layer {
+      position: absolute;
+      inset: 0;
+      width: 900px;
+      height: 650px;
+      z-index: 2;
+      color: var(--arrow);
+    }
+
+    .connector {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: var(--arrow-width);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .decision-node {
+      position: absolute;
+      width: 220px;
+      height: 100px;
+      z-index: 3;
+      overflow: visible;
+    }
+
+    .decision-shape {
+      fill: var(--blue-fill);
+      stroke: var(--blue-stroke);
+      stroke-width: var(--border-width);
+    }
+
+    .decision-label {
+      fill: var(--blue-text);
+      font-family: var(--font);
+      font-size: var(--node-font-size);
+      font-weight: var(--node-font-weight);
+      text-anchor: middle;
+    }
+
+    .edge-label {
+      position: absolute;
+      z-index: 5;
+      padding: 0 5px;
+      background: #FFFFFF;
+      color: var(--neutral-text);
+      font-family: var(--font);
+      font-size: var(--phase-font-size);
+      font-weight: var(--node-font-weight);
+      line-height: var(--node-line-height);
+    }
+
+    .state-symbol {
+      display: inline-block;
+      margin-top: 3px;
+      font-weight: 400;
+    }
+
+    sub {
+      font-size: 10px;
+      line-height: 0;
+    }
+
+    .merge-point {
+      position: absolute;
+      left: 446.5px;
+      top: 507px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--arrow);
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas" role="img" aria-label="Attention Filter decision flow from a teaching round through distractor detection and a condition-specific attention trigger to post-attention input">
+    <svg class="connector-layer" viewBox="0 0 900 650" aria-hidden="true">
+      <defs>
+        <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M2 1 L8 5 L2 9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </marker>
+      </defs>
+
+      <path class="connector" d="M450 90 V116" marker-end="url(#arrowhead)"></path>
+      <path class="connector" d="M450 216 V256" marker-end="url(#arrowhead)"></path>
+      <path class="connector" d="M340 166 H205 V510 H450"></path>
+      <path class="connector" d="M340 306 H280 V510 H450"></path>
+      <path class="connector" d="M450 356 V400" marker-end="url(#arrowhead)"></path>
+      <path class="connector" d="M450 476 V510"></path>
+      <path class="connector" d="M450 510 V536" marker-end="url(#arrowhead)"></path>
+    </svg>
+
+    <div class="node neutral-node" style="left:360px;top:30px;width:180px;height:60px;">
+      <span>Teaching Round</span>
+    </div>
+
+    <svg class="decision-node" style="left:340px;top:116px;" viewBox="0 0 220 100" aria-hidden="true">
+      <polygon class="decision-shape" points="110,0 220,50 110,100 0,50"></polygon>
+      <text class="decision-label" x="110" y="55">Distractor present?</text>
+    </svg>
+
+    <svg class="decision-node" style="left:340px;top:256px;" viewBox="0 0 220 100" aria-hidden="true">
+      <polygon class="decision-shape" points="110,0 220,50 110,100 0,50"></polygon>
+      <text class="decision-label" x="110" y="45">Trigger under</text>
+      <text class="decision-label" x="110" y="63">condition-specific <tspan font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="10">c</tspan>?</text>
+    </svg>
+
+    <div class="node blue-strong-node" style="left:335px;top:400px;width:230px;height:76px;">
+      <span>Remove Predefined<br>Target Sentence</span>
+    </div>
+
+    <div class="merge-point" aria-hidden="true"></div>
+
+    <div class="node neutral-node" style="left:345px;top:540px;width:210px;height:76px;">
+      <span>Post-Attention Input<br><span class="state-symbol"><i>P</i><sub>r,c</sub></span></span>
+    </div>
+
+    <div class="edge-label" style="left:247px;top:151px;">No</div>
+    <div class="edge-label" style="left:463px;top:226px;">Yes</div>
+    <div class="edge-label" style="left:294px;top:291px;">No</div>
+    <div class="edge-label" style="left:463px;top:366px;">Yes</div>
+  </main>
+</body>
+</html>

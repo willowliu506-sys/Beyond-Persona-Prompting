@@ -1,0 +1,156 @@
+/* Deprecated local snapshot. New and existing figures must use ../../../Shared/flowchart_style.css. */
+
+:root {
+  --font: -apple-system, system-ui, sans-serif;
+  --arrow: #5F5E5A;
+  --green-fill: #E1F5EE;
+  --green-strong: #9FE1CB;
+  --green-stroke: #0F6E56;
+  --green-text: #085041;
+  --blue-fill: #E6F1FB;
+  --blue-strong: #B5D4F4;
+  --blue-stroke: #185FA5;
+  --blue-text: #0C447C;
+  --neutral-fill: #F1EFE8;
+  --neutral-stroke: #5F5E5A;
+  --neutral-text: #444441;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+
+.canvas {
+  position: relative;
+  overflow: hidden;
+  background: #FFFFFF;
+  font-family: var(--font);
+}
+
+.panel {
+  position: absolute;
+  border-style: solid;
+  border-width: 0.5px;
+  border-radius: 12px;
+}
+
+.node {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-style: solid;
+  border-width: 0.5px;
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  z-index: 3;
+}
+
+.phase-title {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  z-index: 4;
+}
+
+.green-panel {
+  background: var(--green-fill);
+  border-color: var(--green-stroke);
+}
+
+.green-node {
+  background: var(--green-fill);
+  border-color: var(--green-stroke);
+  color: var(--green-text);
+}
+
+.green-strong-node {
+  background: var(--green-strong);
+  border-color: var(--green-stroke);
+  color: var(--green-text);
+}
+
+.blue-panel {
+  background: var(--blue-fill);
+  border-color: var(--blue-stroke);
+}
+
+.blue-node {
+  background: var(--blue-fill);
+  border-color: var(--blue-stroke);
+  color: var(--blue-text);
+}
+
+.blue-strong-node {
+  background: var(--blue-strong);
+  border-color: var(--blue-stroke);
+  color: var(--blue-text);
+}
+
+.neutral-node {
+  background: var(--neutral-fill);
+  border-color: var(--neutral-stroke);
+  color: var(--neutral-text);
+}
+
+.line-h,
+.line-v,
+.arrow-right,
+.arrow-down {
+  position: absolute;
+  z-index: 2;
+}
+
+.line-h,
+.arrow-right {
+  height: 0;
+  border-top: 1.5px solid var(--arrow);
+}
+
+.line-v,
+.arrow-down {
+  width: 0;
+  border-left: 1.5px solid var(--arrow);
+}
+
+.arrow-right::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: -4.25px;
+  width: 7px;
+  height: 7px;
+  border-top: 1.5px solid var(--arrow);
+  border-right: 1.5px solid var(--arrow);
+  transform: rotate(45deg);
+}
+
+.arrow-down::after {
+  content: "";
+  position: absolute;
+  left: -4.25px;
+  bottom: -1px;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid var(--arrow);
+  border-bottom: 1.5px solid var(--arrow);
+  transform: rotate(45deg);
+}
