@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>RQ3 Prompt Structure Comparison</title>
+  <link rel="stylesheet" href="../../Shared/flowchart_style.css">
+  <style>
+    @page { size: 960px 440px; margin: 0; }
+    html, body, .canvas { width: 960px; height: 440px; }
+
+    .comparison-panel {
+      position: absolute;
+      top: 48px;
+      width: 400px;
+      height: 350px;
+      border-style: solid;
+      border-width: 0.5px;
+      border-radius: 12px;
+    }
+
+    .comparison-title {
+      position: absolute;
+      top: 68px;
+      width: 400px;
+      text-align: center;
+      font-family: var(--font);
+      font-size: 21px;
+      font-weight: 500;
+      line-height: 26px;
+      z-index: 4;
+    }
+
+    .prompt-node {
+      position: absolute;
+      width: 320px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-style: solid;
+      border-width: 0.5px;
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 22px;
+      letter-spacing: 0.1px;
+      z-index: 3;
+    }
+
+    .stack-arrow {
+      position: absolute;
+      width: 0;
+      height: 18px;
+      border-left: 1.5px solid var(--arrow);
+      z-index: 4;
+    }
+
+    .stack-arrow::after {
+      content: "";
+      position: absolute;
+      left: -4.25px;
+      bottom: -1px;
+      width: 7px;
+      height: 7px;
+      border-right: 1.5px solid var(--arrow);
+      border-bottom: 1.5px solid var(--arrow);
+      transform: rotate(45deg);
+    }
+
+    .green-prompt {
+      background: var(--green-fill);
+      border-color: var(--green-stroke);
+      color: var(--green-text);
+    }
+
+    .green-cognitive {
+      background: var(--green-strong);
+      border-color: var(--green-stroke);
+      color: var(--green-text);
+    }
+
+    .blue-prompt {
+      background: var(--blue-fill);
+      border-color: var(--blue-stroke);
+      color: var(--blue-text);
+    }
+
+    .versus {
+      position: absolute;
+      left: 440px;
+      top: 205px;
+      width: 80px;
+      text-align: center;
+      font-family: var(--font);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--neutral-text);
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas" role="img" aria-label="Side-by-side comparison of the prompt structures used for Prompt-ADHD and CPB-ADHD in Study 3">
+    <section class="comparison-panel green-panel" style="left:30px;"></section>
+    <div class="comparison-title" style="left:30px;color:var(--green-stroke);">Prompt-ADHD</div>
+
+    <div class="prompt-node green-cognitive" style="left:70px;top:108px;">[COGNITIVE_PROMPT]</div>
+    <div class="stack-arrow" style="left:230px;top:162px;"></div>
+    <div class="prompt-node green-prompt" style="left:70px;top:184px;">[LANGUAGE_ABILITY]</div>
+    <div class="stack-arrow" style="left:230px;top:238px;"></div>
+    <div class="prompt-node green-prompt" style="left:70px;top:260px;">[PERSONALITY_DESCRIPTION]</div>
+    <div class="stack-arrow" style="left:230px;top:314px;"></div>
+    <div class="prompt-node green-prompt" style="left:70px;top:336px;">[CORE_STUDENT_INSTRUCTION]</div>
+
+    <div class="versus">vs.</div>
+
+    <section class="comparison-panel blue-panel" style="left:530px;"></section>
+    <div class="comparison-title" style="left:530px;color:var(--blue-stroke);">CPB-ADHD</div>
+
+    <div class="prompt-node blue-prompt" style="left:570px;top:146px;">[LANGUAGE_ABILITY]</div>
+    <div class="stack-arrow" style="left:730px;top:200px;"></div>
+    <div class="prompt-node blue-prompt" style="left:570px;top:222px;">[PERSONALITY_DESCRIPTION]</div>
+    <div class="stack-arrow" style="left:730px;top:276px;"></div>
+    <div class="prompt-node blue-prompt" style="left:570px;top:298px;">[CORE_STUDENT_INSTRUCTION]</div>
+  </main>
+</body>
+</html>

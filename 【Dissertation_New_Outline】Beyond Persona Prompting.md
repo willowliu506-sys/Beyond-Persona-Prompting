@@ -10,7 +10,7 @@
 |---|---|---|---|
 | **RQ1 — Mechanism:** Does the CPB processing pipeline produce intended and traceable transitions from instructional information, through attention, working-memory processing and encoding, to the downstream knowledge state? | Mechanistic validity | **Study 1:** 2 × 2 Attention OFF/ON × WM OFF/ON ablation with a shared encoding stage and an A0W0 encoding-only baseline. | 机制正确触发率； |
 | **RQ2 — Representation:** Compared with persona prompting, does CPB produce learning behaviour that shows more theoretically consistent sensitivity to controlled distraction and processing demand? | Comparative representational validity | **Study 2:** Matched Prompt-NT, Prompt-ADHD, CPB Zero, CPB Low, CPB Medium, CPB High conditions under controlled distraction and processing-demand manipulations. |  |
-| **RQ3 — Multidimensional Robustness:** When additional functionally heterogeneous learner characteristics are introduced, does a factorised CPB representation maintain learning outcomes more consistently than joint persona prompting? | Representational robustness | **Study 3:** Matched aligned and conflicting attribute profiles under prompt-based and factorised representations |  |
+| **RQ3 — Multidimensional Robustness:** When additional functionally heterogeneous learner characteristics are introduced, does a factorised CPB representation preserve learning-related patterns and constraint structure more consistently than joint persona prompting? | Representational robustness | **Study 3:** Matched aligned and conflicting attribute profiles under prompt-based and factorised representations |  |
 
 ### Multi-Pass Outline and Draft Review Rules
 

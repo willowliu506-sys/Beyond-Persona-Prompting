@@ -4,7 +4,14 @@
 
 \subsection{Overall Research Workflow}
 
-\mbox{}\par
+All studies followed the same two-phase experimental workflow, as shown in Figure~\ref{fig:overall-research-workflow}. During the Teaching Phase, the instructional material passed through the learner-specific representation to produce a frozen post-exposure information state. During the Assessment Phase, each question was answered from that frozen state and the resulting response was evaluated through criterion-level scoring. Each assessment question was independently branched from the same post-exposure state so that earlier questions and answers could not alter the information available to later questions.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter3/export/ch03_overall_research_workflow.png}
+    \caption{Overall workflow of the Teaching and Assessment Phases.}
+    \label{fig:overall-research-workflow}
+\end{figure}
 
 \subsection{Teaching Phase}
 
@@ -22,7 +29,9 @@
 
 The instructional corpus comprised seven English-language lessons adapted from Sections 1.1--1.7 of \textit{OpenStax Principles of Finance 2e}. The lessons covered the definition and role of finance, the use of data and technology, careers in finance, financial markets and participants, microeconomic and macroeconomic influences, and financial instruments. A single subject area was used to reduce variation attributable to disciplinary genre while retaining a mixture of definitions, factual relations, comparisons, processes, examples, and causal or conditional information suitable for short-answer assessment.
 
-Each lesson file retained the lesson identifier, title, subject, source attribution, language, learning objectives, clean instructional source, teaching rounds, and assessment linkage. Source-file names and SHA-256 hashes were recorded to preserve provenance. The final corpus was frozen as dataset version \texttt{1.0.0} in \path{processed_teaching_materials_v2/frozen_v1_0_0}. The frozen release contains separate \texttt{lessons} and \texttt{questions} directories, a machine-readable validation report, and a manifest containing the SHA-256 hash of every experimental lesson and assessment file.
+The selected source material was converted into a plain-text instructional format. These sections contained no complex tables or figures, apart from simple process or structural diagrams that could be represented clearly in text. References to source images were replaced with concise textual descriptions of the instructional information they conveyed. This treatment preserved continuity between surrounding passages and avoided leaving incomplete or disconnected content when visual elements were removed from the text-only materials.
+
+The instructional materials and associated assessment resources were finalised and frozen before the formal experiments. The same frozen materials were used across all experimental conditions and repeated runs.
 
 \subsection{Text Preprocessing and Teaching-Round Segmentation}
 
@@ -38,9 +47,7 @@ Following preprocessing, each sentence was reviewed for local interpretability. 
 
 The preprocessed lessons were divided into teaching rounds containing two or three complete source sentences. Original sentences were not split merely to equalise round length, because syntactic splitting could interrupt a relation or create a fragment that remained difficult to interpret despite coreference resolution. The segmentation procedure instead sought a practical balance between local coherence and moderately comparable round length while preserving source order.
 
-Rounds were assigned identifiers of the form \texttt{R01}, \texttt{R02}, and so forth within each lesson. Sentences were assigned nested identifiers such as \texttt{R01\_S01} and \texttt{R01\_S02}. Each round stored its ordered sentence objects, reconstructed \texttt{instructional\_text}, deterministic surface-word count, and offline \texttt{processing\_demand\_bits} annotation. These identifiers provide the common keys linking source content, distractor placement, mechanism logs, memory entries, assessment questions, checklist criteria, and later evaluation records.
-
-Surface words were counted using a frozen deterministic rule for the English materials: alphanumeric sequences were counted as one word, with internal apostrophes and hyphens retained within a token. Word count was stored as a descriptive length measure rather than treated as an equivalent of semantic information or cognitive load.
+Rounds were assigned identifiers of the form \texttt{R01}, \texttt{R02}, and so forth within each lesson. Sentences were assigned nested identifiers such as \texttt{R01\_S01} and \texttt{R01\_S02}. Each round retained its source sentences in their original order together with a reconstructed instructional text field. The frozen round and sentence identifiers provided a consistent basis for aligning the instructional materials with the experimental resources used in later stages of the study.
 
 \subsection{Instructional Processing-Demand Annotation and Item Selection}
 
@@ -58,11 +65,210 @@ Surface words were counted using a frozen deterministic rule for the English mat
 
 \subsection{Scoring Rubric and Atomic Checklist Criteria}
 
-\mbox{}\par
+\subsubsection{Theoretical Foundations of Criterion-Level Evaluation}
 
-\subsection{Criterion-Level LLM-as-a-Judge Scoring}
+Open-ended student responses cannot be evaluated solely through lexical overlap with a reference answer. A learner may express acquired knowledge through a valid paraphrase, retain only part of a multi-component answer, or explicitly state a relation that conflicts with the instructional material. A single holistic similarity score cannot reliably distinguish among semantically correct but differently worded answers, partial knowledge omission, and explicit conceptual contradiction. The present study therefore adopts criterion-level LLM evaluation. This approach is not treated as a direct reproduction of any single existing method; instead, it follows a progressively constrained methodological evidence chain. The chain first establishes that an LLM can perform evaluation under a structured protocol, then restricts the credible scope of that capability, decomposes holistic judgement into narrower local decisions, and finally operationalises this approach for educational short-answer scoring.
 
-\mbox{}\par
+The starting point is research on structured LLM evaluation. G-Eval does not simply ask a model to assign an unconstrained holistic impression score. It supplies task-specific evaluation criteria, explicit evaluation steps, and a structured form-filling output, and achieved strong correspondence with human judgements in summarisation evaluation \cite{liu-etal-2023-g}. This result shows that an LLM can act not only as a text generator but also as a protocol-driven evaluator when the criteria and judgement process are explicitly specified. For the present study, the basic implication is that scoring requirements need not remain implicit within the Judge; they can be supplied as explicit inputs that constrain judgement to predefined knowledge requirements.
+
+The ability to perform an evaluation task does not, however, imply that an LLM Judge can be assumed reliable. LLM-Rubric showed that uncalibrated LLM judgements do not automatically maintain stable agreement with human evaluation, and improved predictive quality through a multidimensional rubric and an additional calibration mechanism \cite{hashemi-etal-2024-llm}. The present study does not reproduce its additional neural calibration network, but adopts its more general methodological principle: the reliability of an LLM Judge must be established for the specific task rather than inferred solely from model capability. Evaluation dimensions must therefore be explicitly operationalised, candidate Judges compared, repeatability under fixed inputs examined, and agreement with an independent human assessment evaluated for the present scoring task.
+
+The next issue is how to reduce the ambiguity of open-ended holistic scoring. CheckEval decomposes broad subjective evaluation into a set of bounded binary checklist decisions. Across evaluator models, this decomposition increased agreement, reduced score variance, and made individual judgements more traceable \cite{lee-etal-2025-checkeval}. This approach closely matches the requirements of the present study. Rather than asking the Judge to determine how many points an answer deserves overall, each question is decomposed into atomic criteria. Each Judge decision then addresses a narrower question: whether the student answer expresses the knowledge required by that criterion. Partial knowledge can consequently be represented through independent outcomes across criteria instead of through an ambiguous holistic partial-credit judgement.
+
+Criterion decomposition also has direct precedent in educational short-answer assessment. Wang et al. injected explicit rubric information into a short-answer grading model and reported improved performance relative to an approach without rubric information \cite{wang-etal-2019-inject}. Rubrics are therefore not merely supplementary instructions added to general text evaluation; they are an important source of task-specific information. A scorer needs to know which knowledge components an answer should express rather than infer a score only from surface similarity between a student answer and a reference answer. This finding further supports decomposing a source-grounded rubric into separately testable knowledge requirements instead of asking the Judge to infer scoring requirements from the reference answer.
+
+The BEA 2026 Rubric-based Short Answer Scoring Shared Task provides more recent evidence for this design direction. The task explicitly required systems to score student answers using textual rubrics and evaluated generalisation across seen and unseen questions \cite{gombert-etal-2026-report}. Its official report found that structured and task-adapted LLM systems achieved strong performance across tracks; the strongest system additionally used rubric-aware input structuring, checklist-style reasoning, decision-tree reframing, and ensemble voting. These results do not imply that any arbitrary LLM Judge is reliable for educational assessment. They nevertheless reinforce a direction consistent with the present study: rubric semantics should be explicitly operationalised, and complex holistic judgement should be decomposed into structured, local, and traceable decisions.
+
+The study integrates these principles into the frozen criterion-level scoring pipeline shown in Figure~\ref{fig:criterion-scoring-pipeline}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter3/export/ch03_criterion_scoring_pipeline.pdf}
+    \caption{Criterion-level scoring and validation pipeline.}
+    \label{fig:criterion-scoring-pipeline}
+\end{figure}
+
+Each atomic criterion is judged independently rather than being used to generate a holistic score directly. Criterion-level outputs use structured labels that support binary-credit aggregation while retaining a diagnostic error distinction between missing knowledge and explicit contradiction. The Judge does not freely determine the final question score. Instead, a deterministic program aggregates the frozen criterion labels. The LLM is therefore restricted to local semantic judgement, while the scoring structure, criterion weights, and total-score calculation remain explicit and reproducible.
+
+For each question, the semantic requirements are first derived from the reference answer, rewritten as independently scoreable criteria, and linked to evidence in the frozen instructional source:
+
+\[
+\begin{aligned}
+\text{Reference Answer}
+&\rightarrow \text{Semantic Propositions} \\
+&\rightarrow \text{Atomic Checklist Criteria}
+\rightarrow \text{Source Evidence}.
+\end{aligned}
+\]
+
+The term \textit{atomic} is an operational definition in this study. Each criterion represents one instructional proposition that can be scored independently; it does not claim to be a linguistically unique or indivisible atomic fact. Criteria within a question must be interpretable independently, minimise semantic overlap, and collectively cover the knowledge required by the reference answer. Every criterion is linked to an original evidence span in the frozen instructional material. The checklist therefore does not introduce knowledge absent from the teaching material, and every judgement can be traced to a specific instructional source.
+
+Three criterion-level outcomes are distinguished:
+
+\begin{itemize}
+    \item \textbf{Correct:} the student answer explicitly states or directly entails all required subjects, relations, objects, conditions, outcomes, comparisons, and limiting terms in the criterion;
+    \item \textbf{Absent:} one or more required components are missing or ambiguous, the knowledge is only indirectly suggested by a related topic, or it is mentioned without being asserted as part of the answer; and
+    \item \textbf{Contradicted:} the student answer explicitly states a proposition that conflicts with the criterion.
+\end{itemize}
+
+This distinction preserves the diagnostic difference between failing to express knowledge and explicitly expressing incorrect knowledge. Both \texttt{Absent} and \texttt{Contradicted} receive no credit for the criterion, but their labels remain available for error-type analysis. Partial knowledge is represented through satisfaction of a subset of criteria. If an answer satisfies two of three criteria while omitting one, the system records which two knowledge components were retained without requiring the Judge to select an intermediate Likert category.
+
+\subsubsection{Rubric Construction and Deterministic Score Calculation}
+\label{subsec:rubric-construction}
+
+The scoring rubric and checklist were constructed, reviewed, and frozen before formal student-answer generation and scoring. The LLM Judge cannot generate or modify scoring requirements during evaluation. Each assessment question is stored as a structured record containing a unique question identifier, question scope, question type, question text, reference answer, source Teaching Round, source sentence identifiers, and a checklist of atomic criteria. Each criterion additionally contains a unique \texttt{criterion\_id}, the proposition to be expressed, source sentence identifiers, and the original evidence span supporting that proposition. An independent question corresponds to one frozen Teaching Round, whereas an integrative question requires knowledge from multiple Teaching Rounds. Questions from all seven lessons use the same data structure, and the consistency among questions, reference answers, checklists, source identifiers, and evidence spans was checked before freezing.
+
+During scoring, the LLM Judge receives only the following information:
+
+\[
+\left\{
+\begin{array}{l}
+\text{question ID},\\
+\text{question},\\
+\text{reference answer},\\
+\text{checklist criteria},\\
+\text{source-evidence spans},\\
+\text{student answer}
+\end{array}
+\right\}.
+\]
+
+The Judge payload excludes learner identity, simulation condition, lesson label, demand group, Processing Demand Bits, memory state, Attention state, WM capacity, and all other experimental metadata. These local metadata are reattached to the scoring output only after the Judge response passes structural validation. This blind evaluation design prevents the Judge from inferring the score that a simulated learner should receive from the expected behaviour of a condition.
+
+The Judge does not directly generate a numerical score. It independently assigns \texttt{Correct}, \texttt{Absent}, or \texttt{Contradicted} to each criterion. For \texttt{Correct} and \texttt{Contradicted}, it must also copy the shortest continuous span from the student answer that supports the judgement; for \texttt{Absent}, the evidence field must be null. The output contract prohibits the Judge from adding, deleting, merging, splitting, or redefining criteria. The Judge is also instructed to disregard answer length, writing style, fluency, grammar, vocabulary, confidence, formatting, and repetition, and to evaluate only the semantic propositions actually asserted by the student.
+
+After the returned criterion identifiers and evidence spans pass local programmatic validation, Python calculates the question score deterministically. For question \(q\), containing \(K_q\) criteria,
+
+\[
+\operatorname{Score}_q
+=
+10
+\times
+\frac{
+\sum_{k=1}^{K_q}
+\mathbb{I}\!\left(y_{qk}=\mathrm{Correct}\right)
+}{K_q},
+\]
+
+where \(y_{qk}\) is the label assigned to criterion \(k\), and \(\mathbb{I}(\cdot)\) is the indicator function. Both \texttt{Absent} and \texttt{Contradicted} contribute zero credit, but their labels are retained for error-type analysis. The procedure produces a standardised question score from 0 to 10 while preserving information about the specific knowledge components that the student retained or omitted.
+
+\subsubsection{Criterion-Level LLM-as-a-Judge Scoring and Validation}
+\label{subsec:judge-validation}
+
+Before freezing the operational Judge, the study compared two candidate evaluator models: Alibaba Cloud's \texttt{qwen3.7-max} and OpenAI's \texttt{gpt-5.6-sol}. The Qwen family was selected as a primary candidate because of its prior alignment with the form of the present task. The BEA 2026 Rubric-based Short Answer Scoring Shared Task directly examined the application of textual rubrics to open-ended student answers, and its strongest system used Qwen-based models with rubric-aware input structuring and checklist-style reasoning \cite{gombert-etal-2026-report,belcher2026iwm}. In a separate multi-model extractive-QA Judge comparison, Qwen2.5-72B achieved the highest correlation with human judgements among the candidate Judge models \cite{ho2025llm}. These studies provide task-relevant Judge precedent for the Qwen family. The present study used \texttt{qwen3.7-max} as its high-capability Qwen candidate and \texttt{gpt-5.6-sol} as an independent cross-family comparator. The operational Judge was selected from the study's own repeatability and validation results rather than from the external benchmarks alone.
+
+Both candidates received the same frozen Judge prompt, questions, reference answers, source-grounded criteria, and student answers. They evaluated the same 49 responses generated by \texttt{DeepSeek V4-Flash} for the Pre-Knowledge Baseline, using the same student model later employed in the formal simulation. The sample comprised 42 independent questions and seven integrative questions. Each candidate independently evaluated every answer three times:
+
+\[
+49\ \text{answers}
+\times
+3\ \text{repetitions}
+=
+147\ \text{Judge calls per model}.
+\]
+
+The comparison therefore comprised 294 Judge records that passed output-contract validation. Table~\ref{tab:judge-direct-comparison} presents the direct criterion-level comparison.
+
+\begin{table}[H]
+\centering
+\caption{Direct comparison of candidate Judge models.}
+\label{tab:judge-direct-comparison}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.37\textwidth}rr>{\raggedright\arraybackslash}p{0.21\textwidth}@{}}
+\toprule
+\textbf{Metric} & \textbf{Qwen3.7-max} & \textbf{GPT-5.6-sol} & \textbf{Between-model comparison} \\
+\midrule
+Overall mean question score & 7.823 & 7.993 & Qwen -- GPT = -0.170 \\
+Modal \texttt{Correct} criteria & 106/137 & 108/137 & -2 \\
+Modal \texttt{Absent} criteria & 31/137 & 29/137 & +2 \\
+Exact question-score agreement & -- & -- & 77.55\% \\
+Mean absolute question-score difference & -- & -- & 0.941 \\
+Question-score Pearson correlation & -- & -- & 0.703 \\
+Criterion-label agreement & -- & -- & 89.78\% \\
+Criterion-level Cohen's \(\kappa\) & -- & -- & 0.701 \\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+The difference between the overall mean scores was only 0.170 points, but exact agreement on 77.55\% of question scores shows that similar aggregate means did not imply identical question-level judgements. The models agreed on 89.78\% of modal criterion labels, corresponding to Cohen's \(\kappa=0.701\). Qwen assigned two more criteria to \texttt{Absent} and produced a slightly lower overall mean, indicating a somewhat more conservative semantic-entailment boundary under the frozen prompt. This score difference was treated as a description of model behaviour rather than the primary basis for Judge selection.
+
+The primary selection criterion was repeated-measure stability under the frozen scoring protocol. Before producing the comparison results, seven pass criteria were specified: valid output schema, criterion set, and student-evidence spans for every call; overall criterion-label unanimity of at least 0.95; pairwise criterion agreement of at least 0.97; exact question-score invariance of at least 0.90; absolute-agreement \(\operatorname{ICC}(A,1)\) of at least 0.95; a maximum difference between replicate overall means no greater than 0.10 points; and minimum lesson-level criterion unanimity of at least 0.90 across the seven lessons. The lesson-level requirement prevented strong overall agreement from concealing local instability within one lesson. Results against these thresholds are shown in Table~\ref{tab:judge-repeatability-thresholds}.
+
+\begin{table}[H]
+\centering
+\caption{Three-repetition stability of candidate Judge models against the specified thresholds.}
+\label{tab:judge-repeatability-thresholds}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.36\textwidth}rrrr@{}}
+\toprule
+\textbf{Stability metric} & \textbf{Threshold} & \textbf{Qwen3.7-max} & \textbf{GPT-5.6-sol} & \textbf{Qwen -- GPT} \\
+\midrule
+Schema, criterion-set, and evidence validity & = 1.0000 & 1.0000 & 1.0000 & 0.0000 \\
+Overall criterion-label unanimity & \(\geq 0.9500\) & 1.0000 & 0.9781 & +0.0219 \\
+Pairwise criterion agreement & \(\geq 0.9700\) & 1.0000 & 0.9854 & +0.0146 \\
+Exact question-score invariance & \(\geq 0.9000\) & 1.0000 & 0.9388 & +0.0612 \\
+\(\operatorname{ICC}(A,1)\) & \(\geq 0.9500\) & 1.0000 & 0.9700 & +0.0300 \\
+Maximum replicate-mean difference & \(\leq 0.1000\) & 0.0000 & 0.2041 & -0.2041 \\
+Minimum lesson-level criterion unanimity & \(\geq 0.9000\) & 1.0000 & 0.9474 & +0.0526 \\
+Specified criteria passed & -- & 7/7 & 6/7 & -- \\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+Qwen produced identical criterion labels and question scores across all three repetitions. GPT remained highly stable overall, but its maximum replicate-mean difference was 0.2041, exceeding the specified upper bound of 0.10. Three GPT-scored questions each contained one criterion whose labels varied across calls in an \texttt{Absent--Correct--Absent} pattern.
+
+Because integrative questions require the evaluator to judge answers spanning multiple instructional components, their stability was examined separately. Table~\ref{tab:integrative-judge-stability} reports the results for the seven integrative questions.
+
+\begin{table}[H]
+\centering
+\caption{Scoring stability for the seven integrative questions.}
+\label{tab:integrative-judge-stability}
+\small
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular*}{0.86\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.48\textwidth}rr@{}}
+\toprule
+\textbf{Integrative-question metric} & \textbf{Qwen3.7-max} & \textbf{GPT-5.6-sol} \\
+\midrule
+Criterion-label unanimity & 1.0000 & 0.9524 \\
+Pairwise criterion agreement & 1.0000 & 0.9683 \\
+Exact question-score invariance & 1.0000 & 0.8571 \\
+\(\operatorname{ICC}(A,1)\) & 1.0000 & 0.9231 \\
+Maximum replicate-mean difference & 0.0000 & 0.4762 \\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+GPT's residual instability was more pronounced for integrative questions: exact question-score invariance decreased to 85.71\%, \(\operatorname{ICC}(A,1)\) decreased to 0.9231, and the maximum replicate-mean difference increased to 0.4762. Qwen remained fully invariant across the seven integrative questions.
+
+To supplement the analyses of within-model repeatability and between-model agreement, an offline criterion-level human assessment was conducted. Human Validation was independently performed by a rater holding a bachelor's degree in economics, using the same dataset and scoring criteria. The human assessment was completed without access to the LLM-generated criterion labels. Agreement between the LLM Judges and Human Validation is reported in Table~\ref{tab:judge-human-validation}.
+
+\begin{table}[H]
+\centering
+\caption{Agreement between candidate LLM Judges and human criterion-level validation.}
+\label{tab:judge-human-validation}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.46\textwidth}>{\centering\arraybackslash}p{0.23\textwidth}>{\centering\arraybackslash}p{0.12\textwidth}@{}}
+\toprule
+\textbf{Comparison} & \textbf{Raw criterion agreement} & \textbf{Cohen's \(\kappa\)} \\
+\midrule
+Human validation vs Qwen3.7-max & 84.67\% & 0.441 \\
+Human validation vs GPT-5.6-sol & 86.13\% & 0.471 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Both candidate Judges showed non-perfect chance-corrected agreement with the offline human assessment, with GPT producing a slightly higher value than Qwen. Disagreements primarily concerned whether an answer explicitly expressed the complete relation required by a criterion or provided only a related concept, example, or broader paraphrase.
+
+Based on the confirmatory comparison, \texttt{qwen3.7-max} was frozen as the operational Judge. Qwen passed all seven specified repeatability thresholds and maintained identical criterion labels and question scores across three calls. This property was particularly important for the later large-scale use of a single Judge call per answer: substantial evaluator randomness could otherwise become mixed with differences among simulated learner conditions. However, because Qwen's Cohen's \(\kappa\) with the human ratings remained limited, the evidence does not establish superior human validity.
+
+Qwen's more conservative decision boundary produced a slightly lower overall score. In this high-baseline task, which is susceptible to upper-end score concentration, that stricter boundary was treated as an operational advantage because it was expected to preserve more score space for distinguishing learning conditions and reduce the risk that ceiling compression would conceal performance differences. This consideration remained secondary to the pre-specified repeatability evidence.
 
 \section{Learner Representation: Persona Prompting versus CPB}
 
@@ -480,20 +686,20 @@ Taken together, the Question-Only Baseline shows that the assessment set was not
 The overall research question guiding this study is:
 
 \begin{quote}
-\textbf{Main RQ:} Can a cognitive-process-based representation provide a more theory-consistent, traceable, and robust basis for simulating ADHD-related learning behaviour than persona prompting alone?
+\small
+\textbf{Main RQ:} Can CPB provide a theory-consistent and traceable representation of ADHD-related learning processes, and how do its behavioural consistency and representational robustness compare with persona prompting?
 \end{quote}
 
 This overarching question is addressed through three research questions with distinct evidential roles:
 
 \begin{quote}
+\small
 \textbf{RQ1---Mechanism:} Does the CPB processing pipeline produce intended and traceable transitions from instructional information, through attention, working-memory processing and encoding, to the downstream knowledge state?
 
 \textbf{RQ2---Representation:} Compared with persona prompting, does CPB produce learning behaviour that shows more theoretically consistent sensitivity to controlled distraction and processing demand?
 
-\textbf{RQ3---Multidimensional Robustness:} When additional functionally heterogeneous learner characteristics are introduced, does a factorised CPB representation maintain learning outcomes more consistently than joint persona prompting?
+\textbf{RQ3---Multidimensional Robustness:} When additional functionally heterogeneous learner characteristics are introduced, does a factorised CPB representation preserve learning-related patterns and constraint structure more consistently than joint persona prompting?
 \end{quote}
-
-The three research questions are examined through a progressive experimental design. Study 1 first evaluates whether the internal CPB mechanisms operate as intended and produce traceable information-state transitions. Study 2 then compares CPB with persona prompting under controlled distraction and instructional processing demand. Finally, Study 3 introduces additional heterogeneous learner characteristics to examine the robustness of joint and factorised representations. Table~\ref{tab:rq-study-mapping} summarises the mapping between research questions, evidential roles, experimental studies, and the primary forms of evidence used to address each question.
 
 \begin{table}[H]
 \centering
@@ -513,65 +719,1269 @@ The three research questions are examined through a progressive experimental des
 \end{tabular}
 \end{table}
 
+The three research questions are examined through a progressive experimental design. Study 1 first evaluates whether the internal CPB mechanisms operate as intended and produce traceable information-state transitions. Study 2 then compares CPB with persona prompting under controlled distraction and instructional processing demand. Finally, Study 3 introduces additional heterogeneous learner characteristics to examine the robustness of joint and factorised representations. Table~\ref{tab:rq-study-mapping} summarises the mapping between the research questions, their evidential roles, the corresponding experimental studies, and the primary evidence used to address each question.
+
 \subsection{Study 1---Mechanistic Validity of CPB}
 
-\mbox{}\par
+\subsubsection{Research Question and Subquestions}
 
-\subsubsection{Research Question and Expected Patterns}
+Study 1 addresses RQ1 by examining whether the internal CPB processing pipeline produces correct, attributable, and traceable information-state changes under the predefined mechanisms. RQ1 is restated as follows:
 
-\mbox{}\par
+\begin{quote}
+\small
+\textbf{RQ1---Mechanism:} Does the CPB processing pipeline produce intended and traceable transitions from instructional information, through attention, working-memory processing and encoding, to the downstream knowledge state?
+\end{quote}
+
+RQ1 concerns mechanism execution, stage-specific information change, and the propagation of those changes to downstream knowledge states. Final assessment performance alone cannot establish all three. RQ1 is therefore decomposed into three linked subquestions (SQs), progressing from low-level implementation fidelity to end-to-end propagation, as summarised in Table~\ref{tab:study1-subquestions}.
+
+\begin{table}[H]
+\centering
+\caption{Subquestions and validation focus for Study 1.}
+\label{tab:study1-subquestions}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{p{0.15\textwidth} p{0.26\textwidth} p{0.51\textwidth}}
+\toprule
+\textbf{Subquestion} & \textbf{Validation focus} & \textbf{Evidence sought} \\
+\midrule
+\textbf{SQ1} & Mechanism execution & Correct triggering and execution of the registered Attention and WM rules \\
+\textbf{SQ2} & Stage-specific information-state transitions & Traceable changes at the stage where each mechanism is intended to operate \\
+\textbf{SQ3} & Cumulative and downstream propagation & Evidence that upstream information changes propagate to the resulting Explicit LTM and downstream question performance \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{SQ1---Mechanism Execution.}
+
+\begin{quote}
+\textbf{Do the Attention and Working-Memory mechanisms execute their registered rules correctly?}
+\end{quote}
+
+SQ1 examines whether the two manipulated ADHD-related mechanisms operate according to their frozen rules. For the Attention Filter, this requires confirmation that an eligible distractor triggers according to the condition-specific setting, that the predefined target information becomes unavailable when triggered, and that non-target instructional information remains unaffected. For Working-Memory Processing, it requires confirmation that frozen round-level processing demand triggers WM overflow according to the registered capacity threshold and that, once triggered, the predefined within-round FIFO-style restriction is applied to information that remains available after Attention. This layer evaluates \textit{mechanism implementation fidelity}: before any learning outcome is interpreted, the observed information changes must be shown to arise from the intended mechanisms rather than from an implementation error or unintended information selection.
+
+\paragraph{SQ2---Stage-Specific Information-State Transitions.}
+
+\begin{quote}
+\textbf{Do the individual processing stages produce the intended and attributable changes in information availability and encoding?}
+\end{quote}
+
+After mechanism execution has been established, SQ2 examines whether the mechanisms produce observable information-state changes at their intended positions in the CPB pipeline. The Teaching Phase is represented as:
+
+\[
+S_r
+\xrightarrow{\text{Attention Filter}}
+P_{r,c}
+\xrightarrow{\text{Working-Memory Processing}}
+A_{r,c}
+\xrightarrow{\text{Shared Knowledge Encoder}}
+L_{r,c}.
+\]
+
+Attention operates on the transition from $S_r$ to $P_{r,c}$ and determines which instructional information remains available after controlled distraction. WM subsequently operates on the transition from $P_{r,c}$ to $A_{r,c}$ and further restricts the information that can reach the Encoder under the registered processing-capacity constraint. The shared Knowledge Encoder then transforms $A_{r,c}$ into the round-level Explicit LTM entry $L_{r,c}$. SQ2 therefore asks whether each transition can be observed separately and attributed to its corresponding mechanism, rather than inferred retrospectively from the final LTM or assessment score.
+
+\paragraph{SQ3---Cumulative and Downstream Propagation.}
+
+\begin{quote}
+\textbf{Do stage-specific information changes propagate through the full CPB pipeline to the final Explicit LTM and assessment performance?}
+\end{quote}
+
+SQ3 examines whether local information-state changes propagate through the complete processing chain. At the aggregate level, enabling either Attention or WM should reduce the amount of Source information reaching the Encoder, while A1W1 should exhibit the cumulative result of both local restrictions. Relative to the encoding-only A0W0 reference, conditions with stronger upstream restriction are expected to show lower Source-Word Availability Ratio (SWAR) and lower Source-to-LTM semantic correspondence, measured by End-to-End Semantic Recall (E2ESR). If these changes continue into the Assessment Phase, aggregate Checklist Scores should also decrease. Strict monotonicity is not required for every question because questions depend on different source rounds and answers may receive partial credit from information that remains in the Explicit LTM.
+
+Study 1 consequently implements the following progressive validation structure:
+
+\[
+\begin{aligned}
+\text{Mechanism Execution}
+&\rightarrow
+\text{Stage-Specific Information-State Transitions} \\
+&\rightarrow
+\text{Cumulative and Downstream Propagation}.
+\end{aligned}
+\]
+
+Figure~\ref{fig:study1-validation-logic} locates the three subquestions within the CPB pipeline. SQ1 concerns execution of the Attention Filter and Working-Memory Processing; SQ2 concerns the stage-specific transitions produced by Attention, WM, and Encoding; and SQ3 concerns cumulative propagation to the Explicit LTM and final answer. The figure identifies the scope of each subquestion without introducing the specific evaluation measures, which are defined in Section~3.5.2.3.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter3/export/ch03_study1_validation_logic.pdf}
+    \caption{Study 1 validation structure across mechanism execution, stage-specific information-state transitions, and cumulative downstream propagation.}
+    \label{fig:study1-validation-logic}
+\end{figure}
+
+This structure prevents RQ1 from depending on a single final performance measure. It separately examines whether the mechanisms execute correctly, whether information changes occur at the intended stages, and whether those local changes propagate to the Explicit LTM and observable answer performance.
 
 \subsubsection{Experimental Design and Conditions}
 
-\mbox{}\par
+Study 1 uses a $2 \times 2$ factorial ablation design that independently manipulates the OFF/ON states of the Attention Filter and Working-Memory Processing Capacity:
 
-\subsubsection{Evaluation Measures and Planned Analysis}
+\[
+\text{Attention OFF/ON}
+\times
+\text{WM OFF/ON}.
+\]
 
-\mbox{}\par
+The four conditions are shown in Table~\ref{tab:study1-conditions}. The design is not intended to construct levels of ADHD severity. Instead, deterministic boundary conditions maximise \textit{mechanism identifiability}: A1W0 and A0W1 isolate the Attention and WM constraints, respectively; A1W1 examines their sequential combination in the registered CPB processing order; and A0W0 provides a reference condition without Attention- or WM-attributed information restriction.
+
+\begin{table}[H]
+\centering
+\caption{Study 1 experimental conditions.}
+\label{tab:study1-conditions}
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{p{0.14\textwidth} p{0.18\textwidth} p{0.22\textwidth} p{0.37\textwidth}}
+\toprule
+\textbf{Condition} & \textbf{Attention} & \textbf{Working Memory} & \textbf{Functional role} \\
+\midrule
+\textbf{A0W0} & OFF & OFF & Encoding-only reference \\
+\textbf{A1W0} & ON & OFF & Isolates the Attention constraint \\
+\textbf{A0W1} & OFF & ON & Isolates the WM constraint \\
+\textbf{A1W1} & ON & ON & Tests the sequential combination of Attention and WM constraints \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Deterministic boundary parameters implement the OFF/ON manipulation. Attention OFF corresponds to $p_A=0$, so distractor events do not trigger Attention-attributed target removal. Attention ON corresponds to $p_A=1$, so every Teaching Round with an eligible distractor assignment triggers the Attention Filter according to the frozen distractor-to-target mapping. The Attention manipulation changes only which instructional information forms the Post-Attention Input $P_{r,c}$; it does not alter the execution rules of downstream mechanisms.
+
+The WM OFF/ON states are implemented through condition-specific capacity thresholds. WM OFF uses a non-binding capacity above the complete frozen PDB range:
+
+\[
+C^{WM}_{\mathrm{OFF}}=10^{10}\ \text{bits},
+\]
+
+so no Teaching Round triggers WM overflow. WM ON uses the frozen threshold:
+
+\[
+C^{WM}_{\mathrm{ON}}=321.9937895\ \text{bits}.
+\]
+
+This value is the median boundary of the source-round PDB distribution associated with the 42 independent assessment questions: 21 of the 42 source rounds lie above the capacity and 21 lie at or below it. WM ON therefore does not imply removal in every Teaching Round. Instead, it enables the deterministic capacity rule:
+
+\[
+D(R_r)>C^{WM}_{\mathrm{ON}}
+\quad\Rightarrow\quad
+\text{WM constraint triggered}.
+\]
+
+When the rule is satisfied, WM further restricts the instructional information that remains available after Attention according to the procedure defined in Section~\ref{sec:wm-mechanism-implementation}. Rounds at or below the threshold produce no WM-attributed information loss. Attention ON therefore means that every eligible distractor triggers the Attention mechanism, whereas WM ON means that the processing-capacity constraint is enabled but triggers only for rounds whose demand exceeds the threshold.
+
+Under A1W1, the two mechanisms execute sequentially in the registered CPB order:
+
+\[
+S_r
+\xrightarrow{\text{Attention Filter}}
+P_{r,c}
+\xrightarrow{\text{Working-Memory Processing}}
+A_{r,c}.
+\]
+
+Attention first determines which instructional sentences remain available after distraction. WM can then restrict only this remaining information. Its trigger decision still uses the Teaching Round's frozen $D(R_r)$; PDB is not recalculated after Attention removal. A1W1 therefore represents the cumulative operation of two registered mechanisms in a fixed order rather than a separate joint mechanism.
+
+All other experimental components are held constant across the four conditions. They use the same frozen Teaching Rounds, distractor assignments, assessment questions, scoring rubrics, student-model configuration, and Judge procedure, and they share the same Knowledge Encoder. Although A0W0 disables the Attention and WM constraints, it still undergoes normal Knowledge Encoding and is therefore an \textit{encoding-only reference}, not a perfect-memory condition.
+
+Study 1 uses seven frozen instructional materials containing 83 Teaching Rounds and 201 instructional sentences. Lessons L01--L07 contain 14, 12, 11, 11, 12, 10, and 13 Teaching Rounds, respectively. The assessment set is identical in every condition and contains 42 independent questions (six per lesson) and seven cross-round integrative questions (one per lesson), giving 49 questions in total.
+
+Each of the four conditions is executed once as the canonical simulated-learner run. Every condition processes all 83 Teaching Rounds and stores one memory-state record per round, producing 332 condition-round records. Of these, 323 contain encoded Explicit LTM content; the remaining nine are marked \texttt{no\_visible\_information} because no instructional information remained available for encoding. Each condition then answers all 49 questions independently, producing 196 student answers, 196 question-level Judge records, and 548 criterion-level judgements.
+
+These quantities also define the units of analysis. ATRF and NTPR are based on sentence-level Attention decisions, WMTA on all Teaching Rounds, and FRF on eligible WM-overflow rounds. AAR, WMAR, SWAR, ESR, and E2ESR are calculated from round-level processing records and then aggregated into seven lesson-level observations. Checklist Score is first calculated at question level and then aggregated by lesson and condition. Reported 95\% confidence intervals use lesson as the bootstrap unit and therefore reflect variation across the seven frozen lessons rather than stochastic variation across repeated student runs.
+
+\subsubsection{Evaluation Measures}
+
+Study 1 uses three linked layers of evaluation. The SQ1 measures test whether Attention and WM trigger and execute according to the frozen rules. The SQ2 measures quantify the local information-state transitions in $S_r \rightarrow P_{r,c} \rightarrow A_{r,c} \rightarrow L_{r,c}$. The SQ3 measures assess whether those local changes accumulate and propagate to the final Explicit LTM and assessment performance. Unless otherwise stated, availability measures use deterministic $\operatorname{WordCount}(X)$ values that include instructional content only and exclude distractor labels, control markers, and experimental prompt text. These measures describe the amount of instructional information available at each processing stage; they are not interpreted as percentages of human attention, working-memory capacity, or knowledge retention.
+
+\paragraph{SQ1---Mechanism Execution.}
+
+SQ1 first checks whether the manipulated mechanisms implement the rules defined in Section~3.4. In Study 1, Attention ON uses $p_A=1$, so every Teaching Round with an eligible distractor assignment should trigger the Attention Filter and make its mapped target sentence unavailable. Attention OFF uses $p_A=0$ and should produce no Attention-attributed removal. WM follows the deterministic capacity rule $D(R_r)>C^{WM}_c$ and, when triggered, removes the earliest instructional sentence that remains available after Attention. The SQ1 measures therefore test both whether each mechanism triggers when it should and whether it applies the correct information-selection rule after triggering.
+
+Attention execution is assessed using two complementary measures. \textbf{Attention Target-Removal Fidelity (ATRF)} quantifies the proportion of expected Attention targets that are actually removed:
+
+\[
+ATRF_c=
+\frac{
+\sum_r
+\left|
+T^{\mathrm{expected}}_{r,c}
+\cap
+T^{\mathrm{removed}}_{r,c}
+\right|
+}{
+\sum_r
+\left|
+T^{\mathrm{expected}}_{r,c}
+\right|
+}.
+\]
+
+Here, $T^{\mathrm{expected}}_{r,c}$ denotes the sentence identifiers that should be removed under the frozen distractor mapping and trigger setting for condition $c$, and $T^{\mathrm{removed}}_{r,c}$ denotes the identifiers actually removed in the execution log. Values closer to 1 indicate more complete execution of the intended target removal; $ATRF_c=1$ means that all expected targets were correctly removed. Because Attention OFF has no expected target removals, ATRF applies to rounds and conditions in which removal is expected.
+
+The complementary \textbf{Non-Target Preservation Rate (NTPR)} checks whether information that should remain available after Attention is preserved. Let $N^{\mathrm{expected}}_{r,c}$ denote instructional sentences expected to remain available and $N^{\mathrm{preserved}}_{r,c}$ the sentences actually preserved. Then:
+
+\[
+NTPR_c=
+\frac{
+\sum_r
+\left|
+N^{\mathrm{expected}}_{r,c}
+\cap
+N^{\mathrm{preserved}}_{r,c}
+\right|
+}{
+\sum_r
+\left|
+N^{\mathrm{expected}}_{r,c}
+\right|
+}.
+\]
+
+Values closer to 1 indicate fewer unintended Attention removals; $NTPR_c=1$ means that all non-target information was correctly preserved. ATRF and NTPR therefore assess correct removal and correct preservation separately.
+
+WM execution is also assessed using two complementary measures. \textbf{Working-Memory Trigger Agreement (WMTA)} quantifies whether the trigger status in the execution log agrees with the registered capacity rule:
+
+\[
+WMTA_c
+=
+\frac{1}{R}
+\sum_r
+\mathbf{1}
+\left[
+z^{WM}_{r,c}
+=
+\mathbf{1}
+\left[
+D(R_r)>C^{WM}_c
+\right]
+\right],
+\]
+
+where $z^{WM}_{r,c}$ is the recorded WM trigger status. Values closer to 1 indicate stronger agreement between observed triggering and the threshold rule; $WMTA_c=1$ means that every Teaching Round triggered exactly when required.
+
+For rounds in which WM triggers and the Post-Attention Input still contains removable instructional information, \textbf{FIFO Rule Fidelity (FRF)} is calculated. Let $\mathcal E_c$ denote this set of eligible rounds:
+
+\[
+FRF_c=
+\frac{1}{|\mathcal E_c|}
+\sum_{r\in\mathcal E_c}
+\mathbf{1}
+\left[
+R^{WM}_{r,c}
+=
+\{\operatorname{First}(P_{r,c})\}
+\right].
+\]
+
+Values closer to 1 indicate more consistent execution of the predefined within-round FIFO-style information-restriction rule; $FRF_c=1$ means that the earliest available instructional sentence was correctly removed in every eligible overflow round. ATRF, NTPR, WMTA, and FRF are implementation-fidelity measures defined from the frozen mechanism rules and execution logs. They verify computational execution rather than human ADHD cognitive fidelity.
+When $|\mathcal E_c|=0$, FRF is undefined and is reported as N/A rather than assigned a numerical value.
+
+\paragraph{SQ2---Stage-Specific Information-State Transitions.}
+
+After mechanism execution has been established, SQ2 evaluates information-state changes at the transitions:
+
+\[
+S_r
+\xrightarrow{\text{Attention}}
+P_{r,c}
+\xrightarrow{\text{WM}}
+A_{r,c}
+\xrightarrow{\text{Encoding}}
+L_{r,c}.
+\]
+
+The Attention stage uses the \textbf{Attention-stage Availability Ratio (AAR)} to quantify the proportion of Source information that remains available after the Attention Filter. For lesson $l$ and condition $c$:
+
+\[
+AAR_{l,c}
+=
+\frac{
+\sum_{r\in l}\operatorname{WordCount}(P_{r,c})
+}{
+\sum_{r\in l}\operatorname{WordCount}(S_r)
+}.
+\]
+
+$AAR_{l,c}=1$ means that no instructional information in the lesson became unavailable at the Attention stage; lower values indicate greater Attention-attributed loss. AAR is an information-availability ratio computed from the explicit processing trace, not an ``attention percentage''.
+
+The WM stage uses the \textbf{Working-Memory-stage Availability Ratio (WMAR)} to quantify the proportion of Post-Attention Input that passes the WM constraint and reaches the Knowledge Encoder:
+
+\[
+WMAR_{l,c}
+=
+\frac{
+\sum_{r\in l}\operatorname{WordCount}(A_{r,c})
+}{
+\sum_{r\in l}\operatorname{WordCount}(P_{r,c})
+}.
+\]
+
+Using $P_{r,c}$ rather than the complete Source as the denominator separates WM-attributed restriction from preceding Attention loss. $WMAR_{l,c}=1$ indicates that WM caused no additional reduction in the Post-Attention Input; lower values indicate greater restriction among the information that passed Attention. AAR and WMAR therefore localise the information-availability effects of Attention and WM, respectively.
+
+Knowledge Encoding is shared across conditions and is not an additional ADHD-specific manipulation. This stage is evaluated through \textbf{Encoding Semantic Recall (ESR)}, a diagnostic of semantic correspondence between the Available Input and the generated Explicit LTM:
+
+\[
+ESR_{l,c}
+=
+\frac{1}{|\mathcal R^+_{l,c}|}
+\sum_{r\in\mathcal R^+_{l,c}}
+B_R(A_{r,c},L_{r,c}),
+\]
+
+where:
+
+\[
+\mathcal R^+_{l,c}
+=
+\left\{
+r\in l:
+\operatorname{WordCount}(A_{r,c})>0
+\right\}.
+\]
+
+$B_R(A_{r,c},L_{r,c})$ is BERTScore Recall calculated with Available Input as the reference and Explicit LTM as the candidate. BERTScore uses contextual embeddings to match candidate and reference tokens and can therefore identify paraphrases and semantically similar expressions that exact lexical-overlap measures may miss \cite{zhang2019bertscore}. The frozen configuration uses the \texttt{microsoft/deberta-xlarge-mnli} model, with Recall as the reported component, inverse-document-frequency weighting disabled, and baseline rescaling enabled.
+
+Recall is used because the CPB Encoder is instructed to compress and paraphrase the Available Input into a short LTM entry. The relevant question is how much of the semantic content reaching the Encoder is represented in the generated LTM, not whether input and output are lexically identical or equally long. Higher ESR indicates stronger semantic coverage of the received Available Input; lower ESR indicates that more input semantics lack a corresponding representation in the LTM. Because baseline rescaling is applied, ESR is not interpreted as a strict probability on a 0--1 retention scale. Rounds with an empty $A_{r,c}$ are excluded because they contain no instructional content for the Encoder to transform.
+If $\mathcal R^+_{l,c}$ is empty, ESR is undefined for that lesson--condition combination and is reported as N/A.
+
+\paragraph{SQ3---Cumulative and Downstream Propagation.}
+
+SQ3 moves from local transitions to the complete processing chain and tests whether Attention- and WM-attributed changes accumulate in the information reaching the Encoder, the resulting Explicit LTM, and Assessment Phase performance.
+
+The \textbf{Source-Word Availability Ratio (SWAR)} quantifies the proportion of the original Source that remains available to the Encoder after both Attention and WM:
+
+\[
+SWAR_{l,c}
+=
+\frac{
+\sum_{r\in l}\operatorname{WordCount}(A_{r,c})
+}{
+\sum_{r\in l}\operatorname{WordCount}(S_r)
+}.
+\]
+
+Values closer to 1 indicate that a larger proportion of the Source reaches the shared Knowledge Encoder; lower values indicate stronger cumulative upstream restriction. Under the same lesson-level aggregation:
+
+\[
+SWAR_{l,c}
+=
+AAR_{l,c}
+\times
+WMAR_{l,c}.
+\]
+
+SWAR is therefore not a separate cognitive mechanism measure, but the cumulative information-availability outcome of the Attention and WM stages.
+
+As a supplementary decomposition, the frozen Source-word total in each condition is partitioned into Available Input, Attention-attributed loss, and WM-attributed loss:
+
+\[
+W_{\text{source},c}
+=
+W_{\text{available},c}
++
+W_{\text{attention-loss},c}
++
+W_{\text{WM-loss},c}.
+\]
+
+$W_{\text{available},c}$ is the total word count of $A_{r,c}$ across Teaching Rounds, and $W_{\text{attention-loss},c}$ and $W_{\text{WM-loss},c}$ are the cumulative word losses attributed to the two mechanisms. This decomposition supplements SWAR by showing the absolute composition and attribution of upstream information restriction.
+
+\textbf{End-to-End Semantic Recall (E2ESR)} quantifies semantic correspondence between the complete instructional Source and the final Explicit LTM:
+
+\[
+E2ESR_{l,c}
+=
+\frac{1}{R_l}
+\sum_{r\in l}
+B_R(S_r,L_{r,c}),
+\]
+
+where $R_l$ is the number of Teaching Rounds in lesson $l$. The same frozen BERTScore Recall configuration is used \cite{zhang2019bertscore}. ESR evaluates $A_{r,c}\rightarrow L_{r,c}$ and therefore diagnoses how the Encoder represents the information it actually receives. E2ESR evaluates $S_r\rightarrow L_{r,c}$ and describes how much Source semantics remains represented after Attention, WM, and Encoding. If a round produces no LTM entry, its E2ESR contribution is set to zero so that complete upstream information loss is retained in the cumulative measure. Higher E2ESR indicates stronger semantic correspondence between final Explicit LTM and the original instructional content; E2ESR is not interpreted as a percentage of human knowledge retention.
+
+Finally, \textbf{Checklist Score} is used as a downstream supporting outcome from the complete Source to the final answer. The questions, frozen atomic criteria, source evidence, and criterion-level Judge procedure are defined in Sections~\ref{subsec:rubric-construction} and~\ref{subsec:judge-validation}. For question $q$ with $K_q$ criteria:
+
+\[
+\operatorname{ChecklistScore}_{q,c}
+=
+10
+\times
+\frac{
+\sum_{k=1}^{K_q}
+\mathbf{1}
+\left[
+\ell_{q,k,c}=\mathrm{Correct}
+\right]
+}{
+K_q
+}.
+\]
+
+$\ell_{q,k,c}$ is the Judge label for criterion $k$ under condition $c$. \texttt{Absent} and \texttt{Contradicted} both receive zero credit but remain separate diagnostic labels. Checklist Score does not directly validate whether Attention or WM executed correctly. It tests whether the preceding mechanism execution and information-state changes propagate to final assessment performance and therefore serves as downstream supporting evidence for SQ3 rather than independent mechanistic evidence for RQ1.
+
+Table~\ref{tab:study1-measures} summarises the relationship between the three subquestions and their measures.
+
+\begin{table}[H]
+\centering
+\caption{Evaluation measures for Study 1.}
+\label{tab:study1-measures}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{p{0.12\textwidth} p{0.21\textwidth} p{0.15\textwidth} p{0.44\textwidth}}
+\toprule
+\textbf{Subquestion} & \textbf{Validation target} & \textbf{Measure} & \textbf{Interpretation} \\
+\midrule
+\textbf{SQ1} & Attention execution & ATRF / NTPR & Whether intended Attention targets are removed while non-target information is preserved \\
+\textbf{SQ1} & WM execution & WMTA / FRF & Whether WM triggers at the registered threshold and applies the correct within-round removal rule \\
+\textbf{SQ2} & $S_r\rightarrow P_{r,c}$ & AAR & Proportion of Source information remaining available after Attention \\
+\textbf{SQ2} & $P_{r,c}\rightarrow A_{r,c}$ & WMAR & Proportion of Post-Attention information remaining available after WM \\
+\textbf{SQ2} & $A_{r,c}\rightarrow L_{r,c}$ & ESR & Semantic correspondence between actual Encoder input and generated Explicit LTM \\
+\textbf{SQ3} & $S_r\rightarrow A_{r,c}$ & SWAR & Cumulative proportion of Source information reaching the Encoder \\
+\textbf{SQ3} & $S_r\rightarrow L_{r,c}$ & E2ESR & End-to-end semantic correspondence between Source and Explicit LTM \\
+\textbf{SQ3} & Full pipeline to answer & Checklist Score & Proportion of frozen assessment criteria correctly expressed in the final answer \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Expected Patterns and Interpretation}
+
+Study 1 interprets its results through the progressive SQ1--SQ3 structure: mechanism execution, stage-specific transitions, and cumulative propagation. All expectations concern aggregate-level patterns. Apart from deterministic implementation-fidelity checks, the study does not require every lesson or question to exhibit the same ordering.
+
+\begin{table}[H]
+\centering
+\caption{Prespecified aggregate-level expectations for Study 1.}
+\label{tab:study1-expectations}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{p{0.25\textwidth} p{0.67\textwidth}}
+\toprule
+\textbf{Subquestion and target} & \textbf{Prespecified aggregate-level expectation} \\
+\midrule
+\textbf{SQ1---Mechanism execution} & All applicable fidelity measures should equal 1.000, with no Attention or WM implementation violations. \\
+\textbf{SQ2---Attention stage} & Attention ON should reduce AAR. Holding Attention constant, changing the downstream WM setting should not alter AAR. Thus, $AAR_{A0W0}=AAR_{A0W1}$ and $AAR_{A1W0}=AAR_{A1W1}$ are expected, with Attention ON lower than the corresponding Attention OFF condition. \\
+\textbf{SQ2---WM stage} & WM OFF should produce $WMAR=1$. WM ON should introduce additional restriction only in rounds whose processing demand exceeds the frozen threshold, producing lower aggregate WMAR than the corresponding WM OFF condition. \\
+\textbf{SQ2---Shared Encoding} & Because all conditions use the same Encoder, no strict ESR ordering is prespecified; systematic divergence caused by a condition-specific Encoding procedure is not expected. \\
+\textbf{SQ3---Cumulative propagation} & A1W1 should contain both local changes and exhibit the lowest or near-lowest aggregate Source availability. Relative to A0W0, stronger upstream restriction should correspond to lower SWAR and E2ESR. \\
+\textbf{SQ3---Downstream outcome} & Checklist Score should indicate whether upstream changes propagate to assessment performance. Aggregate scores are expected to decrease as cumulative restriction increases, without requiring strict monotonicity for every question or lesson. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A0W0 still undergoes shared Knowledge Encoding and is therefore an encoding-only reference rather than a perfect-memory baseline. Checklist Score remains supporting evidence for cumulative propagation. Mechanistic validity for Attention and WM is established primarily through SQ1 execution fidelity and SQ2 stage localisation.
 
 \subsection{Study 2---Comparative Representational Validity}
+\label{subsec:study2-design}
 
-\mbox{}\par
+\subsubsection{Research Question and Subquestions}
+\label{subsubsec:study2-rq}
 
-\subsubsection{Research Question and Expected Patterns}
+Study 2 addressed RQ2 by comparing the behavioural sensitivity of persona prompting and CPB under controlled distraction and instructional processing demand. RQ2 was:
 
-\mbox{}\par
+\begin{quote}
+\small
+\textbf{RQ2---Representation:} Compared with persona prompting, does CPB produce learning behaviour that shows more theoretically consistent sensitivity to controlled distraction and processing demand?
+\end{quote}
+
+RQ2 concerns both differentiation within each representation and systematic responses to theoretically relevant external manipulations. A comparison of overall mean scores alone would therefore be insufficient. Study 2 decomposed RQ2 into four linked subquestions. SQ1 and SQ2 tested whether persona prompting and CPB, respectively, produced interpretable differentiation within their own representation. SQ3 and SQ4 then compared their sensitivity to controlled distraction and instructional processing demand. Table~\ref{tab:study2-subquestions} summarises this structure.
+
+\begin{table}[H]
+\centering
+\caption{Subquestions and validation focus for Study 2.}
+\label{tab:study2-subquestions}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{p{0.12\textwidth} p{0.23\textwidth} p{0.52\textwidth}}
+\toprule
+\textbf{Subquestion} & \textbf{Validation focus} & \textbf{Evidence sought} \\
+\midrule
+\textbf{SQ1} & Persona differentiation & Whether Prompt-NT, Moderate-Intensity Prompt-ADHD, and High-Intensity Prompt-ADHD produce distinguishable learning behaviour \\
+\textbf{SQ2} & Graded CPB response & Whether increasing CPB constraint severity produces a systematic ordinal change in learning performance \\
+\textbf{SQ3} & Distraction sensitivity & Whether the two representations differ systematically in their behavioural response to controlled distraction \\
+\textbf{SQ4} & Processing-demand sensitivity & Whether the two representations differ systematically in their sensitivity to instructional processing demand \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{SQ1---Persona Differentiation.}
+
+\begin{quote}
+\small
+\raggedright
+\textbf{Does persona prompting produce distinguishable learning behaviour across Prompt-NT and the two Prompt-ADHD intensity conditions?}
+\end{quote}
+
+SQ1 tested whether persona-level learner descriptions alone produced stable differentiation in final learning behaviour. The persona branch comprised one Prompt-NT learner and two learners with different ADHD-description intensities: Moderate-Intensity Prompt-ADHD and High-Intensity Prompt-ADHD. Under matched teaching materials, questions, and scoring, the analysis examined both NT--ADHD differentiation and whether the two ADHD intensities produced distinguishable behavioural patterns. If the three Prompt learners differed only in language style or phrasing without stable performance differentiation, this would indicate weak behavioural representation of ADHD-related learning characteristics and their intensity. SQ1 therefore established an internal persona-representation baseline without requiring the observed differences to be localisable to an explicit cognitive-processing stage.
+
+\paragraph{SQ2---Graded CPB Response.}
+
+\begin{quote}
+\small
+\textbf{Does increasing CPB constraint severity produce a systematic graded change in learning performance?}
+\end{quote}
+
+SQ2 tested whether the factorised CPB representation produced an ordered behavioural response as registered constraint severity increased. Study 2 used CPB Zero, Low, Medium, and High conditions, with Attention susceptibility and WM capacity jointly parameterised to impose progressively stronger constraints. The relevant evidence was not whether any single condition produced a low score, but whether Zero $\rightarrow$ Low $\rightarrow$ Medium $\rightarrow$ High formed an interpretable ordinal pattern in aggregate learning performance. Such a pattern would establish a systematic correspondence between CPB behavioural output and its internal constraint severity.
+
+\paragraph{SQ3---Distraction Sensitivity.}
+
+\begin{quote}
+\small
+\textbf{How do persona prompting and CPB differ in their sensitivity to controlled distraction?}
+\end{quote}
+
+SQ3 compared behavioural change between clean and distracted materials. Within persona prompting, it examined whether Prompt-NT and the two Prompt-ADHD intensities showed distinguishable changes in performance under distraction. Within CPB, it examined whether the response of Zero, Low, Medium, and High varied systematically with constraint severity. The focus was not which representation produced the lower absolute score, but whether its output showed stable sensitivity to controlled distraction that corresponded to the representation design.
+
+\paragraph{SQ4---Processing-Demand Sensitivity.}
+
+\begin{quote}
+\small
+\textbf{How do persona prompting and CPB differ in their sensitivity to instructional processing demand?}
+\end{quote}
+
+SQ4 compared the relationship between instructional processing demand and performance across the two representations. For persona prompting, it tested whether Prompt-NT and the two Prompt-ADHD intensities showed different relationships between source-round demand and question performance. For CPB, it tested whether higher-demand instructional content produced a larger performance cost as registered constraint severity increased. Because processing demand principally enters the implemented framework through the WM-related capacity rule, SQ4 assessed whether either representation produced a systematic response to this controlled theoretical variable.
+
+Study 2 therefore moved from differentiation within each representation to comparison of their behavioural sensitivities:
+
+\[
+\begin{aligned}
+\text{Persona Differentiation}
+&\rightarrow \text{Graded CPB Response} \\
+&\rightarrow \text{Distraction Sensitivity} \\
+&\rightarrow \text{Processing-Demand Sensitivity}.
+\end{aligned}
+\]
+
+RQ2 did not depend on one representation producing lower absolute performance than the other. It tested whether differentiation was established within each representation and whether the resulting behavioural outputs responded systematically and theory-consistently to controlled distraction and instructional processing demand.
 
 \subsubsection{Experimental Design and Conditions}
+\label{subsubsec:study2-conditions}
 
-\mbox{}\par
+Study 2 used a fully crossed learner-condition $\times$ material-condition design. The learner factor comprised three persona-prompted and four CPB learners. Each learner condition received both clean and distracted materials, with five independent runs in every learner--material cell.
 
-\paragraph{A. Persona-Prompted Conditions}
+The persona-prompted branch comprised Prompt-NT and two Prompt-ADHD intensity conditions. The Prompt-ADHD descriptions used the text-based educational prompts provided by Gonnermann-Müller et al. \cite{gonnermann2026llm}. They retained the same ADHD-related behavioural content while varying intensity through frequency terms. The Moderate-Intensity condition primarily used terms such as \textit{sometimes}, \textit{occasionally}, and \textit{somewhat}; the High-Intensity condition primarily used \textit{often}, \textit{frequently}, and \textit{regularly}. Prompt-NT contained no ADHD-specific cognitive description and served as the persona-prompted reference condition.
 
-\mbox{}\par
+The CPB branch comprised Zero, Low, Medium, and High. CPB Zero retained Teaching-Round processing, shared Knowledge Encoding, Explicit LTM accumulation, and memory-constrained answering while disabling both information-loss mechanisms. It therefore served as the zero-constraint CPB reference. Low, Medium, and High jointly varied Attention-trigger probability and WM-capacity threshold to impose progressively stronger constraints. These configurations are experimental parameters and do not represent clinical ADHD severity. Table~\ref{tab:study2-conditions} lists all learner conditions.
 
-\paragraph{B. Graded CPB Conditions}
+\begin{table}[H]
+\centering
+\caption{Learner conditions used in Study 2.}
+\label{tab:study2-conditions}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{p{0.18\textwidth} p{0.14\textwidth} p{0.25\textwidth} p{0.14\textwidth} p{0.14\textwidth}}
+\toprule
+\textbf{\makecell{Learner\\condition}} & \textbf{Representation} & \textbf{Manipulation} & \textbf{\makecell{Attention\\probability}} & \textbf{\makecell{WM\\capacity}} \\
+\midrule
+\textbf{Prompt-NT} & Persona prompting & No ADHD-specific description & N/A & N/A \\
+\textbf{Prompt-ADHD---Moderate} & Persona prompting & Moderate-intensity ADHD description & N/A & N/A \\
+\textbf{Prompt-ADHD---High} & Persona prompting & High-intensity ADHD description & N/A & N/A \\
+\textbf{CPB Zero} & CPB & Attention and WM restrictions disabled & 0.00 & $10^{10}$ bits \\
+\textbf{CPB Low} & CPB & Low processing constraint & 0.20 & 362.099 bits ($Q_{2/3}$) \\
+\textbf{CPB Medium} & CPB & Medium processing constraint & 0.50 & 321.994 bits ($Q_{1/2}$) \\
+\textbf{CPB High} & CPB & High processing constraint & 0.80 & 246.930 bits ($Q_{1/3}$) \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\mbox{}\par
+Both material conditions were derived from the same seven frozen teaching materials. The clean condition used instructional text without distractor events. The distracted condition inserted the frozen events at the predetermined locations. Apart from these events, the two versions retained the same instructional content, Teaching-Round boundaries, sentence identifiers, and ordering. The material manipulation therefore did not alter the curriculum topic, assessment scope, or instructional structure.
 
-\subsubsection{Evaluation Measures and Planned Analysis}
+Persona-prompted and CPB learners received the same Teaching-Round sequence but followed different representation pipelines. For persona prompting, each round was appended to the complete conversation history in source order and followed by a fixed \texttt{OK} acknowledgement. After teaching, each assessment question branched independently from the same frozen post-exposure history so that earlier questions and answers could not supply information to later questions. This branch did not generate a separate Knowledge-Encoding entry or Explicit LTM.
 
-\mbox{}\par
+For CPB learners, each Teaching Round passed through Attention, WM processing, and shared Knowledge Encoding. The Attention trigger was sampled using the condition-specific probability and stored random seed. When triggered, the frozen target information became unavailable through hard deletion. The WM mechanism then processed the Post-Attention Input using the condition-specific capacity threshold, after which the shared Encoder converted the resulting Available Input into a round-level Explicit LTM entry. During assessment, the learner received only the Explicit LTM generated for that lesson; the complete instructional material was not reintroduced.
 
-\subsection{Study 3---Multidimensional Representational Robustness}
+Both branches used DeepSeek V4-Flash as the student model and shared the frozen materials, assessment questions, and scoring framework. Their assessment inputs followed their respective representation architectures: Prompt learners answered from the frozen post-exposure conversation context, whereas CPB learners answered only from the frozen Explicit LTM. Each lesson contained six independent questions and one cross-round integrative question, giving 42 independent and seven integrative questions across the seven lessons.
 
-\mbox{}\par
+The seven learner conditions were crossed with the two material conditions and run five times per cell:
 
-\subsubsection{Research Question and Expected Patterns}
+\[
+7\ \text{learner conditions}
+\times 2\ \text{material conditions}
+\times 5\ \text{runs}
+=70\ \text{simulated-learner runs}.
+\]
 
-\mbox{}\par
+Because every run covered seven lessons and all 49 questions, Study 2 produced
 
-\subsubsection{Experimental Design and Conditions}
+\[
+70\times7=490
+\]
 
-\mbox{}\par
+lesson-level learning sessions and
 
-\paragraph{A. Joint-Prompt and Contrastive Learner Profiles}
+\[
+70\times49=3{,}430
+\]
 
-\mbox{}\par
+assessment answers. Each run used a unique identifier. CPB records additionally preserved the Attention-sampling seed, realised trigger decisions, WM-processing records, Explicit LTM, and answer files, making each stochastic Attention trajectory reproducible. Prompt records preserved the complete round-wise classroom history and independent answer record for each question.
 
-\subsubsection{Evaluation Measures and Planned Analysis}
+All 3,430 answers were scored by the same frozen \texttt{qwen3.7-max} criterion-level LLM Judge. The Judge received only the frozen question, reference answer, atomic checklist criteria, source evidence, and student answer. Learner identity, representation condition, material condition, and run label were withheld. Criterion-level results were rejoined with local experimental metadata only after scoring. Section~\ref{subsubsec:study2-measures} defines the measures used to address the four subquestions.
 
-\mbox{}\par
+\subsubsection{Evaluation Measures}
+\label{subsubsec:study2-measures}
+
+The four Study 2 subquestions shared a common set of outcome measures. Rather than defining a separate learning-performance metric for every subquestion, the analysis used the same question-level scores to examine persona differentiation, graded CPB response, distraction sensitivity, and processing-demand sensitivity from different comparison perspectives. The five independent runs of each question within a learner and material condition were first reduced to a question-level mean Checklist Score and a run-to-run standard deviation (SD). Response word count was retained as a descriptive answer characteristic; it was not interpreted as learning performance.
+
+For question $q$, learner condition $c$, material condition $m$, and run $j$, let the Checklist Score be $S_{q,c,m,j}$. The question-level mean was
+
+\[
+\bar S_{q,c,m}
+=
+\frac{1}{5}
+\sum_{j=1}^{5}
+S_{q,c,m,j}.
+\]
+
+$\bar S_{q,c,m}$ represents mean assessment performance on question $q$ under the specified learner and material condition. All higher-level summaries were calculated from these question-level means, including the overall mean across 49 questions, lesson-level means, the mean across 42 independent questions, and the mean across seven cross-round integrative questions. The aggregation order was therefore
+
+\[
+\begin{aligned}
+\text{Run-level Score}
+&\rightarrow \text{Question-level Mean} \\
+&\rightarrow \text{Lesson / Question-Type / Overall Summary}.
+\end{aligned}
+\]
+
+Run-to-run stability was quantified using the question-level sample SD:
+
+\[
+SD_{q,c,m}
+=
+\sqrt{
+\frac{1}{5-1}
+\sum_{j=1}^{5}
+\left(S_{q,c,m,j}-\bar S_{q,c,m}\right)^2
+}.
+\]
+
+Because SD and Checklist Score use the same scale, SD directly expresses variation in performance across the five runs of the same question. Lower values indicate greater run-to-run stability. Question-level SDs were subsequently summarised by lesson, question type, or across all questions. Variance was not additionally reported because it would duplicate the same stability information on a squared scale.
+
+Mean answer word count was also calculated across the five runs of each question. This descriptive measure was used to identify systematic differences in response length and to determine whether score differences were accompanied by changes in verbosity. It was not treated as a direct indicator of knowledge acquisition or learning effectiveness.
+
+\paragraph{SQ1---Persona Differentiation.}
+
+SQ1 compared the question-level mean Checklist Scores of Prompt-NT, Moderate-Intensity Prompt-ADHD, and High-Intensity Prompt-ADHD separately under clean and distracted materials. Overall mean performance and mean question-level SD first described aggregate differentiation and run-to-run stability. Scores and SDs were then summarised by lesson and by independent versus integrative question type to assess whether any differentiation was distributed across materials and question structures rather than driven by a single lesson.
+
+The \textbf{Ordering Consistency Rate (OCR)} quantified persona-intensity ordering. For material condition $m$, the expected Prompt ordering was
+
+\[
+\bar S_{q,\mathrm{NT},m}
+\ge
+\bar S_{q,\mathrm{Moderate},m}
+\ge
+\bar S_{q,\mathrm{High},m}.
+\]
+
+Prompt OCR was the proportion of eligible questions satisfying this non-increasing ordering:
+
+\[
+OCR_{\mathrm{Prompt},m}
+=
+\frac{
+\#\left\{
+q:
+\bar S_{q,\mathrm{NT},m}
+\ge
+\bar S_{q,\mathrm{Moderate},m}
+\ge
+\bar S_{q,\mathrm{High},m}
+\right\}
+}{Q},
+\qquad Q=49.
+\]
+
+Values closer to 1 indicate that the Prompt-NT $\rightarrow$ Moderate $\rightarrow$ High intensity ordering was preserved for more questions. Lower OCR indicates a weaker ordinal relationship between persona intensity and question-level performance. Non-strict inequalities were used because the discrete Checklist Score permits ties across conditions.
+
+\paragraph{SQ2---Graded CPB Response.}
+
+SQ2 applied the same outcome summaries to CPB Zero, Low, Medium, and High under both material conditions. The expected non-increasing ordering was
+
+\[
+\bar S_{q,\mathrm{Zero},m}
+\ge
+\bar S_{q,\mathrm{Low},m}
+\ge
+\bar S_{q,\mathrm{Medium},m}
+\ge
+\bar S_{q,\mathrm{High},m},
+\]
+
+and CPB OCR was defined as
+
+\[
+OCR_{\mathrm{CPB},m}
+=
+\frac{
+\#\left\{
+q:
+\bar S_{q,\mathrm{Zero},m}
+\ge
+\bar S_{q,\mathrm{Low},m}
+\ge
+\bar S_{q,\mathrm{Medium},m}
+\ge
+\bar S_{q,\mathrm{High},m}
+\right\}
+}{Q},
+\qquad Q=49.
+\]
+
+Higher CPB OCR indicates a more stable ordinal correspondence between registered constraint severity and question-level performance. This measure also provides the Study 2 baseline ordering against which Study 3 evaluates whether added learner attributes preserve the CPB gradient.
+
+\paragraph{SQ3---Distraction Sensitivity.}
+
+SQ3 used the paired clean and distracted results for each learner condition. For question $q$ and learner condition $c$, distraction cost was defined as
+
+\[
+\Delta D_{q,c}
+=
+\bar S_{q,c,\mathrm{clean}}
+-
+\bar S_{q,c,\mathrm{distracted}}.
+\]
+
+$\Delta D_{q,c}>0$ indicates lower performance under distracted materials, with larger positive values representing a stronger distraction-associated cost. Values near zero indicate little material-related change, while negative values indicate higher performance under distracted materials. Question-level costs were summarised across all questions, by lesson, and by independent versus integrative question type for each of the seven learner conditions.
+
+The analysis also compared question-level SD between clean and distracted materials to describe any accompanying change in run-to-run stability. Clean--distracted change in response word count was retained only as supplementary description of whether behavioural sensitivity coincided with changes in answer length.
+
+\paragraph{SQ4---Processing-Demand Sensitivity.}
+
+SQ4 examined whether question performance changed systematically with instructional processing demand. The primary analysis was restricted to the 42 independent questions because each mapped to one source Teaching Round and one frozen PDB value. Cross-round integrative questions involved multiple Teaching Rounds and therefore had no unique single-round PDB.
+
+The 42 independent questions were ordered by source-round PDB, and the question-level mean Checklist Score profile was visualised for each learner condition. The primary quantitative measure was the PDB--score slope. Consistent with the implemented analysis and reported results, PDB was scaled in units of 100 bits:
+
+\[
+\bar S_q
+=
+\alpha
++
+\beta_{\mathrm{PDB}}
+\left(\frac{PDB_q}{100}\right)
++
+\varepsilon_q.
+\]
+
+$\beta_{\mathrm{PDB}}$ therefore denotes the expected Checklist-Score change per 100-bit increase in instructional processing demand. Values near zero indicate little linear association; negative values indicate lower performance for higher-demand source rounds; and more negative values indicate stronger linear demand sensitivity.
+
+As a supporting analysis that does not assume linearity, Spearman's rank correlation $\rho$ was calculated between PDB and question-level mean Checklist Score. A negative value indicates that higher PDB generally corresponds to lower performance, with values closer to $-1$ indicating a more consistent monotonic negative relationship.
+
+The study also reported the predefined Low--High demand gap:
+
+\[
+\Delta_{\mathrm{Demand},c}
+=
+\bar S_{\mathrm{Low\ demand},c}
+-
+\bar S_{\mathrm{High\ demand},c}.
+\]
+
+A positive gap indicates poorer mean performance on High-demand questions. This quantity provides an interpretable descriptive summary; the continuous PDB--score relationship remains the primary demand-sensitivity evidence.
+
+Independent and integrative performance was not treated as a fifth subquestion. It was reported as a common question-structure dimension across SQ1--SQ3. For SQ4, integrative questions were retained only as supplementary question-structure evidence and excluded from the continuous-demand analysis because they do not map to a unique source-round PDB. Table~\ref{tab:study2-evaluation-framework} summarises the comparison framework.
+
+\begin{table}[H]
+\centering
+\caption{Evaluation framework for Study 2.}
+\label{tab:study2-evaluation-framework}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{p{0.22\textwidth} p{0.20\textwidth} p{0.22\textwidth} p{0.27\textwidth}}
+\toprule
+\textbf{Subquestion} & \textbf{Core comparison} & \textbf{Primary outcome} & \textbf{Supporting evidence} \\
+\midrule
+\textbf{SQ1---Persona differentiation} & Prompt-NT $\rightarrow$ Moderate $\rightarrow$ High & Question-level mean Checklist Score & Run-to-run SD, Prompt OCR, lesson and question-type summaries \\
+\textbf{SQ2---Graded CPB response} & CPB Zero $\rightarrow$ Low $\rightarrow$ Medium $\rightarrow$ High & Question-level mean Checklist Score & Run-to-run SD, CPB OCR, lesson and question-type summaries \\
+\textbf{SQ3---Distraction sensitivity} & Clean $\rightarrow$ Distracted & Distraction cost $\Delta D$ & SD change, lesson and question-type decomposition, response-length change \\
+\textbf{SQ4---Processing-demand sensitivity} & Increasing source-round PDB & PDB--score slope $\beta_{\mathrm{PDB}}$ & Spearman $\rho$, Low--High demand gap \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Expected Patterns and Interpretation}
+\label{subsubsec:study2-expectations}
+
+Study 2 used the SQ1--SQ4 sequence to evaluate within-representation differentiation, graded CPB response, and behavioural sensitivity to controlled distraction and processing demand. All expectations concerned aggregate patterns. Apart from the explicit ordering measures, the design did not require every question, lesson, or run to follow the same ordering. Lower performance was not treated as inherently more ADHD-like; the relevant evidence was systematic correspondence between behavioural outcomes and the manipulated learner representation, material condition, and processing demand.
+
+\begin{table}[H]
+\centering
+\caption{Prespecified aggregate-level expectations for Study 2.}
+\label{tab:study2-expectations}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{p{0.26\textwidth} p{0.66\textwidth}}
+\toprule
+\textbf{Subquestion} & \textbf{Prespecified aggregate-level expectation} \\
+\midrule
+\textbf{SQ1---Persona differentiation} & Prompt-NT, Moderate-Intensity Prompt-ADHD, and High-Intensity Prompt-ADHD should show distinguishable behavioural patterns. If persona intensity maps to learning performance, stable differences should appear in overall, lesson-level, or question-type summaries and produce a comparatively high Prompt OCR. \\
+\textbf{SQ2---Graded CPB response} & CPB Zero, Low, Medium, and High should form an ordered aggregate performance pattern as registered constraint severity increases. Stronger constraints should correspond to Checklist Scores no higher than weaker constraints and produce a comparatively high CPB OCR. \\
+\textbf{SQ3---Distraction sensitivity} & Distracted materials should produce a measurable performance change relative to clean materials within the same learner condition. ADHD-related Prompt conditions and stronger CPB constraints should show larger aggregate distraction costs if their representations are theory-consistently sensitive to the manipulation. \\
+\textbf{SQ4---Processing-demand sensitivity} & Performance should show a stronger decline as source-round PDB increases. Stronger CPB constraints should correspond to more negative PDB--score slopes and rank associations if the WM-related constraint representation is theory-consistent; Prompt conditions test whether persona intensity produces an analogous differentiation. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Independent and integrative performance is reported as a common question-structure dimension for SQ1 and SQ2 and as a decomposition of the distraction effect for SQ3, rather than as a separate fifth subquestion. Run-to-run SD describes stability within learner--material conditions, while response word count remains a descriptive characteristic rather than a direct measure of learning effectiveness.
+
+For SQ3, larger positive $\Delta D$ values indicate stronger distraction-associated performance costs. The cross-representation comparison concerns whether this sensitivity changes systematically with persona intensity or CPB constraint severity, not which representation produces the lower absolute score. For SQ4, more negative $\beta_{\mathrm{PDB}}$ and Spearman $\rho$ values indicate greater performance sensitivity to processing demand. Integrative questions are excluded from the primary continuous-demand analysis because they do not correspond to a unique source-round PDB.
+
+The theoretical-consistency judgement for Study 2 therefore follows the evidence chain
+
+\[
+\begin{aligned}
+\text{Representation-internal Differentiation}
+&\rightarrow \text{Systematic Response to Distraction} \\
+&\rightarrow \text{Systematic Response to Processing Demand}.
+\end{aligned}
+\]
+
+RQ2 does not require CPB to produce lower scores under every condition. It asks whether CPB behavioural patterns correspond more consistently than persona prompting to the explicitly manipulated Attention- and WM-related demands. These expectations also establish the Study 2 behavioural baseline used in Study 3 to test whether additional learner attributes disrupt learning-related performance, stability, and ordering patterns.
+
+\subsection{Study 3---Multidimensional Representational Robustness (Unfinished)}
+
+\subsubsection{Research Question and Subquestions (Unfinished)}
+
+Study 3 addressed RQ3 by examining the extent to which joint persona prompting and a factorised CPB representation preserved the behavioural baseline established in Study 2 after functionally heterogeneous learner-profile prompts were added. RQ3 was:
+
+\begin{quote}
+\textbf{RQ3---Multidimensional Robustness:} When additional functionally heterogeneous learner-profile prompts are introduced, does a factorised CPB representation better preserve its Study 2 behavioural outcomes, learner-condition ordering, and processing-demand sensitivity than joint persona prompting?
+\end{quote}
+
+Study 3 did not require final scores to remain completely unchanged after the additional attributes were introduced. Robustness was instead quantified at three connected levels. First, the analysis measured displacement in mean performance, run-to-run variability, and response length relative to the matched Study 2 baseline. Second, it examined whether the question-level ordering of matched learner conditions from Study 2 was preserved under the A1--B2 profiles. Third, it tested whether the relationship between performance and source-round Processing Demand Bits (PDB) changed. High or Low Language Ability was crossed with a learning-congruent or learning-challenging Big-Five composite to form four controlled attribute profiles. A1 and A2 were directionally aligned configurations, whereas B1 and B2 were conflicting configurations. Each profile was analysed as a complete prompt addition; separate Language main effects, Big-Five main effects, and their statistical interaction were not estimated.
+
+\[
+\begin{array}{c|cc}
+ & BF_{\mathrm{congruent}} & BF_{\mathrm{challenging}} \\
+\hline
+Language_{\mathrm{High}} & A1 & B1 \\
+Language_{\mathrm{Low}} & B2 & A2
+\end{array}
+\]
+
+RQ3 was divided into three subquestions. All three used the same matched baselines from the distracted arm of Study 2 but examined preservation at the outcome, ordering, and processing-demand-relationship levels, respectively.
+
+\paragraph{SQ1---Baseline-Relative Outcome Displacement (Unfinished)}
+
+\begin{quote}
+\textbf{How much do mean performance, run-to-run variability, and response length change after Language Ability and Big-Five profile prompts are added, relative to the matched Study 2 baseline?}
+\end{quote}
+
+SQ1 paired every Study 3 learner-type--profile condition with the same learner type in the distracted arm of Study 2. It quantified absolute and relative displacement in Mean Checklist Score, mean question-level run-to-run SD, and Mean Response Word Count. The analysis therefore measured how strongly the additional profile prompts disturbed learning outcomes, repeated-run stability, and response form.
+
+\paragraph{SQ2---Matched-Ordering Preservation (Unfinished)}
+
+\begin{quote}
+\textbf{Are the matched learner-condition orderings observed in Study 2 preserved across the A1--B2 profiles?}
+\end{quote}
+
+SQ2 examined preservation of matched learner-condition ordering at question level. The Prompt branch used the ordering of Moderate- and High-Intensity Prompt-ADHD in the distracted arm of Study 2, while the CPB branch used the ordering of Low, Medium, and High constraints. The Ordering Consistency Rate (OCR) for each profile was compared with its matched Study 2 baseline. Tie rates were reported separately to distinguish strict preservation, preservation through equal scores, and reversal of the expected direction.
+
+\paragraph{SQ3---Processing-Demand Sensitivity Preservation (Unfinished)}
+
+\begin{quote}
+\textbf{Does the relationship between source-round Processing Demand Bits and question performance change after the additional profiles are introduced?}
+\end{quote}
+
+SQ3 reused the Study 2 processing-demand analysis for the 42 Independent Questions that mapped uniquely to a source Teaching Round. The primary comparison was the change in the PDB--score slope between each Study 3 profile and the matched learner condition in the distracted arm of Study 2. Spearman rank correlation and the Low--High demand gap provided supporting evidence. SQ3 therefore assessed displacement in the previously observed WM/PDB-related behavioural sensitivity.
+
+Study 3 did not independently validate whether the generated answers faithfully expressed the intended Language Ability or Big-Five constructs. Its conclusions were therefore restricted to \textit{robustness under the addition of Language Ability and Big-Five profile prompts}, rather than the accurate simulation of those learner traits.
+
+\subsubsection{Experimental Design and Conditions (Unfinished)}
+
+Study 3 used a learner-type $\times$ attribute-profile crossed design to test whether Prompt-based and CPB-based ADHD representations preserved their Study 2 outcomes, matched ordering, and processing-demand sensitivity after Language Ability and Big-Five characteristics were added. The design included two Prompt-ADHD learner types and three CPB learner types, as shown in Table~\ref{tab:study3-learner-types}.
+
+\begin{table}[H]
+\centering
+\caption{Learner types included in Study 3.}
+\label{tab:study3-learner-types}
+\small
+\begin{tabular}{p{0.24\textwidth}p{0.62\textwidth}}
+\toprule
+\textbf{Representation} & \textbf{Learner type} \\
+\midrule
+Prompt & Moderate-Intensity Prompt-ADHD \\
+Prompt & High-Intensity Prompt-ADHD \\
+CPB & CPB Low constraint \\
+CPB & CPB Medium constraint \\
+CPB & CPB High constraint \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The Prompt branch retained the Moderate- and High-Intensity ADHD descriptions from Study 2, and the CPB branch retained its Low, Medium, and High Attention/WM constraints. Prompt-NT and CPB Zero were not included. The results of these five learner types in the distracted arm of Study 2 served as matched baselines before the additional attributes were introduced.
+
+\paragraph{Added Attributes and Representative Profiles (Unfinished)}
+
+To control the experimental scope, Study 3 did not enumerate all Big-Five dimensions and high--low combinations. Building on the personality-aware student-simulation framework of Liu et al. \cite{liu-etal-2024-personality}, it selected Openness, Conscientiousness, and Neuroticism because they provided comparatively interpretable contrasts in the present learning context. Two Big-Five composite profiles were constructed. High Openness, High Conscientiousness, and Low Neuroticism formed the \textbf{learning-congruent BF} profile; Low Openness, Low Conscientiousness, and High Neuroticism formed the \textbf{learning-challenging BF} profile. These profiles supplied directionally explicit experimental contrasts and were not intended to exhaust the Big-Five personality space. The terms \textit{learning-congruent} and \textit{learning-challenging} were study-specific directional cue labels; they do not imply that Liu et al. established a causal beneficial or detrimental effect of these composites on learning.
+
+The added Language Ability descriptions were also adapted from Liu et al. \cite{liu-etal-2024-personality}. High Language Ability encouraged complete and grammatically conventional sentence organisation, whereas Low Language Ability allowed more fragmented expression and some grammatical incompleteness. This attribute primarily controlled the organisation and form of the answer and did not directly represent the amount of knowledge acquired by the learner.
+
+The two Big-Five composites were crossed with High and Low Language Ability to form four multidimensional learner profiles. This design tested the displacement produced by a limited set of representative profile-prompt additions without making the experiment intractable through exhaustive enumeration. Table~\ref{tab:study3-attribute-profiles} summarises the profiles.
+
+\begin{table}[H]
+\centering
+\caption{Contrastive Language Ability and Big-Five profiles in Study 3.}
+\label{tab:study3-attribute-profiles}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{p{0.09\textwidth}p{0.19\textwidth}p{0.12\textwidth}p{0.18\textwidth}p{0.19\textwidth}p{0.16\textwidth}}
+\toprule
+\textbf{Group} & \textbf{Profile} & \textbf{Language} & \textbf{BF composite} & \textbf{Relationship} & \textbf{Role} \\
+\midrule
+A---Aligned & A1---Learning-Congruent Alignment & High & High O, High C, Low N & Both cues are directionally learning-congruent & Congruent aligned configuration \\
+A---Aligned & A2---Learning-Challenging Alignment & Low & Low O, Low C, High N & Both cues are directionally learning-challenging & Challenging aligned configuration \\
+B---Conflicting & B1---High Language / Challenging BF & High & Low O, Low C, High N & Language and BF cues point in different directions & Cross-attribute separability test \\
+B---Conflicting & B2---Low Language / Congruent BF & Low & High O, High C, Low N & Language and BF cues point in different directions & Cross-attribute separability test \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A1 and A2 were aligned configurations in which Language Ability and Big-Five cues jointly pointed towards learning-congruent or learning-challenging characteristics, respectively. B1 and B2 were conflicting configurations in which the two cue types pointed in opposing directions. The four cells provided representative coverage of aligned and conflicting attribute relationships, but were analysed as complete profile-prompt additions rather than decomposed into separate main effects or an interaction.
+
+\paragraph{Representation-Specific Attribute Placement (Unfinished)}
+
+Both representations used the same Language Ability and Big-Five descriptions but placed them at different functional locations, as shown in Figure~\ref{fig:study3-attribute-placement}. The Prompt branch placed the ADHD description, Language Ability, and Personality Description jointly in the student prompt. The CPB branch continued to represent ADHD-related processing differences through its Attention and WM mechanisms and added Language Ability and Personality Description only at the memory-constrained answering stage. The added attributes therefore conditioned CPB answer generation while ADHD-related processing differences remained implemented by the existing CPB mechanisms.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter3/export/ch03_rq3_prompt_structure_comparison.png}
+    \caption{Placement of additional learner attributes in joint Prompt-ADHD and factorised CPB-ADHD representations.}
+    \label{fig:study3-attribute-placement}
+\end{figure}
+
+In joint Prompt-ADHD, the ADHD description, Language Ability, Personality Description, and Core Student Instruction jointly conditioned answer generation from the complete frozen classroom context. In CPB-ADHD, ADHD-related differences were implemented through the Attention and Working-Memory mechanisms, while Language Ability and Personality Description were introduced only in the memory-constrained response-generation layer. Figure~\ref{fig:study3-attribute-placement} compares the profile-related prompt components rather than the complete payload; the unchanged Memory Restriction, Explicit LTM, and Question components are therefore omitted from the CPB side.
+
+\paragraph{Experimental Procedure and Scale (Unfinished)}
+
+Study 3 used only the same seven frozen distracted teaching materials as the distracted arm of Study 2; clean materials were not included. All learners therefore encountered the same ADHD-relevant instructional challenge, and every Study 3 condition could be compared with its matched Study 2 distracted baseline. The two Prompt-ADHD learner types and three CPB learner types were each crossed with A1, A2, B1, and B2, producing 20 learner-type--attribute-profile conditions. Each condition was run independently five times:
+
+\[
+20\ \text{conditions}
+\times
+5\ \text{runs}
+=
+100\ \text{simulated-learner runs}.
+\]
+
+Each run covered all seven teaching materials and answered all 49 frozen assessment questions, producing:
+
+\[
+100\ \text{runs}
+\times
+49\ \text{questions}
+=
+4{,}900\ \text{assessment answers}.
+\]
+
+Apart from the fixed use of distracted materials and the addition of Language Ability and Big-Five dimensions, Teaching-Round exposure, the student model, generation settings, 49 questions, five repetitions, and the Qwen3.7-Max criterion-level scoring procedure were the same as in Study 2. Prompt learners continued to answer from the complete round-wise conversation history, while CPB learners continued to answer from Explicit LTM. The principal added variable in Study 3 was therefore the attribute profile and its representation-specific placement.
+
+Studies 2 and 3 formed a progressive rather than duplicative comparison. Study 2 crossed learner and material conditions to establish the behavioural baseline. Study 3 fixed the distracted materials and examined how outcomes, matched learner-condition ordering, and PDB sensitivity changed after A1--B2 profiles were added. This analytical relationship is summarised in Table~\ref{tab:study2-study3-relationship}.
+
+\begin{table}[H]
+\centering
+\caption{Analytical relationship between Studies 2 and 3.}
+\label{tab:study2-study3-relationship}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{0.15\textwidth}p{0.23\textwidth}p{0.25\textwidth}p{0.29\textwidth}}
+\toprule
+\textbf{Study} & \textbf{Row axis} & \textbf{Column axis} & \textbf{Main question} \\
+\midrule
+Study 2 / RQ2 & Learner condition & Clean / Distracted & Does learner representation respond systematically to distraction and demand? \\
+Study 3 / RQ3 & Matched learner condition & Language $\times$ BF: A1 / A2 / B1 / B2 & How do outcomes, matched ordering, and PDB sensitivity change relative to the matched baseline? \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Evaluation Measures (Unfinished)}
+
+Study 3 reused the question-level aggregation order, Checklist Score, sample SD, response word count, OCR, and processing-demand measures from Study 2 so that profile conditions could be compared directly with their matched distracted baselines. For question $q$, learner condition $c$, profile $p$, and run $j$, let the Checklist Score be $S_{q,c,p,j}$ and the response word count be $W_{q,c,p,j}$. With five runs per condition, question-level mean score, sample SD, and mean word count were:
+
+\[
+\bar S_{q,c,p}
+=
+\frac{1}{5}\sum_{j=1}^{5}S_{q,c,p,j},
+\]
+
+\[
+SD_{q,c,p}
+=
+\sqrt{
+\frac{
+\sum_{j=1}^{5}
+\left(S_{q,c,p,j}-\bar S_{q,c,p}\right)^2
+}{5-1}
+},
+\]
+
+\[
+\bar W_{q,c,p}
+=
+\frac{1}{5}\sum_{j=1}^{5}W_{q,c,p,j}.
+\]
+
+All higher-level summaries first calculated these quantities at question level and then weighted questions equally within the relevant set. The primary analysis used all 49 questions and additionally reported the 42 Independent and seven Integrative Questions. The continuous PDB analysis for SQ3 used only the 42 Independent Questions that mapped uniquely to one source Teaching Round.
+
+\paragraph{SQ1---Baseline-Relative Outcome Displacement (Unfinished)}
+
+SQ1 quantified changes in Mean Checklist Score, mean question-level run SD, and Mean Response Word Count relative to the matched Study 2 distracted baseline. For outcome $X\in\{\mu,\overline{SD},\overline W\}$, let $X^{(2)}_c$ denote the Study 2 baseline for learner condition $c$, and let $X^{(3)}_{c,p}$ denote the result for the same condition under Study 3 profile $p$. Absolute and relative displacement were:
+
+\[
+\Delta X_{c,p}
+=
+X^{(3)}_{c,p}-X^{(2)}_c,
+\qquad
+R_{X,c,p}
+=
+\frac{X^{(3)}_{c,p}-X^{(2)}_c}{X^{(2)}_c}
+\times100\%.
+\]
+
+The three overall quantities were:
+
+\[
+\mu_{c,p}
+=
+\frac{1}{Q}
+\sum_{q=1}^{Q}\bar S_{q,c,p},
+\qquad
+\overline{SD}_{c,p}
+=
+\frac{1}{Q}
+\sum_{q=1}^{Q}SD_{q,c,p},
+\qquad
+\overline W_{c,p}
+=
+\frac{1}{Q}
+\sum_{q=1}^{Q}\bar W_{q,c,p}.
+\]
+
+SQ1 therefore reported $\Delta\mu$ and $R_{\mu}$, $\Delta\overline{SD}$ and $R_{SD}$, and $\Delta\overline W$ and $R_W$. A positive delta indicated that the Study 3 profile condition exceeded its matched baseline; a negative delta indicated a lower value. Mean Checklist Score displacement was the primary performance outcome, SD displacement described changes in repeated-run stability, and word-count displacement described response length only. It was not interpreted as knowledge gain, learning effectiveness, or attribute fidelity. If a baseline quantity equalled zero, the relative displacement was marked as not estimable rather than calculated using an arbitrary smoothing constant.
+
+\paragraph{SQ2---Matched-OCR Preservation (Unfinished)}
+
+SQ2 tested whether question-level ordering among the matched Study 2 learner conditions was preserved under A1--B2. Because Study 3 did not include Prompt-NT or CPB Zero, the Study 2 baselines were recalculated from the same learner subsets in the distracted arm rather than reusing the complete three-level Prompt OCR or four-level CPB OCR.
+
+For the Prompt branch, the matched Study 2 baseline and profile-specific OCR were:
+
+\[
+OCR^{\mathrm{Prompt}}_0
+=
+\frac{
+\#\left\{q:\bar S^{(2)}_{q,\mathrm{Moderate}}
+\geq
+\bar S^{(2)}_{q,\mathrm{High}}\right\}
+}{Q},
+\]
+
+\[
+OCR^{\mathrm{Prompt}}_p
+=
+\frac{
+\#\left\{q:\bar S^{(3)}_{q,\mathrm{Moderate},p}
+\geq
+\bar S^{(3)}_{q,\mathrm{High},p}\right\}
+}{Q}.
+\]
+
+For the CPB branch:
+
+\[
+OCR^{\mathrm{CPB}}_0
+=
+\frac{
+\#\left\{q:\bar S^{(2)}_{q,\mathrm{Low}}
+\geq
+\bar S^{(2)}_{q,\mathrm{Medium}}
+\geq
+\bar S^{(2)}_{q,\mathrm{High}}\right\}
+}{Q},
+\]
+
+\[
+OCR^{\mathrm{CPB}}_p
+=
+\frac{
+\#\left\{q:\bar S^{(3)}_{q,\mathrm{Low},p}
+\geq
+\bar S^{(3)}_{q,\mathrm{Medium},p}
+\geq
+\bar S^{(3)}_{q,\mathrm{High},p}\right\}
+}{Q}.
+\]
+
+Both branches used non-strict ordering, so equal scores did not violate the expected direction. Profile-specific OCR change was reported in percentage points:
+
+\[
+\Delta OCR_{p,\mathrm{pp}}
+=
+100\left(OCR_p-OCR_0\right).
+\]
+
+To determine whether high OCR values were driven primarily by equal scores, SQ2 separately reported tie rates. For the Prompt branch:
+
+\[
+P^{\mathrm{Prompt}}_{\mathrm{tie},0}
+=
+\frac{
+\#\left\{q:\bar S^{(2)}_{q,\mathrm{Moderate}}
+=
+\bar S^{(2)}_{q,\mathrm{High}}\right\}
+}{Q},
+\]
+
+\[
+P^{\mathrm{Prompt}}_{\mathrm{tie},p}
+=
+\frac{
+\#\left\{q:\bar S^{(3)}_{q,\mathrm{Moderate},p}
+=
+\bar S^{(3)}_{q,\mathrm{High},p}\right\}
+}{Q}.
+\]
+
+For the CPB branch, a tie required the overall non-increasing order to hold while at least one adjacent pair was equal:
+
+\[
+P^{\mathrm{CPB}}_{\mathrm{tie},p}
+=
+\frac{1}{Q}
+\sum_{q=1}^{Q}
+\mathbf 1\!\left[
+\begin{aligned}
+&\bar S_{q,\mathrm{Low},p}
+\geq\bar S_{q,\mathrm{Medium},p}
+\geq\bar S_{q,\mathrm{High},p}\\
+&\land\left(
+\bar S_{q,\mathrm{Low},p}=\bar S_{q,\mathrm{Medium},p}
+\lor
+\bar S_{q,\mathrm{Medium},p}=\bar S_{q,\mathrm{High},p}
+\right)
+\end{aligned}
+\right].
+\]
+
+The Study 2 baseline $P^{\mathrm{CPB}}_{\mathrm{tie},0}$ used the same definition with distracted-arm baseline scores. Tie-rate change and the derived ordering composition were:
+
+\[
+\Delta P_{\mathrm{tie},p,\mathrm{pp}}
+=
+100\left(P_{\mathrm{tie},p}-P_{\mathrm{tie},0}\right),
+\]
+
+\[
+P_{\mathrm{strict},p}=OCR_p-P_{\mathrm{tie},p},
+\qquad
+P_{\mathrm{reverse},p}=1-OCR_p.
+\]
+
+The primary SQ2 measures were therefore $OCR_p$, $P_{\mathrm{tie},p}$, $\Delta OCR_p$, and $\Delta P_{\mathrm{tie},p}$. Strict and reverse proportions were derived to explain the composition of ordering outcomes. Because Prompt and CPB imposed different numbers of ordering constraints, representational robustness was not inferred from their raw OCR values directly; the principal comparison concerned change relative to each matched baseline. Floating-point equality was evaluated using a fixed numerical tolerance so that each question was assigned to exactly one of the strict, tie, or reverse categories.
+
+\paragraph{SQ3---Processing-Demand Sensitivity Preservation (Unfinished)}
+
+SQ3 tested how much the relationship between performance and source-round PDB changed after A1--B2 profiles were added. The analysis used only the 42 Independent Questions because each mapped to one source Teaching Round; the seven Integrative Questions involved multiple rounds and had no unique single-round PDB.
+
+For learner condition $c$, the Study 2 baseline model was:
+
+\[
+\bar S^{(2)}_{q,c}
+=
+\alpha^{(2)}_c
++
+\beta^{(2)}_{c,\mathrm{PDB},100}
+\left(\frac{PDB_q}{100}\right)
++
+\varepsilon_q,
+\]
+
+and each Study 3 profile model was:
+
+\[
+\bar S^{(3)}_{q,c,p}
+=
+\alpha^{(3)}_{c,p}
++
+\beta^{(3)}_{c,p,\mathrm{PDB},100}
+\left(\frac{PDB_q}{100}\right)
++
+\varepsilon_q.
+\]
+
+Here, $\beta_{\mathrm{PDB},100}$ denoted the estimated change in Mean Checklist Score for each 100-bit increase in source-round PDB. The primary measure was slope displacement:
+
+\[
+\Delta\beta_{c,p}
+=
+\beta^{(3)}_{c,p,\mathrm{PDB},100}
+-
+\beta^{(2)}_{c,\mathrm{PDB},100}.
+\]
+
+$\Delta\beta\approx0$ indicated that the PDB--score relationship remained close to the matched baseline. A positive value indicated a shift towards a more positive slope, and a negative value indicated a more negative slope. Because the sign described only the direction of change, robustness was judged primarily from the magnitude of $|\Delta\beta|$ and its consistency across A1--B2.
+
+As supporting measures that did not rely on a linear model, SQ3 also calculated Spearman's rank correlation $\rho$ between PDB and question-level Mean Checklist Score, together with the predefined performance gap between Low- and High-demand Independent Questions:
+
+\[
+G_{c,p}
+=
+\bar S_{\mathrm{Low\ demand},c,p}
+-
+\bar S_{\mathrm{High\ demand},c,p},
+\]
+
+\[
+\Delta\rho_{c,p}=\rho^{(3)}_{c,p}-\rho^{(2)}_c,
+\qquad
+\Delta G_{c,p}=G^{(3)}_{c,p}-G^{(2)}_c.
+\]
+
+PDB--score slope displacement was the primary SQ3 evidence; $\Delta\rho$ and $\Delta G$ tested whether the conclusion depended on the linear fit or a single summary. SQ3 evaluated preservation of WM/PDB-related behavioural sensitivity and did not treat the PDB slope as a direct measurement of the Working-Memory mechanism itself. Table~\ref{tab:study3-evaluation-framework} summarises the three subquestions and measures.
+
+\begin{table}[H]
+\centering
+\caption{Evaluation framework for Study 3.}
+\label{tab:study3-evaluation-framework}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{p{0.22\textwidth}p{0.25\textwidth}p{0.23\textwidth}p{0.22\textwidth}}
+\toprule
+\textbf{Subquestion} & \textbf{Core comparison} & \textbf{Primary measures} & \textbf{Supporting evidence} \\
+\midrule
+SQ1---Outcome displacement & Study 3 profile vs matched Study 2 distracted baseline & $\Delta\mu$, $R_\mu$, $\Delta\overline{SD}$, $R_{SD}$ & $\Delta\overline W$, $R_W$; Independent/Integrative summaries \\
+SQ2---Matched-OCR preservation & Matched Study 2 OCR vs A1--B2 profile OCR & $OCR_p$, $\Delta OCR_p$, $P_{\mathrm{tie},p}$, $\Delta P_{\mathrm{tie},p}$ & Strict/tie/reverse composition; Independent/Integrative summaries \\
+SQ3---Demand-sensitivity preservation & Matched Study 2 PDB relationship vs A1--B2 profile relationship & $\Delta\beta_{\mathrm{PDB},100}$ & $\Delta\rho$, $\Delta G_{\mathrm{Low-High}}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Expected Patterns and Interpretation (Unfinished)}
+
+Study 3 followed the SQ1--SQ3 sequence to examine preservation of outcomes, learner-condition ordering, and processing-demand sensitivity relative to the matched Study 2 distracted baselines after multidimensional profile prompts were introduced. All expectations concerned aggregate patterns. Apart from the question-level OCR classification, the study did not require every question, lesson, or run to exhibit the same relationship, nor did it assume that final scores must remain completely unchanged.
+
+\begin{table}[H]
+\centering
+\caption{Prespecified aggregate-level expectations for Study 3.}
+\label{tab:study3-expectations}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{p{0.27\textwidth}p{0.65\textwidth}}
+\toprule
+\textbf{Subquestion} & \textbf{Prespecified aggregate-level expectation} \\
+\midrule
+SQ1---Outcome displacement & A representation robust to the additional profiles should show generally small $|\Delta\mu|$ and $|\Delta\overline{SD}|$ across A1--B2 rather than displacement driven by a single profile. $\Delta\overline W$ describes response-length change and is not direct evidence of learning-performance robustness. \\
+SQ2---Matched-OCR preservation & Preservation of matched learner-condition ordering should produce $\Delta OCR$ and $\Delta P_{\mathrm{tie}}$ values close to zero without a systematic increase in reversals. OCR must be interpreted with its tie composition so that equal scores are not mistaken for strict ordering. \\
+SQ3---Demand-sensitivity preservation & A robust PDB--performance relationship should produce a small $|\Delta\beta_{\mathrm{PDB},100}|$, supported by directionally consistent $\Delta\rho$ and $\Delta G_{\mathrm{Low-High}}$. Larger slope displacement indicates that the additional profiles changed the original demand sensitivity. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For SQ1, $\Delta\mu$ and $\Delta\overline{SD}$ described absolute changes in mean performance and repeated-run variability; relative displacement supplemented these quantities across different baseline scales. Because Language Ability could directly alter response length, $\Delta\overline W$ was interpreted only as response-form displacement. For SQ2, Prompt and CPB imposed different numbers of ordering constraints, so their raw OCR values were not compared directly; the principal evidence was each branch's $\Delta OCR$ and strict/tie/reverse composition relative to its own baseline. For SQ3, the PDB slope, rank association, and Low--High gap used the same 42 Independent Questions to avoid ambiguity from the multi-round source structure of Integrative Questions.
+
+Aligned and conflicting profiles were not assumed to be simple beneficial or detrimental learner types, and were not treated as an additional independent statistical factor. A1, A2, B1, and B2 were each compared with the matched baseline as complete profile-prompt additions. Observed displacement was not decomposed into independent causal effects of Language Ability, Big-Five traits, or their interaction.
+
+The overall RQ3 judgement integrated three forms of baseline-relative evidence: outcome displacement, matched-ordering preservation, and PDB-sensitivity displacement. If CPB showed smaller and more consistent absolute displacement than Prompt across A1--B2 while preserving its matched OCR and PDB--performance relationship more closely, this would support greater multidimensional representational robustness for factorised CPB under the additional profile prompts. If the evidence differed across levels, the results would be reported separately rather than reduced to a conclusion based on one average score. This claim remains restricted to robustness under the addition of Language Ability and Big-Five profile prompts and does not establish that those traits were accurately simulated.
 
 \section{Implementation, Reproducibility and Ethical Scope}
 

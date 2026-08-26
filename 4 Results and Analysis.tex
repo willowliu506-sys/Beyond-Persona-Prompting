@@ -5,74 +5,487 @@
 \mbox{}\par
 
 \section{RQ1---Cognitive-Mechanism Effects}
+\label{sec:rq1-results}
 
-\mbox{}\par
+\subsection{RQ1 Results Overview}
+\label{subsec:rq1-overview}
 
-\subsection{Attention-Filtering Effects}
+Study 1 addressed RQ1 by testing whether CPB produced correct, attributable, and traceable information-state changes under the predefined processing logic. The analysis followed three linked questions. First, it examined whether the Attention and Working-Memory mechanisms executed their registered rules correctly. Second, it tested whether the resulting changes occurred at the intended processing transitions. Third, it assessed whether these local changes accumulated through the complete processing chain to the Explicit LTM and downstream question performance.
 
-\mbox{}\par
+The results are therefore reported in SQ1--SQ3 order. Section~\ref{subsec:rq1-sq1} reports mechanism-execution fidelity; Section~\ref{subsec:rq1-sq2} examines the stage-specific transitions $S_r\rightarrow P_{r,c}\rightarrow A_{r,c}\rightarrow L_{r,c}$; and Section~\ref{subsec:rq1-sq3} evaluates cumulative propagation to the Explicit LTM and final assessment performance. Section~\ref{subsec:rq1-summary} then integrates these three layers of evidence to answer RQ1.
 
-\subsection{Working-Memory Capacity Effects}
+\subsection{SQ1---Mechanism Execution Fidelity}
+\label{subsec:rq1-sq1}
 
-\mbox{}\par
+SQ1 examined whether the Attention and Working-Memory mechanisms followed their preregistered computational rules. Four implementation-fidelity measures were used. Attention Target-Removal Fidelity (ATRF) checked whether the target sentences scheduled for Attention removal were removed correctly, while Non-Target Preservation Rate (NTPR) checked whether instructional information that should remain unaffected was preserved. Working-Memory Trigger Agreement (WMTA) compared the observed WM trigger status with the frozen processing-demand--capacity rule. FIFO Rule Fidelity (FRF) checked whether a triggered WM constraint removed the earliest instructional sentence that remained available after Attention, as specified by the within-round FIFO-style rule. Values closer to 1 indicate stronger agreement between observed execution and the registered mechanism rules.
 
-\subsection{Combined Attention and WM Effects}
+\begin{table}[H]
+\centering
+\caption{Mechanism-execution fidelity across Study 1 conditions.}
+\label{tab:rq1-mechanism-fidelity}
+\small
+\setlength{\tabcolsep}{8pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{lrrrrr}
+\toprule
+\textbf{Condition} & \textbf{ATRF} & \textbf{NTPR} & \textbf{WMTA} & \textbf{FRF} & \textbf{Violations} \\
+\midrule
+\textbf{A0W0} & N/A   & 1.000 & 1.000 & N/A   & 0 \\
+\textbf{A1W0} & 1.000 & 1.000 & 1.000 & N/A   & 0 \\
+\textbf{A0W1} & N/A   & 1.000 & 1.000 & 1.000 & 0 \\
+\textbf{A1W1} & 1.000 & 1.000 & 1.000 & 1.000 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\mbox{}\par
+Attention execution matched the frozen rules exactly. In each Attention-ON condition, the same 42 eligible distractor-linked target sentences were identified and removed, yielding 84 condition--target removal events across A1W0 and A1W1; ATRF was therefore 1.000 in both conditions. All non-target instructional information was preserved in every condition, giving an NTPR of 1.000 throughout. No Attention-attributed target removal occurred under A0W0 or A0W1. The Attention Filter therefore removed the intended information when enabled without introducing unintended non-target deletion.
 
-\subsection{Source to Available Input to LTM}
+Working-Memory execution was also fully consistent with the frozen rules. Observed WM trigger status agreed with the registered $D(R_r)>C^{WM}_c$ rule in all 83 Teaching Rounds under every condition, giving a WMTA of 1.000 throughout. In each WM-ON condition, the same 32 Teaching Rounds exceeded the registered capacity threshold, yielding 64 condition--round overflow events across A0W1 and A1W1. The mechanism removed the earliest post-Attention instructional sentence in every eligible event, so FRF was 1.000 in both WM-ON conditions. No capacity-related sentence removal occurred under A0W0 or A1W0.
 
-\mbox{}\par
+No implementation violation was observed in any Study 1 condition. Attention triggering, target localisation, and non-target preservation, together with WM threshold triggering and FIFO-style restriction, all achieved complete fidelity. SQ1 was therefore supported: both manipulated CPB mechanisms executed the registered design, providing a valid implementation basis for interpreting the information-state differences reported below. These results establish computational execution fidelity; they do not by themselves establish fidelity to human ADHD cognition.
+
+\subsection{SQ2---Stage-Specific Information-State Transitions}
+\label{subsec:rq1-sq2}
+
+Having established correct mechanism execution, SQ2 examined whether the resulting information changes occurred at the intended processing stages:
+
+\[
+S_r
+\xrightarrow{\mathrm{Attention}}
+P_{r,c}
+\xrightarrow{\mathrm{WM}}
+A_{r,c}
+\xrightarrow{\mathrm{Encoding}}
+L_{r,c}.
+\]
+
+Three stage-specific measures were used. Attention-stage Availability Ratio (AAR) represents the proportion of Source words retained in the Post-Attention Input. Working-Memory-stage Availability Ratio (WMAR) represents the proportion of Post-Attention Input words that remain available to the Encoder after WM processing. Values closer to 1 indicate less information restriction at the corresponding stage. Encoding Semantic Recall (ESR) uses BERTScore Recall under the frozen configuration to quantify semantic correspondence between each non-empty Available Input and its round-level Explicit LTM. Higher ESR indicates stronger conditional semantic coverage of the information that actually reached the Encoder; it is not a retention proportion relative to the complete Source.
+
+Table~\ref{tab:rq1-stage-measures} reports unweighted means across the seven teaching materials and 95\% lesson-bootstrap intervals. Figure~\ref{fig:rq1-stage-transitions} shows the lesson-level observations, condition means, and corresponding intervals.
+
+\begin{table}[H]
+\centering
+\caption{Stage-specific information-state measures across Study 1 conditions.}
+\label{tab:rq1-stage-measures}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Condition} & \textbf{AAR, mean [95\% interval]} & \textbf{WMAR, mean [95\% interval]} & \textbf{ESR, mean [95\% interval]} \\
+\midrule
+\textbf{A0W0} & 1.000 [1.000, 1.000] & 1.000 [1.000, 1.000] & 0.798 [0.772, 0.818] \\
+\textbf{A1W0} & 0.768 [0.749, 0.784] & 1.000 [1.000, 1.000] & 0.817 [0.797, 0.837] \\
+\textbf{A0W1} & 1.000 [1.000, 1.000] & 0.806 [0.754, 0.857] & 0.812 [0.776, 0.843] \\
+\textbf{A1W1} & 0.768 [0.750, 0.784] & 0.783 [0.699, 0.853] & 0.831 [0.806, 0.851] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter4/Figure_4_Study1_Stage_Specific_Transitions.pdf}
+    \caption{Stage-specific information-state transitions in Study 1. Points show individual teaching materials, diamonds show unweighted means, and intervals show 95\% lesson-bootstrap intervals.}
+    \label{fig:rq1-stage-transitions}
+\end{figure}
+
+The Attention stage showed the expected localisation pattern. AAR was 1.000 under both Attention-OFF conditions, indicating that no Source information became unavailable at this stage. Enabling Attention reduced mean AAR to 0.768 under both A1W0 and A1W1. Switching the downstream WM setting while holding Attention constant produced no lesson-level change in AAR. Attention-attributed information loss was therefore localised to the $S_r\rightarrow P_{r,c}$ transition and was invariant to the downstream WM setting.
+
+The WM stage showed a similarly clear stage-specific pattern. WMAR remained 1.000 under A0W0 and A1W0, indicating that no additional information restriction occurred after Attention when the capacity constraint was disabled. Under WM ON, mean WMAR was 0.806 for A0W1 and 0.783 for A1W1. Additional information loss therefore appeared only when the WM constraint was enabled and was localised to the $P_{r,c}\rightarrow A_{r,c}$ transition. A0W1 and A1W1 were not expected to have identical WMAR values because the Attention manipulation changed the set of instructional sentences available for the subsequent within-round restriction.
+
+Across the shared Encoding stage, mean ESR ranged from 0.798 to 0.831, with substantial overlap among the lesson-bootstrap intervals. No clear condition-specific Encoding divergence was observed. The descriptively highest ESR occurred under A1W1, but its reference was the condition-specific Available Input rather than the complete Source. It therefore cannot be interpreted as evidence of better overall retention of the original instructional material. The observed similarity also does not establish statistical or practical equivalence among conditions.
+
+Together, the SQ2 results show that each manipulated mechanism changed information availability at its intended position: Attention-related loss was localised to $S_r\rightarrow P_{r,c}$, and WM-related loss occurred subsequently at $P_{r,c}\rightarrow A_{r,c}$. The shared Encoder maintained broadly similar semantic correspondence with the information that actually reached it. SQ2 was therefore supported at the level of computational stage-specific traceability; broader cognitive interpretation is reserved for Chapter~\ref{Chap5}.
+
+\subsection{SQ3---Cumulative and Downstream Propagation}
+\label{subsec:rq1-sq3}
+
+After SQ2 had localised the Attention, WM, and shared Encoding transitions, SQ3 examined whether these changes accumulated through the complete processing chain. The analysis considered three outcome levels: cumulative Source availability at the Encoder, end-to-end semantic correspondence between the complete Source and Explicit LTM, and downstream assessment performance.
+
+Source-Word Availability Ratio (SWAR) represents the proportion of Source words that reach the Encoder after both Attention and WM. Under the same lesson-level aggregation,
+
+\[
+SWAR_{l,c}=AAR_{l,c}\times WMAR_{l,c}.
+\]
+
+Lower SWAR therefore indicates stronger cumulative upstream information restriction. End-to-End Semantic Recall (E2ESR) uses the complete Source as the BERTScore reference and the round-level Explicit LTM as the candidate, describing their semantic correspondence without treating the score as a percentage of human knowledge retention. Checklist Score converts the proportion of frozen criteria labelled \texttt{Correct} to a 0--10 scale and measures the downstream consequence of the complete learning pipeline.
+
+Table~\ref{tab:rq1-cumulative-outcomes} reports the unweighted means across the seven teaching materials and 95\% lesson-bootstrap intervals. Figure~\ref{fig:rq1-cumulative-outcomes} presents SWAR, E2ESR, and Checklist Score using the same lesson-level observational units.
+
+\begin{table}[H]
+\centering
+\caption{Cumulative information-state and downstream outcomes across Study 1 conditions.}
+\label{tab:rq1-cumulative-outcomes}
+\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Condition} & \textbf{\makecell{SWAR, mean\\\mbox{[95\% interval]}}} & \textbf{\makecell{E2ESR, mean\\\mbox{[95\% interval]}}} & \textbf{\makecell{Checklist Score, mean\\\mbox{[95\% interval]}}} \\
+\midrule
+\textbf{A0W0} & 1.000 [1.000, 1.000] & 0.798 [0.771, 0.818] & 9.286 [8.810, 9.694] \\
+\textbf{A1W0} & 0.768 [0.750, 0.784] & 0.638 [0.623, 0.652] & 2.891 [1.565, 4.082] \\
+\textbf{A0W1} & 0.806 [0.754, 0.859] & 0.679 [0.653, 0.708] & 7.143 [6.327, 7.959] \\
+\textbf{A1W1} & 0.601 [0.534, 0.660] & 0.522 [0.483, 0.558] & 2.415 [0.952, 3.844] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter4/Figure_4_Study1_Cumulative_Downstream_Outcomes.pdf}
+    \caption{Cumulative and downstream outcomes across the four Study 1 mechanism conditions. Points show individual teaching materials, diamonds show unweighted means, and intervals show 95\% lesson-bootstrap intervals.}
+    \label{fig:rq1-cumulative-outcomes}
+\end{figure}
+
+SWAR showed cumulative information restriction. Mean SWAR was 1.000 under A0W0, indicating that the complete Source reached the Encoder when both mechanisms were disabled. It decreased to 0.768 when Attention alone was enabled and to 0.806 when WM alone was enabled. With both mechanisms enabled, A1W1 decreased further to 0.601. Across all lesson-level observations, the maximum numerical discrepancy in $SWAR=AAR\times WMAR$ was $1.11\times10^{-16}$, confirming the identity to numerical precision. The stage-specific transitions identified under SQ2 therefore accumulated in the predefined processing order to determine the final Available Input.
+
+Figure~\ref{fig:rq1-word-decomposition} presents the same cumulative process using pooled absolute word counts. Every condition began with the same 3,719 frozen Source words. All 3,719 words reached the Encoder under A0W0. Under A1W0, Attention removed 868 words and left 2,851 available. Under A0W1, WM removed 717 words and left 3,002 available. Under A1W1, Attention first removed 868 words and WM subsequently removed 603 words, leaving 2,248 words available. Every condition satisfied
+
+\[
+W_{\mathrm{source},c}
+=
+W_{\mathrm{available},c}
++W_{\mathrm{attention\text{-}loss},c}
++W_{\mathrm{WM\text{-}loss},c}.
+\]
+
+Figure~\ref{fig:rq1-word-decomposition} uses pooled corpus counts, whereas SWAR in Table~\ref{tab:rq1-cumulative-outcomes} is the unweighted mean of seven lesson-level ratios. Consequently, the pooled available-word proportion under A1W1 was 60.4\%, compared with a mean lesson-level SWAR of 0.601; the small difference arises from the aggregation level.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter4/Figure_4_Study1_Absolute_Source_Word_Decomposition.pdf}
+    \caption{Absolute decomposition of frozen Source words across Study 1 conditions. Each bar partitions the same 3,719 Source words into Available Input, Attention-attributed loss, and WM-attributed loss.}
+    \label{fig:rq1-word-decomposition}
+\end{figure}
+
+Cumulative information restriction was also reflected in semantic correspondence between the Explicit LTM and the complete Source. Mean E2ESR was 0.798 under A0W0, decreased to 0.638 under A1W0 and 0.679 under A0W1, and was lowest under A1W1 at 0.522. This pattern followed the reduction in upstream Source availability. Combined with the broadly similar ESR values in SQ2, the result indicates that condition-level Source-to-LTM differences primarily accompanied changes in the information reaching the Encoder rather than a condition-specific Encoding procedure.
+
+Downstream assessment performance changed in the same direction. Mean Checklist Score was 9.286 under A0W0, 7.143 under A0W1, 2.891 under A1W0, and 2.415 under A1W1. Descriptively, the Attention-related decrement was larger than the WM-related decrement, and A1W1 produced the lowest mean score. Checklist Score is used here as supporting downstream evidence that upstream information restriction affected final answers, not as the primary test of mechanism-execution fidelity.
+
+\begin{table}[H]
+\centering
+\caption{Factorial contrasts for cumulative and downstream Study 1 outcomes.}
+\label{tab:rq1-factorial-contrasts}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Effect} & \textbf{\makecell{SWAR, estimate\\\mbox{[95\% interval]}}} & \textbf{\makecell{E2ESR, estimate\\\mbox{[95\% interval]}}} & \textbf{\makecell{Checklist Score, estimate\\\mbox{[95\% interval]}}} \\
+\midrule
+\textbf{Attention} & $-0.219$ [$-0.230$, $-0.207$] & $-0.159$ [$-0.180$, $-0.140$] & $-5.561$ [$-6.599$, $-4.609$] \\
+\textbf{WM} & $-0.180$ [$-0.238$, $-0.130$] & $-0.118$ [$-0.153$, $-0.084$] & $-1.310$ [$-1.718$, $-0.816$] \\
+\textbf{Attention $\times$ WM} & $+0.028$ [$+0.001$, $+0.057$] & $+0.004$ [$-0.012$, $+0.019$] & $+1.667$ [$+0.986$, $+2.313$] \\
+\textbf{Joint ON $-$ double OFF} & $-0.399$ [$-0.466$, $-0.339$] & $-0.276$ [$-0.327$, $-0.227$] & $-6.871$ [$-7.959$, $-5.782$] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:rq1-factorial-contrasts} reports the $2\times2$ factorial contrasts for SWAR, E2ESR, and Checklist Score. The Attention and WM rows are marginal effects averaged over the other factor; the interaction is the difference-in-differences; and the joint contrast compares A1W1 directly with A0W0. The marginal Attention and WM effects were negative for all three outcomes, and every A1W1--A0W0 joint contrast was also negative. The interaction estimates for SWAR and Checklist Score were positive, with intervals that did not cross zero; the E2ESR interaction was close to zero and its interval crossed zero. A positive interaction here does not mean that jointly enabling both constraints improved information availability or performance. It means that the observed joint decrease was smaller than the decrease expected by linearly adding the two marginal effects.
+
+SQ3 was therefore supported. Attention- and WM-related changes localised under SQ2 accumulated in the information reaching the Encoder and were reflected in Source-to-LTM semantic correspondence and final Checklist Score. Study 1 consequently established a traceable chain from local information-state transitions to downstream outcomes.
 
 \subsection{RQ1 Summary}
+\label{subsec:rq1-summary}
 
-\mbox{}\par
+RQ1 imposed three progressive requirements: correct execution of the Attention and Working-Memory mechanisms, localisation of their effects to the intended processing stages, and propagation of these local effects to the Explicit LTM and downstream performance. Table~\ref{tab:rq1-summary} summarises the corresponding evidence.
+
+\begin{table}[H]
+\centering
+\caption{Summary of evidence for RQ1.}
+\label{tab:rq1-summary}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{p{0.15\textwidth} p{0.16\textwidth} p{0.285\textwidth} p{0.285\textwidth}}
+\toprule
+\textbf{Subquestion} & \textbf{Primary evidence} & \textbf{Key result} & \textbf{Interpretation} \\
+\midrule
+\textbf{SQ1---Mechanism execution} & ATRF, NTPR, WMTA, FRF & All applicable fidelity measures were 1.000, with no implementation violations. & Attention and WM executed the registered rules correctly. \\
+\textbf{SQ2---Stage-specific transitions} & AAR, WMAR, ESR & Attention loss was localised to $S_r\rightarrow P_{r,c}$; WM loss was localised to $P_{r,c}\rightarrow A_{r,c}$; ESR ranged from 0.798 to 0.831. & Manipulation effects occurred at the intended stages, with no clear condition-specific Encoding divergence. \\
+\textbf{SQ3---Cumulative propagation} & SWAR, E2ESR, Checklist Score & From A0W0 to A1W1, SWAR decreased from 1.000 to 0.601, E2ESR from 0.798 to 0.522, and Checklist Score from 9.286 to 2.415. & Local information-state changes propagated to Available Input, Explicit LTM, and downstream answers. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+First, SQ1 established the implementation foundation for the remaining analyses. All applicable fidelity measures were 1.000 and no mechanism violation occurred. The Attention and WM trigger, target-selection, and removal rules therefore operated as frozen, so the subsequent condition differences need not be explained by implementation error.
+
+Second, SQ2 localised the effects of the two manipulated mechanisms. Attention-related information loss occurred at $S_r\rightarrow P_{r,c}$, while additional WM-related restriction occurred at $P_{r,c}\rightarrow A_{r,c}$. ESR remained within a relatively narrow descriptive range across the four conditions, and no clear condition-specific Encoding divergence was observed. Study 1 therefore identified not only different information states but also the transition at which each difference first arose.
+
+Third, SQ3 showed downstream propagation. Relative to A0W0, the A1W1 joint contrasts were $-0.399$ for SWAR, $-0.276$ for E2ESR, and $-6.871$ for Checklist Score. Cumulative upstream restriction was therefore reflected in the Source information reaching the Encoder, semantic correspondence between the complete Source and final Explicit LTM, and downstream assessment performance. Checklist Score remains supporting behavioural evidence and does not replace the mechanism-execution and stage-localisation evidence.
+
+RQ1 can consequently be answered affirmatively within the scope of the frozen materials, parameters, and operational rules: the CPB processing pipeline executed its predefined logic and produced attributable information-state changes that could be traced through Source, Attention, WM, Encoding, Explicit LTM, and Answer stages. The result supports computational mechanistic validity and process traceability at the implementation level. It does not establish biological equivalence with human ADHD cognitive processes. Having established this mechanism foundation, Section~\ref{sec:rq2-results} compares the behavioural patterns produced by CPB and persona prompting under controlled learning conditions.
+
+\FloatBarrier
 
 \section{RQ2---CPB versus Persona-Prompted ADHD Simulation}
+\label{sec:rq2-results}
 
-\mbox{}\par
+\subsection{RQ2 Results Overview}
+\label{subsec:rq2-overview}
 
-\subsection{Overall Learning Performance}
+Study 2 addressed RQ2 by comparing whether persona prompting and CPB produced different behavioural sensitivities to controlled distraction and instructional processing demand. The analysis comprised seven learner conditions: Prompt-NT, Moderate-Intensity Prompt-ADHD, High-Intensity Prompt-ADHD, and CPB Zero, Low, Medium, and High. Each learner condition was run independently five times under both clean and distracted materials, producing
 
-\mbox{}\par
+\[
+7\times2\times5=70
+\]
 
-\subsection{Sensitivity to Controlled Distraction}
+learner--material runs. Every run answered all 49 questions across the seven lessons, yielding 3,430 answers and Judge scores. For each learner condition, material condition, and question, Mean Checklist Score, run-to-run SD, and mean response word count were first calculated across the five runs, producing 686 question-level condition estimates. Of the 49 questions, 42 independent questions had a unique source-round Processing Demand Bits (PDB) value and were used for SQ4. The remaining seven integrative questions were retained as a common question-type dimension for SQ1--SQ3 but were excluded from the continuous PDB analysis.
 
-\mbox{}\par
+The results are reported through four progressive subquestions. Section~\ref{subsec:rq2-sq1} examines whether the three Prompt learners produced distinguishable performance as ADHD-description intensity increased. Section~\ref{subsec:rq2-sq2} tests whether the four CPB conditions produced a graded response as registered constraint severity increased. Section~\ref{subsec:rq2-sq3} compares the distraction sensitivity of the two representations using within-condition clean--distracted differences. Section~\ref{subsec:rq2-sq4} then examines the relationship between question performance and source-round PDB. Section~\ref{subsec:rq2-summary} integrates the four sets of findings to answer RQ2 directly.
 
-\subsection{Sensitivity to Processing Demand}
+\subsection{SQ1---Persona Differentiation}
+\label{subsec:rq2-sq1}
 
-\mbox{}\par
+SQ1 tested whether Prompt-NT, Moderate-Intensity Prompt-ADHD, and High-Intensity Prompt-ADHD produced behavioural differentiation corresponding to persona intensity. The primary outcome was the five-run question-level Mean Checklist Score. Mean question-level SD described the stability of repeated answers to the same question, while mean answer word count was retained only as a descriptive response characteristic. Ordering Consistency Rate (OCR) recorded the proportion of questions satisfying
 
-\subsection{Independent versus Integrative Learning}
+\[
+\bar S_{\mathrm{NT}}
+\geq
+\bar S_{\mathrm{Moderate}}
+\geq
+\bar S_{\mathrm{High}},
+\]
 
-\mbox{}\par
+with ties permitted across conditions.
 
-\subsection{Error Traceability}
+\begin{table}[H]
+\centering
+\caption{Overall performance and response characteristics of persona-prompted learners.}
+\label{tab:rq2-persona-performance}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{llrrr}
+\toprule
+\textbf{Material} & \textbf{Learner} & \textbf{Mean score} & \textbf{Mean SD} & \textbf{Mean words} \\
+\midrule
+Clean & Prompt-NT & 9.898 & 0.140 & 79.48 \\
+Clean & Prompt-ADHD---Moderate & 9.823 & 0.091 & 80.99 \\
+Clean & Prompt-ADHD---High & 9.837 & 0.203 & 87.23 \\
+Distracted & Prompt-NT & 9.871 & 0.161 & 80.84 \\
+Distracted & Prompt-ADHD---Moderate & 9.864 & 0.000 & 81.41 \\
+Distracted & Prompt-ADHD---High & 9.837 & 0.129 & 86.07 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\mbox{}\par
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter4/Study2_SQ1_Persona_Differentiation.pdf}
+    \caption{Persona-prompted learning performance and run-to-run stability. Panel A shows five-run Mean Checklist Score; Panel B shows mean question-level run-to-run SD.}
+    \label{fig:rq2-persona-differentiation}
+\end{figure}
+
+As shown in Table~\ref{tab:rq2-persona-performance} and Figure~\ref{fig:rq2-persona-differentiation}, all three Prompt conditions performed close to the upper boundary of the scoring scale. The difference between the highest- and lowest-scoring conditions was only 0.075 points under clean materials and 0.034 points under distracted materials. Under clean materials, the Moderate condition did not score below the High condition, so the three Prompt learners did not form a stable NT $\rightarrow$ Moderate $\rightarrow$ High gradient in their aggregate means. High-Intensity Prompt-ADHD produced longer answers on average, but this response-length difference was not accompanied by lower or less stable aggregate performance.
+
+Question-level OCR was $44/49=89.80\%$ under clean materials and $47/49=95.92\%$ under distracted materials. However, OCR used a non-strict ordering and therefore admitted a large number of near-ceiling ties. The high OCR values show that most questions did not violate the expected direction, but do not independently establish a performance separation of substantive magnitude among the three persona conditions. Taken together, the mean scores, SDs, and response lengths provided only limited support for SQ1: persona intensity changed some response characteristics but did not create a clear and consistently sized separation in learning performance.
+
+\subsection{SQ2---Graded CPB Response}
+\label{subsec:rq2-sq2}
+
+SQ2 used the same question-level outcomes to test whether CPB Zero, Low, Medium, and High produced a graded performance response as registered constraint severity increased. CPB OCR recorded the proportion of questions satisfying
+
+\[
+\bar S_{\mathrm{Zero}}
+\geq
+\bar S_{\mathrm{Low}}
+\geq
+\bar S_{\mathrm{Medium}}
+\geq
+\bar S_{\mathrm{High}},
+\]
+
+again allowing ties.
+
+\begin{table}[H]
+\centering
+\caption{Overall performance and response characteristics of CPB learners.}
+\label{tab:rq2-cpb-performance}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{llrrr}
+\toprule
+\textbf{Material} & \textbf{CPB condition} & \textbf{Mean score} & \textbf{Mean SD} & \textbf{Mean words} \\
+\midrule
+Clean & CPB Zero & 9.415 & 0.178 & 32.75 \\
+Clean & CPB Low & 7.830 & 0.289 & 36.29 \\
+Clean & CPB Medium & 7.293 & 0.154 & 37.25 \\
+Clean & CPB High & 6.347 & 0.286 & 36.03 \\
+Distracted & CPB Zero & 9.374 & 0.262 & 33.46 \\
+Distracted & CPB Low & 6.517 & 1.967 & 39.88 \\
+Distracted & CPB Medium & 4.680 & 2.388 & 42.91 \\
+Distracted & CPB High & 3.014 & 1.853 & 43.43 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter4/Study2_SQ2_Graded_CPB_Response.pdf}
+    \caption{Graded CPB learning performance and run-to-run stability. Panel A shows five-run Mean Checklist Score; Panel B shows mean question-level run-to-run SD.}
+    \label{fig:rq2-cpb-gradient}
+\end{figure}
+
+Both material conditions exhibited the expected aggregate ordering. Under clean materials, the mean score decreased from 9.415 for CPB Zero to 7.830 for Low, 7.293 for Medium, and 6.347 for High. Under distracted materials, it decreased from 9.374 to 6.517, 4.680, and 3.014, respectively. Relative to the clean condition, Low, Medium, and High also showed markedly larger question-level SDs under distracted materials, indicating that stochastic Attention triggering combined with WM restriction increased variation across runs.
+
+CPB OCR was $42/49=85.71\%$ under clean materials and $38/49=77.55\%$ under distracted materials. Registered constraint severity therefore produced a complete Zero $\rightarrow$ Low $\rightarrow$ Medium $\rightarrow$ High gradient in the aggregate means, although the ordering was not retained for every individual question. SQ2 was supported at the aggregate graded-response level, while item-level OCR showed local departures arising from stochastic processing trajectories.
+
+\subsection{SQ3---Distraction Sensitivity}
+\label{subsec:rq2-sq3}
+
+SQ3 used paired performance under clean and distracted materials to calculate distraction cost for each learner condition:
+
+\[
+\Delta D_{q,c}
+=
+\bar S_{q,c,\mathrm{clean}}
+-
+\bar S_{q,c,\mathrm{distracted}}.
+\]
+
+Positive values indicate lower performance under distracted materials. Table~\ref{tab:rq2-distraction-cost} reports the mean distraction cost across the 49 questions, its 95\% confidence interval, and the mean change in question-level SD and response word count from clean to distracted materials.
+
+\begin{table}[H]
+\centering
+\caption{Distraction-associated changes across learner conditions.}
+\label{tab:rq2-distraction-cost}
+\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Learner condition} & \textbf{Mean cost [95\% CI]} & \textbf{Mean SD change} & \textbf{Mean word change} \\
+\midrule
+Prompt-NT & 0.027 [$-0.152$, 0.206] & $+0.021$ & $+1.36$ \\
+Prompt-ADHD---Moderate & $-0.041$ [$-0.087$, 0.006] & $-0.091$ & $+0.42$ \\
+Prompt-ADHD---High & 0.000 [$-0.146$, 0.146] & $-0.074$ & $-1.16$ \\
+CPB Zero & 0.041 [$-0.113$, 0.194] & $+0.085$ & $+0.71$ \\
+CPB Low & 1.313 [0.774, 1.852] & $+1.677$ & $+3.58$ \\
+CPB Medium & 2.612 [1.843, 3.382] & $+2.234$ & $+5.65$ \\
+CPB High & 3.333 [2.316, 4.350] & $+1.567$ & $+7.40$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter4/Study2_SQ3_Distraction_Sensitivity.pdf}
+    \caption{Distraction-associated changes in score, stability, and response length. Error bars show 95\% question-level confidence intervals.}
+    \label{fig:rq2-distraction-sensitivity}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter4/Study2_SQ3_Lesson_Distraction_Cost_Heatmap.pdf}
+    \caption{Lesson-level distraction costs across learner conditions. Positive values indicate lower performance under distracted materials.}
+    \label{fig:rq2-distraction-heatmap}
+\end{figure}
+
+The mean distraction costs of all three Prompt learners were close to zero, and every confidence interval crossed zero. Moderate-Intensity and High-Intensity Prompt-ADHD did not show a larger distraction-associated decrement than Prompt-NT. Changes in SD and response length also failed to form a systematic pattern with increasing persona intensity. CPB Zero was similarly close to zero, consistent with its design in which the Attention and WM information-loss constraints were disabled.
+
+In contrast, mean distraction cost was 1.313 for CPB Low, 2.612 for Medium, and 3.333 for High. All three intervals lay above zero, and the cost increased with constraint severity. Mean SD change was also positive in each condition, indicating that distracted materials both reduced mean performance and increased variation across stochastic runs. SQ3 was therefore supported: persona prompting showed almost no behavioural response to controlled distraction, whereas CPB produced graded distraction sensitivity modulated by its factorised Attention and WM constraints.
+
+Figure~\ref{fig:rq2-distraction-heatmap} further shows that this difference was not driven by a single lesson. Lesson-level distraction costs for the three Prompt learners and CPB Zero fluctuated narrowly around zero and changed direction across lessons. CPB Low, Medium, and High, by contrast, produced a positive cost in all seven lessons. The lesson-level ranges were 0.38--2.67 for Low, 1.14--4.00 for Medium, and 1.33--5.33 for High. This distribution is consistent with the aggregate estimates in Figure~\ref{fig:rq2-distraction-sensitivity}: the performance cost of controlled distraction had broad material coverage in constrained CPB conditions, while the Prompt conditions did not produce the same pattern.
+
+\subsection{SQ4---Processing-Demand Sensitivity}
+\label{subsec:rq2-sq4}
+
+SQ4 was restricted to the 42 independent questions that mapped uniquely to a source Teaching Round. The primary measure was the linear change in Checklist Score for each 100-bit increase in PDB, $\beta_{\mathrm{PDB},100}$. Spearman's $\rho$ described the corresponding rank association without assuming linearity. The Low--High gap was the mean score on the predefined low-demand questions minus the mean score on the high-demand questions. Negative slopes and correlations, together with positive Low--High gaps, indicate that higher processing demand was associated with lower performance.
+
+\begin{table}[H]
+\centering
+\caption{Processing-demand sensitivity across learner and material conditions.}
+\label{tab:rq2-demand-sensitivity}
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.15}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Learner condition} & \textbf{\makecell{Slope/100\\Clean}} & \textbf{\makecell{Slope/100\\Distracted}} & \textbf{$\rho$, Clean} & \textbf{$\rho$, Distracted} & \textbf{\makecell{Low--High gap\\Clean}} & \textbf{\makecell{Low--High gap\\Distracted}} \\
+\midrule
+Prompt-NT & $+0.135$ & $+0.045$ & $+0.360$ & $+0.035$ & $-0.175$ & $-0.016$ \\
+Prompt-ADHD---Moderate & $+0.023$ & 0.000 & $+0.166$ & N/A & $-0.063$ & 0.000 \\
+Prompt-ADHD---High & $+0.018$ & $+0.004$ & $-0.007$ & $+0.032$ & 0.000 & $-0.032$ \\
+CPB Zero & $-0.022$ & $+0.075$ & $-0.050$ & $-0.032$ & $-0.032$ & $-0.286$ \\
+CPB Low & $-2.217$ & $-1.876$ & $-0.441$ & $-0.392$ & $+3.032$ & $+2.381$ \\
+CPB Medium & $-2.748$ & $-2.223$ & $-0.499$ & $-0.578$ & $+4.603$ & $+3.524$ \\
+CPB High & $-2.355$ & $-1.548$ & $-0.410$ & $-0.536$ & $+3.603$ & $+2.302$ \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter4/Study2_SQ4_PDB_Performance_Profiles.pdf}
+    \caption{Question-level performance profiles across source-round PDB. Points represent five-run question means; lines show condition-specific linear fits.}
+    \label{fig:rq2-pdb-profiles}
+\end{figure}
+
+Figure~\ref{fig:rq2-pdb-profiles} provides question-level visual evidence for these relationships. The fitted lines for Prompt learners were close to horizontal under both clean and distracted materials, with most questions concentrated near the score ceiling. CPB Zero likewise showed no clear decline as PDB increased. In contrast, CPB Low, Medium, and High produced downward fitted profiles under both material conditions, indicating that questions sourced from higher-PDB Teaching Rounds were more likely to receive lower scores. Processing-demand sensitivity therefore appeared principally in the CPB conditions with active factorised constraints rather than being produced by ADHD persona-description intensity alone.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter4/Study2_SQ4_Processing_Demand_Sensitivity.pdf}
+    \caption{PDB--score slopes across learner and material conditions. Points show score change per 100-bit increase in PDB; intervals show 95\% confidence intervals.}
+    \label{fig:rq2-pdb-slopes}
+\end{figure}
+
+Figure~\ref{fig:rq2-pdb-slopes} quantifies the same pattern with uncertainty estimates. Slopes for the three Prompt learners and CPB Zero were close to zero, and all corresponding 95\% confidence intervals included zero. Their Spearman correlations were also weak, and their Low--High gaps were close to zero or slightly negative. The 42 independent questions for Moderate-Intensity Prompt-ADHD under distracted materials all received the same score; its slope was consequently zero and Spearman's $\rho$ was undefined because the outcome had no variance. Overall, persona intensity did not generate distinguishable sensitivity to processing demand.
+
+CPB Low, Medium, and High produced negative slopes under both clean and distracted materials, with all corresponding 95\% confidence intervals below zero. Their Spearman correlations ranged from $-0.392$ to $-0.578$, and every Low--High gap was positive, showing a consistent negative relationship between higher-PDB source rounds and question performance. Slope magnitude did not increase strictly from Low to Medium to High, with the steepest decline occurring under Medium. SQ4 therefore supports systematic demand sensitivity in constrained CPB conditions, but does not support a strict severity ordering in slope magnitude.
 
 \subsection{RQ2 Summary}
+\label{subsec:rq2-summary}
 
-\mbox{}\par
+RQ2 comprised four questions. These examined persona differentiation, graded CPB response, sensitivity to controlled distraction, and systematic sensitivity to instructional processing demand. Table~\ref{tab:rq2-summary} summarises the resulting evidence.
+
+\begin{table}[H]
+\centering
+\caption{Summary of evidence for RQ2.}
+\label{tab:rq2-summary}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{p{0.18\textwidth} p{0.20\textwidth} p{0.30\textwidth} p{0.23\textwidth}}
+\toprule
+\textbf{Subquestion} & \textbf{Primary evidence} & \textbf{Key result} & \textbf{Direct conclusion} \\
+\midrule
+\textbf{SQ1---Persona differentiation} & Mean score, SD, Prompt OCR & Prompt means ranged from 9.823 to 9.898; OCR was 89.80\%--95.92\% under a non-strict rule. & Persona intensity did not produce a substantively separated performance gradient. \\
+\textbf{SQ2---Graded CPB response} & Mean score, SD, CPB OCR & Aggregate score followed Zero $>$ Low $>$ Medium $>$ High; OCR was 77.55\%--85.71\%. & Registered CPB severity produced a clear aggregate graded response. \\
+\textbf{SQ3---Distraction sensitivity} & Clean--distracted cost & Prompt costs were approximately zero; CPB Zero/Low/Medium/High costs were 0.041/1.313/2.612/3.333. & Controlled distraction produced graded effects in CPB but not in persona prompting. \\
+\textbf{SQ4---Processing-demand sensitivity} & PDB slope, $\rho$, Low--High gap & Prompt and CPB Zero slopes were approximately zero; constrained CPB slopes were consistently negative. & Demand sensitivity emerged under factorised CPB constraints rather than persona intensity. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+SQ1 showed that Moderate- and High-Intensity ADHD descriptions did not produce a substantively sized performance differentiation among the near-ceiling Prompt responses. SQ2 showed that registered CPB constraint severity produced a clear aggregate score gradient under both material conditions, although stochastic trajectories caused some question-level departures from the expected ordering. SQ3 further showed that clean--distracted differences were close to zero for Prompt learners, whereas distraction cost increased progressively across CPB Low, Medium, and High. Finally, SQ4 showed a stable negative relationship between constrained CPB performance and source-round PDB, while the Prompt conditions and CPB Zero did not exhibit the same pattern.
+
+RQ2 can therefore be answered affirmatively within the scope of the frozen materials, student model, assessment questions, and scoring procedure: compared with persona prompting, CPB produced learning behaviour that responded more systematically and directionally consistently to controlled distraction and instructional processing demand, with those responses corresponding to the registered constraint parameters. This conclusion does not depend on CPB producing lower absolute scores. It rests on the combined evidence of a graded constraint response, clean--distracted sensitivity, and PDB-related performance patterns. The findings support the comparative representational validity of CPB in this experiment, but do not establish clinical or biological equivalence with real learners with ADHD.
+
+\FloatBarrier
 
 \section{RQ3---Cross-Attribute Robustness}
 
 \mbox{}\par
 
-\subsection{Added Learner Attributes}
+\subsection{RQ3 Results Overview}
 
 \mbox{}\par
 
-\subsection{Preservation of ADHD-Related Learning Patterns}
+\subsection{SQ1---Baseline-Relative Outcome Displacement}
 
 \mbox{}\par
 
-\subsection{Attribute Fidelity}
+\subsection{SQ2---Matched-Ordering Preservation}
 
 \mbox{}\par
 
-\subsection{Prompt-Based versus Factorised Representation}
+\subsection{SQ3---Processing-Demand Sensitivity Preservation}
 
 \mbox{}\par
 
