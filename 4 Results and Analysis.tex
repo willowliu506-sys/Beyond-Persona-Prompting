@@ -471,27 +471,177 @@ RQ2 can therefore be answered affirmatively within the scope of the frozen mater
 
 \section{RQ3---Cross-Attribute Robustness}
 
-\mbox{}\par
-
 \subsection{RQ3 Results Overview}
 
-\mbox{}\par
+Study 3 addressed RQ3 by examining whether the factorised CPB representation showed less baseline-relative outcome displacement and better preserved the learner-condition ordering and processing-demand sensitivity established in Study 2 than joint persona prompting after Language Ability and Big-Five profile prompts were introduced. The formal analysis fixed the distracted materials and included two Prompt-ADHD intensities and three CPB constraint levels. Each learner condition was combined with the A1, A2, B1, and B2 profiles and run five times. Study 3 therefore comprised
+
+\[
+5\ \text{learner conditions}
+\times4\ \text{profiles}
+\times5\ \text{runs}
+=100\ \text{simulated-learner runs},
+\]
+
+corresponding to 4,900 answers and their Qwen Judge scores. Each Study 3 cell was matched with the same learner condition in the distracted arm of Study 2 rather than compared directly with the absolute score of a different learner type.
+
+The results are reported in the order of the three subquestions. SQ1 examines displacement in Mean Checklist Score, question-level run-to-run SD, and Mean Answer Words relative to the matched Study 2 baseline. SQ2 examines preservation of the Prompt ordering Moderate $\geq$ High and the CPB ordering Low $\geq$ Medium $\geq$ High. SQ3 then assesses preservation of the PDB--performance relationship across the 42 Independent Questions. The RQ3 judgement integrates evidence from all three levels and does not infer overall robustness from one profile's score or a single measure.
 
 \subsection{SQ1---Baseline-Relative Outcome Displacement}
 
-\mbox{}\par
+SQ1 used the same learner condition in the distracted arm of Study 2 as its baseline and calculated displacement in Mean Checklist Score, mean question-level run SD, and Mean Answer Words for each A1--B2 profile. Smaller absolute displacement indicates less disruption of the established outcome after the additional profile prompts were introduced. Answer word count describes response form and is not interpreted as retained knowledge or learning performance.
+
+\begin{table}[H]
+\centering
+\caption{Mean absolute baseline-relative displacement across A1--B2 profiles.}
+\label{tab:study3-sq1-displacement}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{p{0.20\textwidth}rrr}
+\toprule
+\textbf{Representation} & \textbf{Checklist Score} & \textbf{Question-level SD} & \textbf{Answer words} \\
+\midrule
+Prompt & 0.535 & 0.223 & 26.635 \\
+CPB & 0.283 & 0.163 & 2.885 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Figure~\ref{fig:study3-sq1-displacement} shows the matched profile-specific displacements and their question-level uncertainty intervals.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter4/Study3_SQ1_Baseline_Relative_Displacement.pdf}
+    \caption{Baseline-relative displacement in performance, run-to-run variability, and response length.}
+    \label{fig:study3-sq1-displacement}
+\end{figure}
+
+Points in Figure~\ref{fig:study3-sq1-displacement} report the mean matched question-level displacement for each learner condition and profile; the intervals represent 95\% confidence intervals over the 49 matched question-level differences. The horizontal zero line denotes no change from the corresponding Study 2 distracted baseline.
+
+CPB showed smaller mean absolute displacement on all three outcomes. Its Mean Checklist Score displacement was 0.283, approximately half the Prompt value of 0.535. Mean question-level SD displacement also decreased from 0.223 for Prompt to 0.163 for CPB. The clearest difference concerned response length: mean absolute displacement in Mean Answer Words was 26.635 for Prompt and 2.885 for CPB.
+
+At profile level, Prompt score displacement ranged from $-0.952$ to $+0.014$. A2 produced a change of approximately $-0.952$ under both Moderate- and High-Intensity Prompt-ADHD. CPB score displacement ranged from $-0.177$ to $+0.646$, and most profile-specific changes were smaller than their Prompt counterparts. A2 and B2 shortened Prompt answers by approximately 42--51 words on average, whereas the word-count change under every CPB profile remained below approximately five words. These results show that the additional profiles produced broader changes in response form and aggregate outcomes under the joint Prompt representation, while baseline-relative displacement was generally smaller under factorised CPB. SQ1 therefore supports stronger CPB robustness at the level of overall outcome stability. This conclusion does not imply that the added Language Ability or Big-Five traits were accurately simulated.
 
 \subsection{SQ2---Matched-Ordering Preservation}
 
-\mbox{}\par
+SQ2 used the same non-strict Ordering Consistency Rate (OCR) as Study 2. The Prompt branch tested whether each question satisfied Moderate $\geq$ High, and the CPB branch tested Low $\geq$ Medium $\geq$ High. Because OCR includes both strict and tie-consistent ordering, tie and reverse proportions were reported separately to avoid interpreting a high rate of equal scores as strict differentiation. The two branches imposed different numbers of ordering constraints, so raw OCR was not compared directly; the principal cross-representation evidence was change relative to each matched baseline.
+
+\begin{table}[H]
+\centering
+\caption{Matched-ordering composition in Study 2 and across A1--B2 profiles.}
+\label{tab:study3-sq2-ordering}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.13}
+\begin{tabular}{p{0.14\textwidth}p{0.16\textwidth}rrrrr}
+\toprule
+\textbf{Representation} & \textbf{Profile} & \textbf{Strict} & \textbf{Tie-consistent} & \textbf{Reverse} & \textbf{OCR} & \textbf{$\Delta$OCR} \\
+\midrule
+Prompt & Study 2 baseline & 6.12\% & 93.88\% & 0.00\% & 100.00\% & --- \\
+ & A1 & 10.20\% & 87.76\% & 2.04\% & 97.96\% & $-2.04$ pp \\
+ & A2 & 26.53\% & 57.14\% & 16.33\% & 83.67\% & $-16.33$ pp \\
+ & B1 & 10.20\% & 85.71\% & 4.08\% & 95.92\% & $-4.08$ pp \\
+ & B2 & 16.33\% & 81.63\% & 2.04\% & 97.96\% & $-2.04$ pp \\
+\midrule
+CPB & Study 2 baseline & 34.69\% & 44.90\% & 20.41\% & 79.59\% & --- \\
+ & A1 & 38.78\% & 44.90\% & 16.33\% & 83.67\% & $+4.08$ pp \\
+ & A2 & 42.86\% & 28.57\% & 28.57\% & 71.43\% & $-8.16$ pp \\
+ & B1 & 26.53\% & 46.94\% & 26.53\% & 73.47\% & $-6.12$ pp \\
+ & B2 & 38.78\% & 32.65\% & 28.57\% & 71.43\% & $-8.16$ pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Figure~\ref{fig:study3-sq2-ordering} visualises the strict, tie-consistent, and reverse composition. Its left panel reports Prompt Moderate $\geq$ High, and its right panel reports CPB Low $\geq$ Medium $\geq$ High. OCR is the combined strict and tie-consistent proportion; the decomposition indicates whether preservation reflects strict differentiation or equal scores.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter4/Study3_SQ2_Matched_Ordering_Composition.pdf}
+    \caption{Strict, tie-consistent, and reverse matched-ordering composition.}
+    \label{fig:study3-sq2-ordering}
+\end{figure}
+
+The mean absolute OCR change was 6.12 percentage points (pp) for Prompt and 6.63 pp for CPB, a difference of only 0.51 pp. Overall ordering preservation therefore did not show a clear CPB advantage. Although the Prompt baseline OCR was 100\%, 93.88\% of questions were tie-consistent. A1, B1, and B2 also remained dominated by ties, while reverse ordering under A2 increased to 16.33\%, reducing OCR to 83.67\%.
+
+Mean absolute tie-rate change was 7.65 pp for CPB and 15.82 pp for Prompt, indicating that the strict/tie composition was comparatively more stable under CPB. However, reverse proportions under CPB A2, B1, and B2 all exceeded the Study 2 baseline, reducing their corresponding OCR values. SQ2 therefore provides mixed evidence: CPB better preserved the tie component of the ordering composition but did not better preserve overall OCR. The result does not support a general claim that CPB was superior in matched-ordering preservation.
 
 \subsection{SQ3---Processing-Demand Sensitivity Preservation}
 
-\mbox{}\par
+SQ3 was restricted to the 42 Independent Questions that mapped uniquely to a source Teaching Round. The primary measure was displacement in the Mean Checklist Score slope per 100 PDB bits relative to the matched Study 2 baseline, $\Delta\beta_{\mathrm{PDB},100}$. Displacement in Spearman's $\rho$ and in the predefined Low--High demand gap supplied supporting evidence. All three measures describe how much the established behavioural PDB sensitivity changed after the additional profiles were introduced; the slope itself is not interpreted as a direct measurement of the Working-Memory mechanism.
+
+\begin{table}[H]
+\centering
+\caption{Mean absolute displacement in processing-demand sensitivity across A1--B2 profiles.}
+\label{tab:study3-sq3-demand}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{p{0.19\textwidth}rrr}
+\toprule
+\textbf{Representation} & \textbf{PDB slope / 100 bits} & \textbf{Spearman $\rho$} & \textbf{Low--High gap} \\
+\midrule
+Prompt & 0.341 & 0.256$^{\dagger}$ & 0.569 \\
+CPB & 0.480 & 0.112 & 0.444 \\
+\bottomrule
+\end{tabular}
+
+\vspace{2pt}
+\begin{minipage}{0.94\textwidth}
+\footnotesize $^{\dagger}$The Moderate-Intensity Prompt Study 2 baseline was constant across all 42 Independent Questions, so its Spearman coefficient and four profile-specific displacements were undefined. The Prompt summary therefore uses the four estimable High-Intensity cells; no zero value was imputed.
+\end{minipage}
+\end{table}
+
+Figure~\ref{fig:study3-sq3-slope} reports profile-specific slope changes and their 95\% paired question-bootstrap confidence intervals. The vertical zero line denotes an unchanged slope relative to the matched Study 2 distracted baseline.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter4/Study3_SQ3_PDB_Slope_Displacement.pdf}
+    \caption{Baseline-relative displacement in PDB--performance slopes.}
+    \label{fig:study3-sq3-slope}
+\end{figure}
+
+Figure~\ref{fig:study3-sq3-heatmap} shows the signed slope changes across matched learner conditions. Values closer to zero indicate stronger preservation of the original PDB--performance relationship.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter4/Study3_SQ3_PDB_Slope_Displacement_Heatmap.pdf}
+    \caption{Profile-specific PDB-slope displacement across matched learner conditions.}
+    \label{fig:study3-sq3-heatmap}
+\end{figure}
+
+On the primary slope measure, mean absolute displacement was 0.341 for Prompt and 0.480 for CPB. This result does not support stronger overall PDB-sensitivity preservation under CPB. Prompt profile slopes all shifted in a positive direction from their near-zero Study 2 baselines, with profile-specific changes from $+0.198$ to $+0.469$. CPB showed stronger profile dependence. Most slope changes under A1 and B1 were close to zero, ranging from $-0.140$ to $+0.150$, while changes under A2 and B2 were larger, ranging from $+0.604$ to $+1.149$. The latter profiles therefore substantially weakened the negative PDB--performance relationship observed in Study 2.
+
+The supporting measures pointed in a different direction. Mean absolute Spearman displacement was 0.112 for CPB and 0.256 across the estimable Prompt cells. The Low--High gap displacement was also smaller for CPB (0.444) than Prompt (0.569). Rank association and the predefined demand-group gap therefore provided relatively stronger evidence for CPB preservation, whereas the primary linear slope measure favoured Prompt. Taken together, SQ3 receives only partial support: the existing processing-demand sensitivity did not disappear completely after the additional profiles were introduced, but its preservation depended on the profile and measure. The evidence does not justify a claim that CPB was more robust across all PDB-related outcomes.
 
 \subsection{RQ3 Summary}
 
-\mbox{}\par
+RQ3 was decomposed into three complementary tests: displacement in overall outcomes after the added profiles, preservation of learner-condition ordering from Study 2, and preservation of the existing PDB--performance relationship. Table~\ref{tab:study3-rq3-summary} summarises the evidence.
+
+\begin{table}[H]
+\centering
+\caption{Summary of evidence for RQ3.}
+\label{tab:study3-rq3-summary}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{p{0.20\textwidth}p{0.22\textwidth}p{0.27\textwidth}p{0.24\textwidth}}
+\toprule
+\textbf{Subquestion} & \textbf{Primary evidence} & \textbf{Key result} & \textbf{Direct conclusion} \\
+\midrule
+SQ1---Outcome displacement & Score, question-level SD, and answer-word displacement & CPB = 0.283/0.163/2.885; Prompt = 0.535/0.223/26.635 & CPB showed clearly smaller overall outcome and response-form displacement \\
+SQ2---Ordering preservation & OCR and strict/tie/reverse composition & OCR change: Prompt 6.12 pp, CPB 6.63 pp; tie-rate change: 15.82 vs 7.65 pp & Overall OCR preservation was comparable; CPB showed a more stable tie composition but no general ordering advantage \\
+SQ3---PDB-sensitivity preservation & PDB slope, Spearman $\rho$, and Low--High gap displacement & Slope favoured Prompt; $\rho$ and Low--High gap favoured CPB & Preservation was profile- and metric-dependent rather than uniformly stronger under CPB \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+SQ1 provided the clearest robustness evidence. Relative to the matched Study 2 baseline, CPB showed smaller displacement than the joint Prompt representation in mean performance, repeated-run variability, and response length. SQ2 showed that mean absolute OCR change was almost identical across the two representations. Although CPB had a smaller tie-rate change, it did not show an overall advantage in ordering preservation. SQ3 likewise produced mixed results: CPB showed smaller changes in rank association and the Low--High gap, but its displacement on the primary PDB-slope measure was larger than Prompt, particularly under A2 and B2.
+
+RQ3 therefore receives \textbf{conditional support}. Within the frozen Study 2 baselines, distracted materials, A1--B2 profile prompts, and five repeated runs, the factorised CPB representation showed smaller overall learning-performance, run-to-run variability, and response-length displacement than joint persona prompting. This advantage did not extend consistently to matched-ordering preservation or every processing-demand sensitivity measure. CPB consequently demonstrated multidimensional robustness primarily at the level of overall outcome stability, with the remaining evidence dependent on profile and measure, rather than complete insensitivity to the additional profile prompts.
+
+This conclusion supports only robustness under the addition of Language Ability and Big-Five profile prompts. Study 3 did not independently validate whether the generated behaviour faithfully expressed the intended Language Ability or Big-Five constructs, so the findings do not establish accurate simulation of those learner traits. Nor do they imply that CPB eliminates all cross-attribute effects. Instead, the evidence indicates that functional factorisation limited broad disruption from additional prompt attributes at the overall-outcome level.
+
+\FloatBarrier
 
 \section{Summary of Findings}
 
