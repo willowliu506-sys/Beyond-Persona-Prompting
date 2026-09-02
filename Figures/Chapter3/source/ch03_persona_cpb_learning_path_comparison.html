@@ -2,54 +2,256 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Persona Prompting and CPB Learning Paths</title>
+  <title>Persona Prompting and CPB Representation Comparison</title>
   <link rel="stylesheet" href="../../Shared/flowchart_style.css">
   <style>
-    @page { size: 982px 370px; margin: 0; }
-    html, body, .canvas { width: 982px; height: 370px; }
+    @page { size: 1400px 760px; margin: 0; }
+    html, body, .canvas { width: 1400px; height: 760px; }
+
+    .column-title,
+    .row-label,
+    .process-note,
+    .access-note {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font);
+      text-align: center;
+      z-index: 5;
+    }
+
+    .column-title {
+      height: 34px;
+      border-radius: 8px;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .persona-title {
+      color: var(--green-text);
+      background: var(--green-strong);
+      border: 0.5px solid var(--green-stroke);
+    }
+
+    .cpb-title {
+      color: var(--blue-text);
+      background: var(--blue-strong);
+      border: 0.5px solid var(--blue-stroke);
+    }
+
+    .row-label {
+      justify-content: flex-start;
+      padding: 0 16px;
+      border-radius: 8px;
+      background: var(--neutral-fill);
+      border: 0.5px solid var(--neutral-stroke);
+      color: var(--neutral-text);
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 20px;
+    }
+
+    .process-note {
+      padding: 6px 12px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 18px;
+    }
+
+    .green-note {
+      color: var(--green-text);
+      background: #FFFFFF;
+      border: 0.5px dashed var(--green-stroke);
+    }
+
+    .blue-note {
+      color: var(--blue-text);
+      background: #FFFFFF;
+      border: 0.5px dashed var(--blue-stroke);
+    }
+
+    .access-note {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 18px;
+    }
+
+    .green-access { color: var(--green-text); }
+    .blue-access { color: var(--blue-text); }
+
+    .panel-separator {
+      position: absolute;
+      height: 0;
+      border-top: 0.5px solid rgba(95, 94, 90, 0.35);
+      z-index: 1;
+    }
+
+    .green-line-h,
+    .green-line-v,
+    .green-arrow-left,
+    .green-arrow-right,
+    .green-arrow-down,
+    .blue-line-h,
+    .blue-line-v,
+    .blue-arrow-right,
+    .blue-arrow-down {
+      position: absolute;
+      z-index: 4;
+    }
+
+    .green-line-h,
+    .green-arrow-left,
+    .green-arrow-right {
+      height: 0;
+      border-top: var(--arrow-width) solid var(--green-stroke);
+    }
+
+    .green-line-v,
+    .green-arrow-down {
+      width: 0;
+      border-left: var(--arrow-width) solid var(--green-stroke);
+    }
+
+    .blue-line-h,
+    .blue-arrow-right {
+      height: 0;
+      border-top: var(--arrow-width) solid var(--blue-stroke);
+    }
+
+    .blue-line-v,
+    .blue-arrow-down {
+      width: 0;
+      border-left: var(--arrow-width) solid var(--blue-stroke);
+    }
+
+    .green-arrow-right::after,
+    .blue-arrow-right::after {
+      content: "";
+      position: absolute;
+      right: -1px;
+      top: -4.25px;
+      width: 7px;
+      height: 7px;
+      transform: rotate(45deg);
+    }
+
+    .green-arrow-right::after {
+      border-top: var(--arrow-width) solid var(--green-stroke);
+      border-right: var(--arrow-width) solid var(--green-stroke);
+    }
+
+    .blue-arrow-right::after {
+      border-top: var(--arrow-width) solid var(--blue-stroke);
+      border-right: var(--arrow-width) solid var(--blue-stroke);
+    }
+
+    .green-arrow-left::after {
+      content: "";
+      position: absolute;
+      left: -1px;
+      top: -4.25px;
+      width: 7px;
+      height: 7px;
+      border-top: var(--arrow-width) solid var(--green-stroke);
+      border-left: var(--arrow-width) solid var(--green-stroke);
+      transform: rotate(-45deg);
+    }
+
+    .green-arrow-down::after,
+    .blue-arrow-down::after {
+      content: "";
+      position: absolute;
+      left: -4.25px;
+      bottom: -1px;
+      width: 7px;
+      height: 7px;
+      transform: rotate(45deg);
+    }
+
+    .green-arrow-down::after {
+      border-right: var(--arrow-width) solid var(--green-stroke);
+      border-bottom: var(--arrow-width) solid var(--green-stroke);
+    }
+
+    .blue-arrow-down::after {
+      border-right: var(--arrow-width) solid var(--blue-stroke);
+      border-bottom: var(--arrow-width) solid var(--blue-stroke);
+    }
   </style>
 </head>
 <body>
-  <main class="canvas" role="img" aria-label="Comparison between persona prompting and CPB learning pathways">
-    <div class="phase-title" style="left:174px;top:34px;width:424px;color:#0F6E56;">Persona Prompting</div>
+  <main class="canvas" role="img" aria-label="Four-part comparison of persona prompting and CPB learner characteristics, learning processes, knowledge states, and answer access">
+    <div class="column-title persona-title" style="left:245px;top:24px;width:530px;">Persona Prompting</div>
+    <div class="column-title cpb-title" style="left:805px;top:24px;width:570px;">CPB</div>
 
-    <div class="node neutral-node" style="left:20px;top:70px;width:130px;height:50px;">Same Teaching<br>Rounds</div>
-    <div class="arrow-right" style="left:154px;top:95px;width:16px;"></div>
+    <section class="panel green-panel" style="left:245px;top:72px;width:530px;height:598px;"></section>
+    <section class="panel blue-panel" style="left:805px;top:72px;width:570px;height:598px;"></section>
 
-    <section class="panel green-panel" style="left:174px;top:55px;width:424px;height:80px;"></section>
-    <div class="node green-node" style="left:192px;top:73px;width:150px;height:44px;">Persona Prompt</div>
-    <div class="arrow-right" style="left:346px;top:95px;width:36px;"></div>
-    <div class="node green-node" style="left:386px;top:73px;width:200px;height:44px;">Full Teaching<br>Context</div>
-    <div class="arrow-right" style="left:602px;top:95px;width:36px;"></div>
+    <div class="row-label" style="left:20px;top:90px;width:205px;height:70px;">Learner<br>characteristics</div>
+    <div class="row-label" style="left:20px;top:202px;width:205px;height:120px;">Learning<br>process</div>
+    <div class="row-label" style="left:20px;top:368px;width:205px;height:84px;">Knowledge<br>state</div>
+    <div class="row-label" style="left:20px;top:500px;width:205px;height:100px;">Answer<br>access</div>
 
-    <div class="node neutral-node" style="left:642px;top:70px;width:110px;height:50px;">Answer</div>
-    <div class="arrow-right" style="left:756px;top:95px;width:36px;"></div>
-    <div class="node neutral-node" style="left:796px;top:70px;width:110px;height:50px;">Scoring</div>
+    <div class="panel-separator" style="left:260px;top:178px;width:500px;"></div>
+    <div class="panel-separator" style="left:820px;top:178px;width:540px;"></div>
+    <div class="panel-separator" style="left:260px;top:346px;width:500px;"></div>
+    <div class="panel-separator" style="left:820px;top:346px;width:540px;"></div>
+    <div class="panel-separator" style="left:260px;top:476px;width:500px;"></div>
+    <div class="panel-separator" style="left:820px;top:476px;width:540px;"></div>
 
-    <div class="phase-title" style="left:174px;top:199px;width:470px;color:#185FA5;">CPB</div>
+    <!-- Persona prompting: learner characteristics -->
+    <div class="node green-strong-node" style="left:385px;top:99px;width:250px;height:52px;">Persona Prompt<br>Explicit persona descriptions</div>
 
-    <div class="node neutral-node" style="left:20px;top:255px;width:130px;height:50px;">Same Teaching<br>Rounds</div>
-    <div class="arrow-right" style="left:154px;top:280px;width:16px;"></div>
+    <!-- Persona prompting: learning process -->
+    <div class="node neutral-node" style="left:270px;top:218px;width:150px;height:52px;">Matched Teaching<br>Rounds</div>
+    <div class="arrow-right" style="left:424px;top:244px;width:30px;"></div>
+    <div class="process-note green-note" style="left:458px;top:207px;width:275px;height:74px;">No explicit predefined<br>cognitive stages</div>
+    <div class="green-arrow-down" style="left:595px;top:281px;height:82px;"></div>
 
-    <section class="panel blue-panel" style="left:174px;top:220px;width:470px;height:120px;"></section>
-    <div class="node blue-node" style="left:186px;top:258px;width:83px;height:44px;">Functional<br>Constraints</div>
-    <div class="arrow-right" style="left:273px;top:280px;width:16px;"></div>
+    <!-- Persona prompting: knowledge state -->
+    <div class="node green-node" style="left:465px;top:382px;width:260px;height:58px;">Accumulated Full<br>Teaching Context</div>
 
-    <div class="node blue-node" style="left:293px;top:258px;width:68px;height:44px;">Attention</div>
-    <div class="arrow-right" style="left:365px;top:280px;width:16px;"></div>
+    <!-- Persona Prompt and context jointly condition the answer -->
+    <div class="green-line-h" style="left:635px;top:125px;width:90px;"></div>
+    <div class="green-line-v" style="left:725px;top:125px;height:425px;"></div>
+    <div class="green-arrow-down" style="left:595px;top:440px;height:72px;"></div>
+    <div class="access-note green-access" style="left:275px;top:516px;width:265px;height:42px;">Full teaching context</div>
+    <div class="node green-strong-node" style="left:555px;top:516px;width:150px;height:58px;">Answer</div>
+    <div class="green-arrow-left" style="left:705px;top:545px;width:20px;"></div>
 
-    <div class="node blue-node" style="left:385px;top:258px;width:42px;height:44px;">WM</div>
-    <div class="arrow-right" style="left:431px;top:280px;width:16px;"></div>
+    <!-- CPB: learner characteristics configure processing mechanisms -->
+    <div class="node blue-strong-node" style="left:968px;top:91px;width:245px;height:58px;">Functional Processing<br>Constraints</div>
+    <div class="blue-line-v" style="left:1090px;top:149px;height:35px;"></div>
+    <div class="blue-line-h" style="left:1032px;top:184px;width:113px;"></div>
+    <div class="blue-arrow-down" style="left:1032px;top:184px;height:48px;"></div>
+    <div class="blue-arrow-down" style="left:1145px;top:184px;height:48px;"></div>
 
-    <div class="node blue-node" style="left:451px;top:258px;width:69px;height:44px;">Encoding</div>
-    <div class="arrow-right" style="left:524px;top:280px;width:16px;"></div>
+    <!-- CPB: information-processing path -->
+    <div class="node neutral-node" style="left:823px;top:244px;width:135px;height:52px;">Matched Teaching<br>Rounds</div>
+    <div class="arrow-right" style="left:962px;top:270px;width:22px;"></div>
+    <div class="node blue-node" style="left:988px;top:244px;width:88px;height:52px;">Attention</div>
+    <div class="arrow-right" style="left:1080px;top:270px;width:22px;"></div>
+    <div class="node blue-node" style="left:1106px;top:244px;width:78px;height:52px;">WM</div>
+    <div class="arrow-right" style="left:1188px;top:270px;width:22px;"></div>
+    <div class="node blue-node" style="left:1214px;top:244px;width:135px;height:52px;">Encoding</div>
+    <div class="blue-arrow-down" style="left:1281px;top:296px;height:72px;"></div>
 
-    <div class="node blue-node" style="left:544px;top:258px;width:78px;height:44px;">Explicit<br>LTM</div>
-    <div class="arrow-right" style="left:648px;top:280px;width:36px;"></div>
+    <!-- CPB: explicit knowledge state -->
+    <div class="node blue-node" style="left:1190px;top:382px;width:182px;height:58px;">Explicit LTM</div>
+    <div class="blue-arrow-down" style="left:1281px;top:440px;height:72px;"></div>
 
-    <div class="node neutral-node" style="left:688px;top:255px;width:110px;height:50px;">Answer</div>
-    <div class="arrow-right" style="left:802px;top:280px;width:36px;"></div>
-    <div class="node neutral-node" style="left:842px;top:255px;width:110px;height:50px;">Scoring</div>
+    <!-- CPB: answer access -->
+    <div class="access-note blue-access" style="left:890px;top:516px;width:285px;height:42px;">Explicit LTM only</div>
+    <div class="node blue-strong-node" style="left:1206px;top:516px;width:150px;height:58px;">Answer</div>
+
+    <!-- Shared assessment and scoring -->
+    <div class="line-v" style="left:630px;top:574px;height:62px;"></div>
+    <div class="line-v" style="left:1281px;top:574px;height:62px;"></div>
+    <div class="line-h" style="left:630px;top:636px;width:651px;"></div>
+    <div class="arrow-down" style="left:956px;top:636px;height:38px;"></div>
+    <div class="node neutral-node" style="left:821px;top:678px;width:270px;height:58px;">Same Assessment &amp; Scoring</div>
   </main>
 </body>
 </html>

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prompt and CPB Answering Evidence Comparison</title>
+  <link rel="stylesheet" href="../../Shared/flowchart_style.css">
+  <style>
+    @page { size: 1500px 1020px; margin: 0; }
+    html, body, .canvas { width: 1500px; height: 1020px; }
+
+    .comparison-panel {
+      position: absolute;
+      top: 35px;
+      width: 680px;
+      height: 940px;
+      border: 0.5px solid;
+      border-radius: 14px;
+      font-family: var(--font);
+    }
+
+    .prompt-panel {
+      left: 40px;
+      color: var(--green-text);
+      background: var(--green-fill);
+      border-color: var(--green-stroke);
+    }
+
+    .cpb-panel {
+      left: 780px;
+      color: var(--blue-text);
+      background: var(--blue-fill);
+      border-color: var(--blue-stroke);
+    }
+
+    .panel-title {
+      position: absolute;
+      top: 28px;
+      left: 32px;
+      width: 616px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 36px;
+      text-align: center;
+    }
+
+    .evidence-label {
+      position: absolute;
+      top: 88px;
+      left: 112px;
+      width: 456px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0.5px solid;
+      border-radius: 8px;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 30px;
+    }
+
+    .prompt-panel .evidence-label {
+      background: var(--green-strong);
+      border-color: var(--green-stroke);
+    }
+
+    .cpb-panel .evidence-label {
+      background: var(--blue-strong);
+      border-color: var(--blue-stroke);
+    }
+
+    .round-card {
+      position: absolute;
+      left: 32px;
+      width: 616px;
+      padding: 26px 30px;
+      border: 0.5px solid;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.36);
+      overflow: hidden;
+    }
+
+    .prompt-panel .round-card { border-color: var(--green-stroke); }
+    .cpb-panel .round-card { border-color: var(--blue-stroke); }
+
+    .round-one { top: 170px; height: 280px; }
+    .round-two { top: 478px; height: 350px; }
+
+    .round-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      margin: 0 0 18px;
+      padding: 5px 14px;
+      border: 0.5px solid;
+      border-radius: 7px;
+      font-size: 21px;
+      font-weight: 500;
+      line-height: 26px;
+    }
+
+    .prompt-panel .round-label {
+      background: var(--green-strong);
+      border-color: var(--green-stroke);
+    }
+
+    .cpb-panel .round-label {
+      background: var(--blue-strong);
+      border-color: var(--blue-stroke);
+    }
+
+    .round-text {
+      margin: 0;
+      font-size: 21px;
+      font-weight: 400;
+      line-height: 29px;
+      text-align: left;
+    }
+
+    .speaker {
+      font-weight: 500;
+    }
+
+    .student-line {
+      margin-top: 16px;
+    }
+
+    .round-continuation {
+      position: absolute;
+      left: 300px;
+      top: 830px;
+      width: 80px;
+      height: 28px;
+      font-size: 25px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-align: center;
+    }
+
+    .access-summary {
+      position: absolute;
+      left: 72px;
+      top: 870px;
+      width: 536px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0.5px dashed;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.58);
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 25px;
+      text-align: center;
+    }
+
+    .prompt-panel .access-summary { border-color: var(--green-stroke); }
+    .cpb-panel .access-summary { border-color: var(--blue-stroke); }
+
+    .versus {
+      position: absolute;
+      left: 720px;
+      top: 472px;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--neutral-text);
+      font-family: var(--font);
+      font-size: 24px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas" role="img" aria-label="Comparison of the instructional evidence available to a prompt-based student and a CPB student when answering assessment questions">
+    <section class="comparison-panel prompt-panel">
+      <div class="panel-title">Prompt-Based Answering</div>
+      <div class="evidence-label">[CLASSROOM_EXPERIENCE]</div>
+
+      <article class="round-card round-one">
+        <div class="round-label">[TEACHING_ROUND 01]</div>
+        <p class="round-text"><span class="speaker">Teaching Material:</span> Finance examines how money is obtained, managed, moved, and used. [A seagull flies past and lands on the windowsill] Finance helps individuals and organizations understand sources and uses of cash and make decisions when outcomes are uncertain.</p>
+        <p class="round-text student-line"><span class="speaker">Student:</span> OK</p>
+      </article>
+
+      <article class="round-card round-two">
+        <div class="round-label">[TEACHING_ROUND 02]</div>
+        <p class="round-text"><span class="speaker">Teaching Material:</span> A central theme in finance is the trade-off between risk and reward: decisions that offer greater potential benefits often involve greater uncertainty. The study of finance has three basic, connected areas: business finance, investments, and financial markets and institutions. Business finance focuses on how organizations make financial decisions and manage their resources.</p>
+        <p class="round-text student-line"><span class="speaker">Student:</span> OK</p>
+      </article>
+
+      <div class="round-continuation">...</div>
+
+      <div class="access-summary">Answer access: full accumulated teaching context</div>
+    </section>
+
+    <div class="versus">VS.</div>
+
+    <section class="comparison-panel cpb-panel">
+      <div class="panel-title">CPB Answering</div>
+      <div class="evidence-label">[LEARNED_MEMORY]</div>
+
+      <article class="round-card round-one">
+        <div class="round-label">[TEACHING_ROUND 01]</div>
+        <p class="round-text">Finance examines how money is obtained, managed, moved, and used, helping individuals and organizations understand sources and uses of cash and make decisions when outcomes are uncertain.</p>
+      </article>
+
+      <article class="round-card round-two">
+        <div class="round-label">[TEACHING_ROUND 02]</div>
+        <p class="round-text">Finance's core theme is the risk-reward trade-off, where higher potential gains come with more uncertainty, and it is organized into three interconnected areas: business finance, which covers organizational financial decisions and resource management, along with investments and financial markets and institutions.</p>
+      </article>
+
+      <div class="round-continuation">...</div>
+
+      <div class="access-summary">Answer access: encoded Explicit LTM entries only</div>
+    </section>
+  </main>
+</body>
+</html>

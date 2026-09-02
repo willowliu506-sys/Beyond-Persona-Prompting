@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Study 1 Explicit-LTM Validation Logic</title>
+  <link rel="stylesheet" href="../../Shared/flowchart_style.css">
+  <style>
+    @page { size: 1210px 600px; margin: 0; }
+    html, body, .canvas { width: 1210px; height: 600px; }
+
+    .sq1-title,
+    .mechanism-label,
+    .validation-label {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font);
+      text-align: center;
+      z-index: 5;
+    }
+
+    .sq1-title {
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--blue-text);
+    }
+
+    .mechanism-label {
+      height: 24px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--blue-text);
+    }
+
+    .branch-line,
+    .branch-stem {
+      position: absolute;
+      z-index: 2;
+    }
+
+    .branch-line {
+      height: 0;
+      border-top: var(--border-width) solid var(--blue-stroke);
+    }
+
+    .branch-stem {
+      width: 0;
+      border-left: var(--border-width) solid var(--blue-stroke);
+    }
+
+    .branch-arrow {
+      position: absolute;
+      width: 0;
+      border-left: var(--arrow-width) solid var(--blue-stroke);
+      z-index: 2;
+    }
+
+    .branch-arrow::after {
+      content: "";
+      position: absolute;
+      left: -4.25px;
+      bottom: -1px;
+      width: 7px;
+      height: 7px;
+      border-right: var(--arrow-width) solid var(--blue-stroke);
+      border-bottom: var(--arrow-width) solid var(--blue-stroke);
+      transform: rotate(45deg);
+    }
+
+    .validation-line {
+      position: absolute;
+      height: 0;
+      border-top: var(--arrow-width) solid var(--green-stroke);
+      z-index: 2;
+    }
+
+    .validation-stem {
+      position: absolute;
+      width: 0;
+      border-left: var(--border-width) solid var(--green-stroke);
+      z-index: 2;
+    }
+
+    .validation-line::after,
+    .cumulative-line::after {
+      content: "";
+      position: absolute;
+      right: -1px;
+      top: -4.25px;
+      width: 7px;
+      height: 7px;
+      transform: rotate(45deg);
+    }
+
+    .validation-line::after {
+      border-top: var(--arrow-width) solid var(--green-stroke);
+      border-right: var(--arrow-width) solid var(--green-stroke);
+    }
+
+    .validation-label {
+      flex-direction: column;
+      padding: 2px 12px;
+      background: #FFFFFF;
+      line-height: 16px;
+    }
+
+    .validation-label strong {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--blue-text);
+    }
+
+    .validation-label span {
+      margin-top: 2px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--green-text);
+    }
+
+    .cumulative-line {
+      position: absolute;
+      height: 0;
+      border-top: var(--arrow-width) solid var(--arrow);
+      z-index: 2;
+    }
+
+    .cumulative-line::after {
+      border-top: var(--arrow-width) solid var(--arrow);
+      border-right: var(--arrow-width) solid var(--arrow);
+    }
+
+    .cumulative-stem {
+      position: absolute;
+      width: 0;
+      border-left: var(--border-width) solid var(--arrow);
+      z-index: 2;
+    }
+
+    .cumulative-label span {
+      color: var(--neutral-text);
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas" role="img" aria-label="Study 1 validation logic covering mechanism execution, stage-specific transitions, and cumulative propagation to Explicit LTM">
+    <div class="sq1-title" style="left:280px;top:20px;width:290px;height:24px;">SQ1 - Mechanism Execution</div>
+    <div class="branch-stem" style="left:425px;top:44px;height:20px;"></div>
+    <div class="branch-line" style="left:250px;top:64px;width:350px;"></div>
+    <div class="branch-arrow" style="left:250px;top:64px;height:27px;"></div>
+    <div class="branch-arrow" style="left:600px;top:64px;height:27px;"></div>
+
+    <div class="mechanism-label" style="left:150px;top:98px;width:200px;">Attention Filter</div>
+    <div class="branch-arrow" style="left:250px;top:122px;height:78px;"></div>
+
+    <div class="mechanism-label" style="left:470px;top:98px;width:260px;">Working-Memory Processing</div>
+    <div class="branch-arrow" style="left:600px;top:122px;height:78px;"></div>
+
+    <div class="node neutral-node" style="left:30px;top:205px;width:100px;height:60px;"><span>Source<br><i>S</i></span></div>
+    <div class="arrow-right" style="left:134px;top:235px;width:57px;"></div>
+    <div class="node blue-node" style="left:195px;top:205px;width:110px;height:60px;">Attention</div>
+    <div class="arrow-right" style="left:309px;top:235px;width:47px;"></div>
+    <div class="node neutral-node" style="left:360px;top:205px;width:130px;height:60px;"><span>Post-Attention<br><i>P</i></span></div>
+    <div class="arrow-right" style="left:494px;top:235px;width:47px;"></div>
+    <div class="node blue-node" style="left:545px;top:205px;width:110px;height:60px;">Working<br>Memory</div>
+    <div class="arrow-right" style="left:659px;top:235px;width:47px;"></div>
+    <div class="node neutral-node" style="left:710px;top:205px;width:130px;height:60px;"><span>Available Input<br><i>A</i></span></div>
+    <div class="arrow-right" style="left:844px;top:235px;width:47px;"></div>
+    <div class="node blue-node" style="left:895px;top:205px;width:110px;height:60px;">Encoder</div>
+    <div class="arrow-right" style="left:1009px;top:235px;width:62px;"></div>
+    <div class="node neutral-node" style="left:1075px;top:205px;width:100px;height:60px;"><span>Explicit LTM<br><i>L</i></span></div>
+
+    <div class="validation-stem" style="left:80px;top:265px;height:95px;"></div>
+    <div class="validation-line" style="left:80px;top:360px;width:345px;"></div>
+    <div class="validation-stem" style="left:425px;top:265px;height:95px;"></div>
+    <div class="validation-label" style="left:178px;top:338px;width:150px;height:44px;">
+      <strong>SQ2</strong><span>Attention-stage transition</span>
+    </div>
+
+    <div class="validation-stem" style="left:425px;top:265px;height:150px;"></div>
+    <div class="validation-line" style="left:425px;top:415px;width:350px;"></div>
+    <div class="validation-stem" style="left:775px;top:265px;height:150px;"></div>
+    <div class="validation-label" style="left:527px;top:393px;width:150px;height:44px;">
+      <strong>SQ2</strong><span>WM-stage transition</span>
+    </div>
+
+    <div class="validation-stem" style="left:775px;top:265px;height:205px;"></div>
+    <div class="validation-line" style="left:775px;top:470px;width:350px;"></div>
+    <div class="validation-stem" style="left:1125px;top:265px;height:205px;"></div>
+    <div class="validation-label" style="left:877px;top:448px;width:150px;height:44px;">
+      <strong>SQ2</strong><span>Encoding transition</span>
+    </div>
+
+    <div class="cumulative-stem" style="left:80px;top:265px;height:285px;"></div>
+    <div class="cumulative-line" style="left:80px;top:550px;width:1045px;"></div>
+    <div class="cumulative-stem" style="left:1125px;top:265px;height:285px;"></div>
+    <div class="validation-label" style="left:473px;top:518px;width:260px;height:64px;">
+      <strong>SQ2</strong>
+      <span>Cumulative propagation<br>to Explicit LTM</span>
+    </div>
+  </main>
+</body>
+</html>

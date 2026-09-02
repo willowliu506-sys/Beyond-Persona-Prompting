@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CPB Student Prompt Example</title>
+  <link rel="stylesheet" href="../../Shared/flowchart_style.css">
+  <style>
+    @page { size: 1400px 2100px; margin: 0; }
+    html, body, .canvas { width: 1400px; height: 2100px; }
+
+    .prompt-section {
+      position: absolute;
+      padding: 34px 42px;
+      background: var(--green-fill);
+      border: 0.5px solid var(--green-stroke);
+      border-radius: 12px;
+      color: var(--green-text);
+      font-family: var(--font);
+      overflow: hidden;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 48px;
+      margin: 0 0 24px;
+      padding: 7px 18px;
+      background: var(--green-strong);
+      border: 0.5px solid var(--green-stroke);
+      border-radius: 8px;
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 34px;
+    }
+
+    .prompt-text {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 34px;
+      text-align: left;
+    }
+
+    .prompt-text + .prompt-text {
+      margin-top: 18px;
+    }
+
+    .restriction-line + .restriction-line {
+      margin-top: 7px;
+    }
+
+    .profile-group + .profile-group {
+      margin-top: 20px;
+    }
+
+    .profile-name {
+      margin: 0 0 5px;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 34px;
+    }
+
+    .profile-line {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 32px;
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas" role="img" aria-label="Full CPB student assessment prompt containing memory restriction, language ability, personality, and core student instructions">
+    <section class="prompt-section" style="left:50px;top:40px;width:1300px;height:600px;">
+      <div class="section-label">[MEMORY_RESTRICTION]</div>
+      <p class="prompt-text restriction-line">Answer using only information explicitly stated in the learned memory provided for this assessment.</p>
+      <p class="prompt-text restriction-line">Do not use prior knowledge, general domain knowledge, common sense, or plausible inference to add definitions, relationships, causes, examples, or details that the learned memory does not explicitly contain.</p>
+      <p class="prompt-text restriction-line">The presence of a technical term or category name in memory does not provide its definition or its relationship to another term.</p>
+      <p class="prompt-text restriction-line">Every factual claim in your answer must be directly supported by a statement in the learned memory, allowing only meaning-preserving paraphrase.</p>
+      <p class="prompt-text restriction-line">If the memory supports only part of the answer, give only that supported part and state that the remaining information was not retained in your learned memory.</p>
+      <p class="prompt-text restriction-line">If the information needed to answer the question is not explicitly present, state that you do not know based on what you learned.</p>
+      <p class="prompt-text restriction-line">Do not attempt to be helpful by completing missing knowledge.</p>
+    </section>
+
+    <section class="prompt-section" style="left:50px;top:670px;width:1300px;height:230px;">
+      <div class="section-label">[LANGUAGE_ABILITY]</div>
+      <p class="prompt-text">[High] Give correct answers in complete sentences;</p>
+      <p class="prompt-text">Use the correct nouns, verbs, and modifiers.</p>
+    </section>
+
+    <section class="prompt-section" style="left:50px;top:930px;width:1300px;height:600px;">
+      <div class="section-label">[PERSONALITY_DESCRIPTION]</div>
+
+      <div class="profile-group">
+        <p class="profile-name">Openness [High]</p>
+        <p class="profile-line">Creativity in answers</p>
+        <p class="profile-line">Open to new ideas from the teacher</p>
+        <p class="profile-line">Curiosity and interest in learning</p>
+      </div>
+
+      <div class="profile-group">
+        <p class="profile-name">Conscientiousness [High]</p>
+        <p class="profile-line">Well-organized and logic thinking</p>
+        <p class="profile-line">Positive attitude toward learning</p>
+        <p class="profile-line">Using more strategies in language learning</p>
+      </div>
+
+      <div class="profile-group">
+        <p class="profile-name">Neuroticism [Low]</p>
+        <p class="profile-line">Emotional stability</p>
+        <p class="profile-line">Rarely feeling sad or depressed</p>
+        <p class="profile-line">Confident in the answers</p>
+      </div>
+    </section>
+
+    <section class="prompt-section" style="left:50px;top:1560px;width:1300px;height:500px;">
+      <div class="section-label">[CORE_STUDENT_INSTRUCTION]</div>
+      <p class="prompt-text">You are answering an assessment question as a student.</p>
+      <p class="prompt-text">Answer the question directly and naturally.</p>
+      <p class="prompt-text">Use only the factual information permitted by the Memory Restriction above.</p>
+      <p class="prompt-text">Let the specified Language Ability and Personality Description jointly shape how you organize and express that retained information.</p>
+      <p class="prompt-text">Follow both dimensions consistently, but do not use them to invent, recover, or add knowledge that is absent from the learned memory.</p>
+    </section>
+  </main>
+</body>
+</html>

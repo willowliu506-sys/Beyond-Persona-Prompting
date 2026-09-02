@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prompt and CPB Answering Prompt Comparison</title>
+  <link rel="stylesheet" href="../../Shared/flowchart_style.css">
+  <style>
+    @page { size: 1120px 700px; margin: 0; }
+    html, body, .canvas { width: 1120px; height: 700px; }
+
+    .comparison-panel {
+      position: absolute;
+      top: 38px;
+      width: 480px;
+      height: 624px;
+      border-style: solid;
+      border-width: 0.5px;
+      border-radius: 12px;
+    }
+
+    .comparison-title {
+      position: absolute;
+      top: 60px;
+      width: 480px;
+      text-align: center;
+      font-family: var(--font);
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 30px;
+      z-index: 5;
+    }
+
+    .message-group {
+      position: absolute;
+      width: 408px;
+      border-style: solid;
+      border-width: 0.5px;
+      border-radius: 10px;
+      z-index: 2;
+    }
+
+    .role-label {
+      position: absolute;
+      left: 22px;
+      top: 14px;
+      font-family: var(--font);
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: 0.2px;
+      z-index: 4;
+    }
+
+    .prompt-component {
+      position: absolute;
+      left: 22px;
+      width: 364px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-style: solid;
+      border-width: 0.5px;
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 22px;
+      letter-spacing: 0.1px;
+      z-index: 3;
+    }
+
+    .green-group {
+      background: rgba(225, 245, 238, 0.72);
+      border-color: var(--green-stroke);
+    }
+
+    .green-group .role-label { color: var(--green-stroke); }
+
+    .green-component {
+      background: var(--green-fill);
+      border-color: var(--green-stroke);
+      color: var(--green-text);
+    }
+
+    .green-key {
+      background: var(--green-strong);
+      border-color: var(--green-stroke);
+      color: var(--green-text);
+    }
+
+    .blue-group {
+      background: rgba(230, 241, 251, 0.72);
+      border-color: var(--blue-stroke);
+    }
+
+    .blue-group .role-label { color: var(--blue-stroke); }
+
+    .blue-component {
+      background: var(--blue-fill);
+      border-color: var(--blue-stroke);
+      color: var(--blue-text);
+    }
+
+    .blue-key {
+      background: var(--blue-strong);
+      border-color: var(--blue-stroke);
+      color: var(--blue-text);
+    }
+
+    .versus {
+      position: absolute;
+      left: 520px;
+      top: 328px;
+      width: 80px;
+      text-align: center;
+      font-family: var(--font);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--neutral-text);
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas" role="img" aria-label="Side-by-side comparison of the prompt structures used by Prompt-based and CPB learners during assessment">
+    <section class="comparison-panel green-panel" style="left:30px;"></section>
+    <div class="comparison-title" style="left:30px;color:var(--green-stroke);">Prompt-Based Answering</div>
+
+    <section class="message-group green-group" style="left:66px;top:108px;height:326px;">
+      <div class="role-label">SYSTEM</div>
+      <div class="prompt-component green-key" style="top:52px;">[COGNITIVE_PROMPT]</div>
+      <div class="prompt-component green-component" style="top:112px;">[LANGUAGE_ABILITY]</div>
+      <div class="prompt-component green-component" style="top:172px;">[PERSONALITY_DESCRIPTION]</div>
+      <div class="prompt-component green-component" style="top:232px;">[CORE_STUDENT_INSTRUCTION]</div>
+    </section>
+
+    <section class="message-group green-group" style="left:66px;top:454px;height:174px;">
+      <div class="role-label">USER</div>
+      <div class="prompt-component green-key" style="top:52px;">[CLASSROOM_EXPERIENCE]</div>
+      <div class="prompt-component green-component" style="top:112px;">[ASSESSMENT_QUESTION]</div>
+    </section>
+
+    <div class="versus">vs.</div>
+
+    <section class="comparison-panel blue-panel" style="left:610px;"></section>
+    <div class="comparison-title" style="left:610px;color:var(--blue-stroke);">CPB Answering</div>
+
+    <section class="message-group blue-group" style="left:646px;top:108px;height:326px;">
+      <div class="role-label">SYSTEM MESSAGE</div>
+      <div class="prompt-component blue-key" style="top:52px;">[MEMORY_RESTRICTION]</div>
+      <div class="prompt-component blue-component" style="top:112px;">[LANGUAGE_ABILITY]</div>
+      <div class="prompt-component blue-component" style="top:172px;">[PERSONALITY_DESCRIPTION]</div>
+      <div class="prompt-component blue-component" style="top:232px;">[CORE_STUDENT_INSTRUCTION]</div>
+    </section>
+
+    <section class="message-group blue-group" style="left:646px;top:454px;height:174px;">
+      <div class="role-label">USER MESSAGE</div>
+      <div class="prompt-component blue-key" style="top:52px;">[LEARNED_MEMORY]</div>
+      <div class="prompt-component blue-component" style="top:112px;">[QUESTION]</div>
+    </section>
+  </main>
+</body>
+</html>

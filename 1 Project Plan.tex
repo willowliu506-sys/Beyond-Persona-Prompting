@@ -3,28 +3,83 @@
 
 \section{Background and Motivation}
 
-\mbox{}\par
+Simulated students have long been used in teacher training, intelligent tutoring-system development, and research on learning behaviour. The open-ended language generation, multi-turn interaction, and natural-language conditioning capabilities of large language models (LLMs) have further expanded the scope of student simulation, allowing simulated learners to participate in more flexible classroom dialogue, answer open-ended questions, and display different interactional characteristics according to predefined learner profiles \cite{markel-etal-2023-gpteach,liu-etal-2024-personality,chu-etal-2025-llm}. These developments make LLM-based student simulation increasingly relevant not only to teacher rehearsal, but also to tutoring-system testing and synthetic educational experimentation.
+
+As simulated learners are increasingly used to compare teaching strategies, investigate learner differences, and analyse learning outcomes, however, generating natural or superficially plausible student responses is no longer sufficient to support stronger research claims. Recent studies show that LLM-simulated students can produce fluent dialogue while still deviating from the target learner in behavioural consistency, knowledge level, or cognitive fidelity \cite{martynova-etal-2025-can,scarlatos-etal-2026-simulated}. A more fundamental methodological question therefore arises: \textit{if simulated-learner behaviour is used to infer learning processes or compare learner conditions, the representation of learner characteristics directly determines how those behavioural differences can be interpreted}.
 
 \section{The Representation Problem}
 
-\mbox{}\par
+Persona prompting is one of the most direct and flexible approaches to learner representation in LLM-based student simulation. Characteristics such as academic ability, language ability, personality, motivation, and behavioural tendencies can be written into a prompt as natural-language profiles, after which the same foundation model adjusts its generated behaviour accordingly \cite{benedetto-etal-2024-using,liu-etal-2024-personality}. This approach requires no additional training and facilitates the rapid combination of multiple learner dimensions.
+
+Learner characteristics do not necessarily operate at the same functional level, however. Some characteristics are expressed primarily through linguistic organisation, interactional tendencies, or response style. Others theoretically affect attention, information processing, or knowledge formation and therefore operate closer to the learning process itself. When these functionally heterogeneous characteristics are all represented through a single global persona prompt, the model can be told what the student is like or how the student should behave, but the way in which each represented characteristic enters the learning process and produces downstream behaviour remains implicit.
+
+Persona prompting primarily constrains generated behaviour directly through descriptive learner profiles, whereas process-based representation allows selected learner characteristics first to act on the learning process, alter the learner state, and then influence downstream behaviour through the resulting state. The central distinction is therefore not whether behavioural variation is permitted, but whether behavioural differences are directly described or arise from preceding process constraints and the learner state that they form.
+
+The central representation problem examined in this thesis is therefore whether descriptive persona conditioning is sufficient when learner characteristics are expected to affect knowledge acquisition and downstream task behaviour through the learning process, or whether those characteristics need to be represented at the processing level at which they are expected to operate.
 
 \section{ADHD Student Simulation as the Research Case}
 
-\mbox{}\par
+ADHD provides a useful case for examining this representation problem because many ADHD-related differences are expected to affect learning processes rather than only observable response style. At the same time, ADHD is highly heterogeneous: learners with the same diagnosis may differ substantially in cognitive profile and behavioural presentation \cite{willcutt-etal-2005-validity,luo-etal-2019-heterogeneity}. It would therefore be inappropriate to treat ``ADHD'' as a single fixed learner persona or to assume that one set of cognitive characteristics applies to all ADHD learners.
 
-\section{Research Aim and Research Questions}
+Rather than attempting to simulate ADHD as a whole, this thesis focuses on two bounded learning-related characteristics with established theoretical relevance. The first is \textit{susceptibility to controlled distraction}, reflecting the possibility that task-irrelevant events may disrupt the availability of task-relevant instructional information. The second is \textit{sensitivity to instructional processing demand}, reflecting the possibility that performance becomes more constrained as processing demands exceed available Working-Memory resources \cite{aboitiz2014irrelevant,martinussen2005meta,kofler2010adhd}. These characteristics are used as controlled functional targets rather than diagnostic markers or a complete cognitive model of ADHD.
 
-\mbox{}\par
+Both characteristics are particularly suitable for the representation question examined here because their expected effects occur during learning: they concern what information remains available, how that information is processed, and what learner state is subsequently formed. They therefore provide a scoped test case for comparing a descriptive persona representation with a representation that places selected learner characteristics within the learning process itself.
 
-\section{Research Objectives}
+To investigate this distinction, the thesis introduces a \textit{Cognitive-Process-Based} (CPB) learner representation. CPB represents the selected Attention- and Working-Memory-related characteristics as controlled processing constraints that shape the learner knowledge state, while persona prompting serves as the comparison representation. The subsequent studies examine whether these constraints operate as intended, whether they produce task behaviour consistent with the targeted processes, and whether the resulting constraint-related patterns remain observable when additional response-stage learner attributes are introduced.
 
-\mbox{}\par
+\section{Research Aim, Research Questions and Objectives}
+
+The aim of this thesis is to investigate whether selected ADHD-related learning characteristics can be represented as explicit and traceable processing constraints in LLM-based student simulation, and how this process-based representation differs from persona prompting in mechanistic validity, task-sensitive behavioural patterns, and multidimensional profile extension.
+
+The study does not seek to establish that CPB is universally superior to persona prompting. Instead, it examines the forms of evidence that each representation can support under different functional claims: whether the CPB mechanisms affect the learner knowledge state according to their registered rules; whether the two representations produce different assessment-performance structures; and whether their behavioural patterns relate to controlled distraction and instructional processing demand in theoretically expected directions.
+
+The following research questions address this aim.
+
+\noindent\textbf{Main Research Question:} How can selected ADHD-related learning characteristics be represented in LLM-based student simulation, and to what extent does a cognitive-process-based representation produce more theory-consistent task behaviour than persona prompting while retaining its constraint-related patterns under additional response-stage learner attributes?
+
+\noindent\textbf{RQ1---Mechanism:} Does the CPB processing pipeline execute its intended rules and produce traceable transitions from instructional information, through attention, working-memory processing and encoding, to Explicit LTM?
+
+RQ1 first examines whether CPB itself operates as designed. Before final behaviour is compared, the study verifies whether the Attention and Working-Memory mechanisms execute correctly and whether the information-state changes caused by these mechanisms can be attributed and traced to the final Explicit LTM.
+
+\noindent\textbf{RQ2---Representation:} Compared with persona prompting, does CPB produce learning behaviour that shows more theoretically consistent sensitivity to controlled distraction and instructional processing demand?
+
+RQ2 then extends the analysis from the mechanism level to observable assessment behaviour. The study first compares learner-condition differentiation within each representation and then tests whether performance shows sensitivity to controlled distraction and source-round instructional processing demand in directions consistent with the targeted Attention- and Working-Memory-related hypotheses.
+
+\noindent\textbf{RQ3---Constraint-Pattern Retention under Attribute Additions:} When Language Ability and Big-Five prompt dimensions are added at the response stage, how do assessment outcomes change, and do CPB's previously established constraint-related aggregate patterns remain observable?
+
+RQ3 finally examines a more complex multidimensional learner representation. The addition of Language Ability and Big-Five prompt dimensions can reasonably change individual assessment responses, so the study does not require final outcomes to remain unchanged. The more important test is whether the graded performance structure and aggregate sensitivity to controlled distraction and instructional processing demand established for CPB remain observable after these response-stage attributes are introduced.
+
+The three RQs therefore form a progressive sequence. RQ1 tests whether the process representation forms a traceable learner state through predefined mechanisms. RQ2 tests whether this representation subsequently produces theoretically relevant, task-sensitive behaviour. RQ3 then examines whether these constraint-related aggregate patterns remain observable after further learner-profile dimensions are added.
+
+Four research objectives operationalise these questions:
+
+\begin{enumerate}
+    \item \textbf{Develop a process-based learner representation} that operationalises the selected ADHD-related Attention and Working-Memory characteristics as explicit processing constraints and represents the learner information formed after instructional experience in a separate knowledge state.
+    \item \textbf{Validate the internal CPB processing pipeline} by testing whether the Attention and Working-Memory mechanisms execute according to their predefined rules and whether the corresponding information-state transitions are correct, attributable, and traceable to Explicit LTM.
+    \item \textbf{Compare persona prompting and CPB at the behavioural level} by examining the within-representation performance structure of each approach and its sensitivity to controlled distraction and instructional processing demand.
+    \item \textbf{Examine constraint-pattern retention under multidimensional profile additions} by analysing changes in assessment outcomes after Language Ability and Big-Five prompt dimensions are introduced and testing whether the established CPB constraint-related aggregate patterns remain observable.
+\end{enumerate}
 
 \section{Contributions}
 
-\mbox{}\par
+This thesis makes three principal contributions across learner representation, validation methodology, and controlled empirical comparison.
+
+\textbf{First, a functionally factorised learner-representation framework.} The thesis introduces CPB, which functionally distinguishes selected process-relevant learner characteristics from persona-style response attributes within the representation architecture. Rather than describing learner behaviour only through a natural-language persona, CPB allows some task behaviour to arise from controlled information-processing constraints and the learner knowledge state that they form. It thereby provides an alternative design for investigating how heterogeneous learner characteristics can be represented according to their functional roles.
+
+\textbf{Second, a traceable and claim-matched validation framework.} The thesis separates learner-simulation validation into distinct evidential levels, including mechanism execution, information-state transition, learner-condition performance structure, process-sensitive behavioural response, and constraint-pattern retention. Through explicit intermediate states, source-grounded assessment criteria, and structured outcome evaluation, representation claims at different levels can be connected to observable and auditable evidence rather than relying on a single final realism or performance score.
+
+\textbf{Third, a controlled comparison between persona- and process-based learner representation.} Persona prompting and CPB are systematically compared using the same instructional materials, assessment tasks, and scoring framework. The experiments further examine the effects of controlled distraction, instructional processing demand, and additional learner-profile prompts on simulated behaviour. This design provides empirical evidence about how descriptive persona conditioning and process-based constraints organise task-level learner behaviour while preserving explicit boundaries around simulation scope and ADHD heterogeneity.
+
+Overall, the thesis does not seek merely to make an LLM generate a student who appears more ``ADHD-like''. It investigates a more fundamental learner-representation question: when learner characteristics are expected to influence information processing, knowledge formation, and downstream behaviour through the learning process, should they be represented at the corresponding functional-process layer rather than applied directly to generated behaviour as persona-level descriptions? Using ADHD-related Attention and Working-Memory characteristics as a controlled case, the thesis compares the behavioural organisation produced by descriptive persona prompting and process-based representation and examines whether this process-related structure remains observable after further learner-profile dimensions are added.
 
 \section{Thesis Structure}
 
-\mbox{}\par
+The remainder of the thesis is organised as follows.
+
+\textbf{Chapter 2---Related Work and Background} reviews research on LLM-based student simulation, persona prompting, neurodivergent learner simulation, and ADHD-related learning processes. It then considers process- and state-based learner modelling and the evaluation of simulated learners. The chapter concludes by synthesising the principal limitations of existing work into the research gaps and corresponding design and validation requirements addressed by this thesis.
+
+\textbf{Chapter 3---Materials and Methods} presents the research questions and overall experimental framework before describing the frozen instructional and assessment resources, instructional processing-demand measure, question and rubric construction, LLM-as-a-Judge procedure, and the implementations of persona prompting and Cognitive-Process-Based (CPB) representation. It then defines the Attention, Working-Memory, and Knowledge-Encoding mechanisms and specifies the experimental designs, evaluation measures, implementation settings, reproducibility controls, and ethical scope of the three studies.
+
+\textbf{Chapter 4---Results} reports the findings by RQ. RQ1 evaluates the execution of the CPB mechanisms and their information-state transitions. RQ2 compares the within-representation performance differentiation and ADHD-theory-consistent process sensitivity of CPB and persona prompting. RQ3 examines changes in behavioural outcomes after additional Language Ability and Big-Five dimensions are introduced and determines whether the previously established constraint-related patterns remain observable. The chapter concludes by integrating the findings across the three research questions and discussing their implications and boundaries for learner representation.
+
+\textbf{Chapter 5---Conclusions and Future Work} answers the Main Research Question, summarises the thesis's contributions to learner representation, process-based modelling, and validation methodology, identifies its external-validity limitations, and outlines future research based on real learner data, more refined cognitive mechanisms, and validation across tasks and models.
