@@ -522,7 +522,7 @@ Score_q
 
 模型—人工比较统一使用criterion-wise modal labels。按照这一汇总方式，Qwen与GPT的总体平均分分别为7.823和7.925。Qwen与GPT分别将106/137和108/137项criteria判定为`Correct`，且二者均仅对29/49道题给出满分，低于两名人工评分者的37和38道满分题。这表明自动Judge与人工评分之间不仅存在局部criterion边界差异，也存在系统性的score-level stringency difference。该差异被视为自动评分解释的限制，而不是模型更接近或优于人工评分的证据。
 
-Qwen最终被保留为正式实验的operational Judge，因为它是唯一通过全部七项预设重复稳定性标准的候选模型。Human alignment不作为事后定义的模型选择门槛，现有证据也不支持将Qwen描述为比GPT更接近人工评分。更准确的定位是：Qwen能够更稳定地执行冻结的source-grounded checklist，但其评分边界与两名人工评分者并不等价。因此，后续实验结果应被解释为Qwen在当前材料、问题和回答分布中对冻结评分协议的稳定应用，而不应被视为能够与人工评分普遍互换。The complete operational prompt is provided in Appendix Figure A.1.
+Qwen最终被保留为正式实验的operational Judge，因为它是唯一通过全部七项预设重复稳定性标准的候选模型。Human alignment不作为事后定义的模型选择门槛，现有证据也不支持将Qwen描述为比GPT更接近人工评分。更准确的定位是：Qwen能够更稳定地执行冻结的source-grounded checklist，但其评分边界与两名人工评分者并不等价。因此，后续实验结果应被解释为Qwen在当前材料、问题和回答分布中对冻结评分协议的稳定应用，而不应被视为能够与人工评分普遍互换。The complete operational prompt is provided in Appendix Figure A.3.
 
 ### 3.3 Learner Representation: Persona Prompting versus CPB
 
@@ -2123,7 +2123,7 @@ Raw distraction cost表示每个learner condition自身从clean到distracted mat
 
 Figure 4.RQ2-3显示，Prompt NT、Moderate和High的Raw distraction costs分别为0.027、−0.041和0.000，均接近0；其confidence intervals均跨越0，且lesson-level points分布于0的两侧。Table 4.RQ2-4进一步显示，Moderate与High相对Prompt NT的Additional costs分别为−0.068和−0.027，两个95% CIs同样跨越0。这些负值表明两个Prompt ADHD conditions的得分损失并未超过Prompt NT：Moderate在distracted materials下得分轻微上升，High则几乎不变。在7篇教材中，Moderate只有1篇、High只有3篇呈现比Prompt NT更大的distraction cost。因此，在冻结题目与教材集合中，Prompt ADHD conditions既未表现出额外的distraction-associated performance loss，也没有形成跨教材一致的干扰敏感性模式。
 
-CPB Zero的Raw distraction cost仅为0.041，其confidence interval跨越0，说明关闭processing constraints时，material condition变化几乎没有降低performance。CPB Low、Medium和High的Raw costs则分别为1.313、2.612和3.333分，且对应lesson-level points均位于正向，表明受约束conditions在distracted materials下出现了随constraint severity扩大的performance decline。相对于CPB Zero，三个conditions的Additional costs仍依次达到1.272、2.571和3.293分，95% CIs在冻结题目集合中均完全高于0，并在全部7篇教材中保持预期方向。因此，这一pattern并非基础模型对material condition变化的共同反应，而是与CPB constraints的联合启用及强度相关。CPB由此形成了幅度明确、随severity增强且跨教材一致的distraction-associated performance pattern，而Prompt persona intensity没有形成相应模式；该结果不用于分离Attention与WM各自的独立因果贡献。完整的clean/distracted means与Raw costs见Appendix Table A.3。
+CPB Zero的Raw distraction cost仅为0.041，其confidence interval跨越0，说明关闭processing constraints时，material condition变化几乎没有降低performance。CPB Low、Medium和High的Raw costs则分别为1.313、2.612和3.333分，且对应lesson-level points均位于正向，表明受约束conditions在distracted materials下出现了随constraint severity扩大的performance decline。相对于CPB Zero，三个conditions的Additional costs仍依次达到1.272、2.571和3.293分，95% CIs在冻结题目集合中均完全高于0，并在全部7篇教材中保持预期方向。因此，这一pattern并非基础模型对material condition变化的共同反应，而是与CPB constraints的联合启用及强度相关。CPB由此形成了幅度明确、随severity增强且跨教材一致的distraction-associated performance pattern，而Prompt persona intensity没有形成相应模式；该结果不用于分离Attention与WM各自的独立因果贡献。完整的clean/distracted means与Raw costs见Appendix Table A.6。
 
 **Processing-demand component**
 
@@ -2163,7 +2163,7 @@ Taken together, RQ2 shows that, within the frozen task setting, CPB produced mor
 
 #### 4.3.1 SQ1 — Baseline-Relative Behavioural Change
 
-SQ1仅使用distracted materials，检验A1–B2 profile dimensions加入后，各learner conditions相对于matched Study 2 baselines的behavioural outcomes如何变化，以及两种representations原有的within-representation performance structure是否仍然能够识别。本节首先使用具体learner-condition结果定位overall score changes的来源。run SD和Mean Answer Words用于补充描述stability与response form，最后结合Lesson/Question OCR、ER和实际score separation判断performance structure的保持情况。按representation与profile汇总的Mean Checklist Score、Overall Mean Question-Level Run SD和Mean Answer Words，以及各指标的matched Study 2 baseline和delta，集中报告于Appendix Table A.4。
+SQ1仅使用distracted materials，检验A1–B2 profile dimensions加入后，各learner conditions相对于matched Study 2 baselines的behavioural outcomes如何变化，以及两种representations原有的within-representation performance structure是否仍然能够识别。本节首先使用具体learner-condition结果定位overall score changes的来源。run SD和Mean Answer Words用于补充描述stability与response form，最后结合Lesson/Question OCR、ER和实际score separation判断performance structure的保持情况。按representation与profile汇总的Mean Checklist Score、Overall Mean Question-Level Run SD和Mean Answer Words，以及各指标的matched Study 2 baseline和delta，集中报告于Appendix Table A.7。
 
 ![Study 3 SQ1 distracted-material Mean Checklist Score change](Figures/Chapter4/Study3_v3_Figure_1_SQ1_distracted_mean_score_delta.png)
 
@@ -2171,7 +2171,7 @@ SQ1仅使用distracted materials，检验A1–B2 profile dimensions加入后，�
 
 Source: `/Users/willow/Documents/Code/[Msc] ADHD Simulation/UCL_Master_s_Thesis_Qingqing/Figures/Chapter4/Study3_v3_Figure_1_SQ1_distracted_mean_score_delta.png`
 
-Figure 4.RQ3-1比较两种Prompt-ADHD conditions和三种CPB constraint conditions分别加入A1、A2、B1与B2四种attribute profiles后，相对于matched Study 2 distracted-material baselines的Overall Mean Checklist Score变化，并用于判断同一profile的影响是否跨learner conditions共同出现，或主要来自某个具体condition。相应的representation-level profile summaries见Appendix Table A.4。总体来看，新增profile dimensions对Prompt与CPB并未产生一致影响；即使加入完全相同的A1–B2属性组合，两种representations也可能呈现方向不同的score displacement，其中A2和B2的差异最为明显。
+Figure 4.RQ3-1比较两种Prompt-ADHD conditions和三种CPB constraint conditions分别加入A1、A2、B1与B2四种attribute profiles后，相对于matched Study 2 distracted-material baselines的Overall Mean Checklist Score变化，并用于判断同一profile的影响是否跨learner conditions共同出现，或主要来自某个具体condition。相应的representation-level profile summaries见Appendix Table A.7。总体来看，新增profile dimensions对Prompt与CPB并未产生一致影响；即使加入完全相同的A1–B2属性组合，两种representations也可能呈现方向不同的score displacement，其中A2和B2的差异最为明显。
 
 A组由Language Ability与Big-Five composite方向一致的两个aligned profiles组成。**A1 — Learning-Congruent Alignment**结合High Language Ability与High O、High C、Low N。该profile对两种representations的影响均较有限：Prompt Moderate基本不变（+0.014），Prompt High轻微下降（−0.177）；CPB Low和Medium轻微提高（+0.197和+0.082），CPB High轻微下降（−0.088）。在representation层级，Prompt与CPB的平均变化分别仅为−0.082和+0.063，整体均接近matched Study 2 baselines。相比之下，**A2 — Learning-Challenging Alignment**结合Low Language Ability与Low O、Low C、High N，并在两种representations中产生了明显不同的结果。Prompt Moderate和High均下降约0.952分，呈现高度一致的负向变化；CPB Low、Medium和High则分别提高0.544、0.231和0.265分，representation-level平均变化为+0.347。由此，aligned profiles并未形成跨representation一致的performance effect：Learning-Congruent Alignment仅引起有限变化，而Learning-Challenging Alignment在Prompt中产生了最明显的performance decline，却没有在CPB中产生相应下降。这表明相同的challenging profile cues如何进入最终assessment performance，取决于其与基础learner representation的结合方式。
 
@@ -2203,7 +2203,7 @@ Figure 4.RQ3-3比较两种Prompt-ADHD conditions和三种CPB constraint conditio
 
 在aligned A组中，**A1 — Learning-Congruent Alignment**使两个Prompt conditions均增加约6.3词，CPB三个conditions平均增加3.1词；**A2 — Learning-Challenging Alignment**则使Prompt Moderate和High分别减少44.1和50.6词，而CPB平均仍增加2.0词，形成明显的representation-specific divergence。在conflicting B组中，High Language的B1仅使回答小幅缩短；Low Language的**B2 — Low Language / Learning-Congruent BF**则使Prompt Moderate和High分别减少41.8和49.9词，而CPB三个conditions平均仅减少约4.7词。跨profile比较显示，无论Big-Five composite是Learning-Challenging还是Learning-Congruent，A2与B2两个Low Language profiles均使Prompt回答缩短约46–47词；A1与B1两个High Language profiles则只产生有限变化。因此，Prompt回答长度主要响应显式Language Ability cue，而CPB回答受Explicit LTM及memory-restricted answering procedure约束，对相同cue的长度变化明显收窄。
 
-将Figure 4.RQ3-3与得分结果联合观察，Prompt A2和B2的明显缩短同时伴随Mean Checklist Score下降，但回答长度并不能单独解释全部performance change：Prompt A1在回答变长后得分基本不变，而CPB B2在回答缩短的同时得分反而提高。因此，Mean Answer Words在此仅用于说明新增profiles如何改变response form，不被解释为knowledge gain、learning effectiveness或profile fidelity。完整representation-level absolute values与deltas见Appendix Table A.4。
+将Figure 4.RQ3-3与得分结果联合观察，Prompt A2和B2的明显缩短同时伴随Mean Checklist Score下降，但回答长度并不能单独解释全部performance change：Prompt A1在回答变长后得分基本不变，而CPB B2在回答缩短的同时得分反而提高。因此，Mean Answer Words在此仅用于说明新增profiles如何改变response form，不被解释为knowledge gain、learning effectiveness或profile fidelity。完整representation-level absolute values与deltas见Appendix Table A.7。
 
 **Table 4.RQ3-1. Profile-specific Lesson/Question OCR and Complete Equality Rate under distracted materials**
 
@@ -2222,7 +2222,7 @@ Table 4.RQ3-1以Lesson OCR/ER作为主要performance-structure evidence。CPB在
 
 Question-level results进一步揭示了lesson aggregation内部的差异。Prompt在四种profiles下仍有41–48/49道题满足non-increasing ordering，Question OCR为83.67%–97.96%，表面上比CPB的71.43%–83.67%更稳定；但Prompt同时有28–43/49道题在Moderate与High下完全同分，Question ER高达57.14%–87.76%。因此，其较高Question OCR在很大程度上表示两个Prompt conditions在单题上没有产生可辨识的performance difference，而不代表更强的persona-intensity differentiation。CPB的Question OCR相对较低，说明High constraint在个别题目上并不总是稳定低于Medium或Low；但其Question ER仅为12.24%–22.45%，且这些item-level stochastic reversals在按教材聚合后均转化为100% Lesson OCR和0 Lesson ER。
 
-换言之，Prompt在单题层面具有更高的表面ordering coverage，却主要由大量完全同分构成，并且这种pattern未稳定转化为跨教材的Moderate–High separation。CPB在微观题目层面存在更多局部波动，但在宏观lesson level保持了跨四种profiles一致且具有实际分离的constraint gradient。Appendix Table A.5进一步量化了对应的实际分差：Prompt Moderate–High separation在四种profiles下仅为0.027–0.333分；CPB所有相邻等级分差均保持为正，介于1.551–2.150分，Low–High separation则保持在3.578–3.789分。因此，CPB的100% Lesson OCR和0 Lesson ER对应了幅度明确的graded separation，而Prompt ordering仍主要表现为有限的performance differentiation。
+换言之，Prompt在单题层面具有更高的表面ordering coverage，却主要由大量完全同分构成，并且这种pattern未稳定转化为跨教材的Moderate–High separation。CPB在微观题目层面存在更多局部波动，但在宏观lesson level保持了跨四种profiles一致且具有实际分离的constraint gradient。Appendix Table A.8进一步量化了对应的实际分差：Prompt Moderate–High separation在四种profiles下仅为0.027–0.333分；CPB所有相邻等级分差均保持为正，介于1.551–2.150分，Low–High separation则保持在3.578–3.789分。因此，CPB的100% Lesson OCR和0 Lesson ER对应了幅度明确的graded separation，而Prompt ordering仍主要表现为有限的performance differentiation。
 
 To sum up，A1–B2 profile additions改变了两种representations的assessment behaviour，但影响方式不同。Prompt的得分总体下降，尤其集中于A2和B2两个Low Language profiles，并伴随更高的run-to-run variability及明显缩短的回答。其原有limited differentiation仍然存在，且Moderate–High ordering随profile变化并继续包含大量question-level ties。CPB的总体得分则多为接近或高于matched baseline，response-length变化相对有限。尽管单题层面仍有局部reversals，Low、Medium和High在四种profiles下均保持100% Lesson OCR、0 Lesson ER及幅度明确的score separation。因此，SQ1的结果表明，新增Language Ability与Big-Five dimensions能够显著改变具体outcomes和response form，但没有消除CPB在Study 2中形成的graded within-representation performance structure。相比之下，Prompt branch仍主要表现为较弱且更受profile组合影响的performance differentiation。
 
@@ -2240,9 +2240,9 @@ SQ2沿用Study 2的两个process-sensitive components。Controlled-distraction c
 
 Source: `/Users/willow/Documents/Code/[Msc] ADHD Simulation/UCL_Master_s_Thesis_Qingqing/Figures/Chapter4/Study3_v3_Figure_5_SQ2_raw_distraction_costs_bars_only.png`
 
-Figure 4.RQ3-4显示，八个Prompt condition × profile cells的Raw distraction costs介于−0.299至0.231分。这里的正值表示distracted得分低于clean，而负值则表示加入干扰后得分反而提高。具体而言，A2 Moderate、A2 High和B1 Moderate的Raw costs分别为−0.027、−0.299和−0.177分，即这三组Prompt-ADHD learners在distracted materials下的平均得分略高于clean materials；其余组合的得分下降也仅为0.041–0.231分。所有95% confidence intervals均跨越0，说明无论是轻微下降还是反向提高，现有数据都不能将这些变化与0清晰区分。Appendix Table A.6进一步显示，每个cell仅有2–3篇教材呈现正向cost。因此，在加入Language Ability与Big-Five dimensions后，Prompt-ADHD不仅没有表现出稳定的distraction-associated performance loss，部分profile组合还出现了“有干扰反而得分更高”的反向结果，且整体方向在不同教材间不一致。
+Figure 4.RQ3-4显示，八个Prompt condition × profile cells的Raw distraction costs介于−0.299至0.231分。这里的正值表示distracted得分低于clean，而负值则表示加入干扰后得分反而提高。具体而言，A2 Moderate、A2 High和B1 Moderate的Raw costs分别为−0.027、−0.299和−0.177分，即这三组Prompt-ADHD learners在distracted materials下的平均得分略高于clean materials；其余组合的得分下降也仅为0.041–0.231分。所有95% confidence intervals均跨越0，说明无论是轻微下降还是反向提高，现有数据都不能将这些变化与0清晰区分。Appendix Table A.9进一步显示，每个cell仅有2–3篇教材呈现正向cost。因此，在加入Language Ability与Big-Five dimensions后，Prompt-ADHD不仅没有表现出稳定的distraction-associated performance loss，部分profile组合还出现了“有干扰反而得分更高”的反向结果，且整体方向在不同教材间不一致。
 
-CPB呈现了明显不同的pattern。四种profiles下，Low的Raw costs为0.912–1.347分，Medium为2.129–2.531分，High为2.810–3.286分，意味着全部12个CPB condition × profile组合在加入干扰后都出现了明确的得分下降。这些95% confidence intervals均完全高于0，且每个组合在全7篇教材中均呈现正向cost，说明该下降既能与0清晰区分，也不是由少数教材驱动。更重要的是，A1–B2的所有profiles都保持Low < Medium < High的distraction-cost梯度：constraint severity越高，distracted materials造成的performance loss越大。因此，额外profile dimensions虽然改变了具体effect magnitude，却没有消除CPB在Study 2中观察到的controlled-distraction sensitivity；这与Prompt branch中接近0、方向不稳定且部分反转的结果形成了清晰对照。完整估计值、confidence intervals及lesson coverage见Appendix Table A.6。
+CPB呈现了明显不同的pattern。四种profiles下，Low的Raw costs为0.912–1.347分，Medium为2.129–2.531分，High为2.810–3.286分，意味着全部12个CPB condition × profile组合在加入干扰后都出现了明确的得分下降。这些95% confidence intervals均完全高于0，且每个组合在全7篇教材中均呈现正向cost，说明该下降既能与0清晰区分，也不是由少数教材驱动。更重要的是，A1–B2的所有profiles都保持Low < Medium < High的distraction-cost梯度：constraint severity越高，distracted materials造成的performance loss越大。因此，额外profile dimensions虽然改变了具体effect magnitude，却没有消除CPB在Study 2中观察到的controlled-distraction sensitivity；这与Prompt branch中接近0、方向不稳定且部分反转的结果形成了清晰对照。完整估计值、confidence intervals及lesson coverage见Appendix Table A.9。
 
 **Processing-demand component**
 
@@ -2254,11 +2254,11 @@ Source: `/Users/willow/Documents/Code/[Msc] ADHD Simulation/UCL_Master_s_Thesis_
 
 Figure 4.RQ3-5显示，Prompt conditions在A1–B2下仍主要集中于较高得分区间，拟合线近似水平或向上，没有呈现PDB越高、performance越低的系统性关系。CPB Low、Medium和High则在四种profiles下均呈负向拟合线，表明higher source-round PDB仍与lower question performance相关。该representation-level对照在所有A1–B2 profiles中均可辨识，但不同profile下的负向幅度有所变化。
 
-Appendix Table A.7量化了Figure 4.RQ3-5中的主要clean-material relationships。Prompt的八个slopes介于−0.052至0.627分/100 bits，没有任何condition呈现95% CI完全低于0的negative slope；相应Spearman \(\rho\)也除A1 Moderate外均为正。因此，新增profiles没有使Prompt learners形成与higher processing demand相关的系统性performance decline，A2 Moderate和B2 High反而呈现明确的正向slope。
+Appendix Table A.10量化了Figure 4.RQ3-5中的主要clean-material relationships。Prompt的八个slopes介于−0.052至0.627分/100 bits，没有任何condition呈现95% CI完全低于0的negative slope；相应Spearman \(\rho\)也除A1 Moderate外均为正。因此，新增profiles没有使Prompt learners形成与higher processing demand相关的系统性performance decline，A2 Moderate和B2 High反而呈现明确的正向slope。
 
 CPB的12个slopes全部为负，介于−2.713至−1.103分/100 bits，其中9个95% CIs完全低于0；A2 Low、A2 High和B2 High的intervals跨越0，但其point estimates及Spearman \(\rho\)仍保持负向。四种profiles下的全部CPB \(\rho\)均为负，范围为−0.484至−0.205，与linear slopes的总体方向一致。A1与B1的负向关系整体强于A2与B2，说明新增profile dimensions能够改变processing-demand effect magnitude，但没有反转CPB的representation-wide negative association。
 
-在Appendix Figure A.4中，Distracted-material profiles提供了相同方向的支持性检查：Prompt的八个slopes均为正，仍未呈现PDB越高、performance越低的系统性关系；CPB的12个condition × profile slopes则全部保持负向。与对应的clean-material estimates相比，其中11/12个CPB slopes的绝对值减小，只有A2 Medium的负向slope略微增强，说明加入外部干扰后该relationship的幅度通常减弱，但方向没有反转。
+在Appendix Figure A.11中，Distracted-material profiles提供了相同方向的支持性检查：Prompt的八个slopes均为正，仍未呈现PDB越高、performance越低的系统性关系；CPB的12个condition × profile slopes则全部保持负向。与对应的clean-material estimates相比，其中11/12个CPB slopes的绝对值减小，只有A2 Medium的负向slope略微增强，说明加入外部干扰后该relationship的幅度通常减弱，但方向没有反转。
 
 To sum up，SQ2在两类process-sensitive evidence上呈现一致的描述性结果。A1–B2 Prompt learners既未表现出明确且跨教材一致的Raw distraction cost，也未形成negative PDB–performance relationship；CPB learners则在全部profiles和constraint levels下保持正向且跨7篇教材一致的distraction cost，并在clean materials下普遍呈现PDB越高、performance越低的关系。这些结果表明，加入response-stage attribute prompts后，Study 2中观察到的CPB constraint-related aggregate patterns仍然可见；它们不验证完整multidimensional fidelity，也不证明Big-Five attributes本身得到忠实表达。
 
@@ -2331,7 +2331,7 @@ RQ3进一步表明，Language Ability与Big-Five additions能够改变具体asse
 
 ![Complete blinded LLM Judge prompt](Figures/Appendix/export/appendix_llm_judge_prompt_card.png)
 
-**Appendix Figure A.1. Complete blinded LLM Judge prompt for criterion-level short-answer evaluation.** The prompt defines answer-boundary handling, the ordered classification of each atomic criterion as `Contradicted`, `Correct`, or `Absent`, exact evidence-span extraction, and the required structured JSON output. It instructs the Judge to evaluate semantic content independently of response style and to return criterion-level labels without generating a numerical score.
+**Appendix Figure A.3. Complete blinded LLM Judge prompt for criterion-level short-answer evaluation.** The prompt defines answer-boundary handling, the ordered classification of each atomic criterion as `Contradicted`, `Correct`, or `Absent`, exact evidence-span extraction, and the required structured JSON output. It instructs the Judge to evaluate semantic content independently of response style and to return criterion-level labels without generating a numerical score.
 
 Source: `/Users/willow/Documents/Code/[Msc] ADHD Simulation/UCL_Master_s_Thesis_Qingqing/Figures/Appendix/export/appendix_llm_judge_prompt_card.png`
 
@@ -2340,19 +2340,19 @@ Source: `/Users/willow/Documents/Code/[Msc] ADHD Simulation/UCL_Master_s_Thesis_
 
 ![Complete Prompt-ADHD student system-prompt example](Figures/Appendix/export/appendix_prompt_adhd_student_prompt_example.png)
 
-**Appendix Figure A.2. Complete Prompt-ADHD student system-prompt example.** The example shows the explicit ADHD-related `[COGNITIVE_PROMPT]`, the additional `[LANGUAGE_ABILITY]` and `[PERSONALITY_DESCRIPTION]` components used in Study 3, and the shared `[CORE_STUDENT_INSTRUCTION]`. In this representation, these descriptive instructions jointly condition answer generation while the accumulated classroom experience remains available through the conversation context.
+**Appendix Figure A.4. Complete Prompt-ADHD student system-prompt example.** The example shows the explicit ADHD-related `[COGNITIVE_PROMPT]`, the additional `[LANGUAGE_ABILITY]` and `[PERSONALITY_DESCRIPTION]` components used in Study 3, and the shared `[CORE_STUDENT_INSTRUCTION]`. In this representation, these descriptive instructions jointly condition answer generation while the accumulated classroom experience remains available through the conversation context.
 
 Source: `/Users/willow/Documents/Code/[Msc] ADHD Simulation/UCL_Master_s_Thesis_Qingqing/Figures/Appendix/export/appendix_prompt_adhd_student_prompt_example.png`
 
 ![Complete CPB student system-prompt example](Figures/Appendix/export/appendix_cpb_student_prompt_example.png)
 
-**Appendix Figure A.3. Complete CPB student system-prompt example.** The example shows the `[MEMORY_RESTRICTION]`, the additional `[LANGUAGE_ABILITY]` and `[PERSONALITY_DESCRIPTION]` components used in Study 3, and the shared `[CORE_STUDENT_INSTRUCTION]`. Unlike Prompt-ADHD, the CPB system prompt contains no explicit ADHD identity description and requires factual content in the answer to remain grounded in the process-derived learned memory.
+**Appendix Figure A.5. Complete CPB student system-prompt example.** The example shows the `[MEMORY_RESTRICTION]`, the additional `[LANGUAGE_ABILITY]` and `[PERSONALITY_DESCRIPTION]` components used in Study 3, and the shared `[CORE_STUDENT_INSTRUCTION]`. Unlike Prompt-ADHD, the CPB system prompt contains no explicit ADHD identity description and requires factual content in the answer to remain grounded in the process-derived learned memory.
 
 Source: `/Users/willow/Documents/Code/[Msc] ADHD Simulation/UCL_Master_s_Thesis_Qingqing/Figures/Appendix/export/appendix_cpb_student_prompt_example.png`
 
 ### Appendix A.5 — Study 2 Controlled-Distraction Details
 
-**Appendix Table A.3. Clean-to-distracted performance changes and representation-relative distraction costs**
+**Appendix Table A.6. Clean-to-distracted performance changes and representation-relative distraction costs**
 
 | Learner condition | Clean mean | Distracted mean | Raw distraction cost | Additional cost vs reference (95% CI) | Expected-direction lesson coverage |
 |---|---:|---:|---:|---:|---:|
@@ -2366,7 +2366,7 @@ Source: `/Users/willow/Documents/Code/[Msc] ADHD Simulation/UCL_Master_s_Thesis_
 
 ### Appendix A.6 — Study 3 SQ1 Baseline-Relative Outcome Details
 
-**Appendix Table A.4. Representation-level baseline-relative outcome changes by profile under distracted materials**
+**Appendix Table A.7. Representation-level baseline-relative outcome changes by profile under distracted materials**
 
 | Representation | Profile | Study 2 score | Study 3 score | Δ Score | Study 2 SD | Study 3 SD | Δ SD | Study 2 words | Study 3 words | Δ Words |
 |:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -2381,7 +2381,7 @@ Source: `/Users/willow/Documents/Code/[Msc] ADHD Simulation/UCL_Master_s_Thesis_
 
 The table aggregates learner conditions within each representation for every A1–B2 profile. \(\Delta\text{ Score}\), \(\Delta SD\) and \(\Delta\text{ Words}\) are calculated as Study 3 minus the matched Study 2 distracted-material baseline. Positive \(\Delta SD\) indicates greater run-to-run score variability, whereas negative values indicate more concentrated repeated-run outcomes. Word-count changes describe response form only and are not interpreted as knowledge gain, learning effectiveness or profile fidelity.
 
-**Appendix Table A.5. Profile-specific within-representation score separation under distracted materials**
+**Appendix Table A.8. Profile-specific within-representation score separation under distracted materials**
 
 | Representation | Profile | Contrast | Study 2 difference | Study 3 difference | Difference change |
 |:---|:---|:---|---:|---:|---:|
@@ -2404,7 +2404,7 @@ The table aggregates learner conditions within each representation for every A1�
 
 ### Appendix A.7 — Study 3 SQ2 Supporting Results
 
-**Appendix Table A.6. Raw distraction costs and cross-lesson direction under A1–B2 profiles**
+**Appendix Table A.9. Raw distraction costs and cross-lesson direction under A1–B2 profiles**
 
 | Representation | Profile | Learner | Raw distraction cost (95% CI) | Positive-cost lessons |
 |:---|:---|:---|---:|---:|
@@ -2431,7 +2431,7 @@ The table aggregates learner conditions within each representation for every A1�
 
 Raw distraction cost is calculated as the clean-material Mean Checklist Score minus the matched distracted-material score. Positive-cost lessons report the number of L01–L07 teaching materials for which this difference is greater than zero.
 
-**Appendix Table A.7. Primary clean-material PDB–performance estimates under A1–B2 profiles**
+**Appendix Table A.10. Primary clean-material PDB–performance estimates under A1–B2 profiles**
 
 | Representation | Profile | Learner | Slope per 100 bits | Slope 95% CI | Spearman \(\rho\) |
 |:---|:---|:---|---:|---:|---:|
@@ -2458,7 +2458,7 @@ Raw distraction cost is calculated as the clean-material Mean Checklist Score mi
 
 ![Study 3 SQ2 distracted-material PDB performance profiles](Figures/Chapter4/Study3_v3_Figure_7_SQ2_distracted_pdb_profiles.png)
 
-**Appendix Figure A.4. Distracted-material PDB–performance profiles across multidimensional Study 3 learners.** Points report five-run question-level Mean Checklist Scores for the 42 Independent Questions; lines show fitted linear relationships between source-round Processing Demand Bits and performance. Panels A–D present Prompt Moderate and High under A1–B2; Panels E–H present CPB Low, Medium and High. This figure provides a descriptive direction check under the joint presence of distractors and processing constraints.
+**Appendix Figure A.11. Distracted-material PDB–performance profiles across multidimensional Study 3 learners.** Points report five-run question-level Mean Checklist Scores for the 42 Independent Questions; lines show fitted linear relationships between source-round Processing Demand Bits and performance. Panels A–D present Prompt Moderate and High under A1–B2; Panels E–H present CPB Low, Medium and High. This figure provides a descriptive direction check under the joint presence of distractors and processing constraints.
 
 Source: `/Users/willow/Documents/Code/[Msc] ADHD Simulation/UCL_Master_s_Thesis_Qingqing/Figures/Chapter4/Study3_v3_Figure_7_SQ2_distracted_pdb_profiles.png`
 
