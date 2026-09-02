@@ -40,6 +40,7 @@ A Project Report Presented in Partial Fulfilment of the Degree \\ \textit{MSc Ar
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
+\hypersetup{pageanchor=false}
 %Adjust logo positions here
 % \AddToShipoutPicture*{\parbox[t][\paperheight][t]{\paperwidth}{%
 %           \includegraphics[width=\paperwidth]{\BackgroundPicturea{Logos/ucl_long%_logo.png}{3in}{3in}}
@@ -53,7 +54,7 @@ A Project Report Presented in Partial Fulfilment of the Degree \\ \textit{MSc Ar
 }
 \AddToShipoutPicture*{%
       \parbox[t][\paperheight][t]{\paperwidth}{%
-          \includegraphics[width=1.2\paperwidth]{Logos/UCL page footer.png}
+          \includegraphics[width=\paperwidth]{Logos/UCL page footer.png}
       }}
       
 
@@ -100,15 +101,16 @@ I, Qingqing Liu, declare that the thesis has been composed by myself and that th
 % \end{figure}
 \vspace{1.2cm}
 \noindent\begin{tabular*}{\textwidth}
-{@{}l@{\hspace{0.2cm}}p{0.38\textwidth}
+{@{}l@{\hspace{0.2cm}}p{0.36\textwidth}
 @{\hspace{0.8cm}}
-l@{\hspace{0.2cm}}p{0.38\textwidth}@{}}
+l@{\hspace{0.2cm}}p{0.36\textwidth}@{}}
 \textit{Signature:} & \underline{\makebox[\linewidth]{}} &
 \textit{Date:} & \underline{\makebox[\linewidth]{September 1, 2026}}
 \end{tabular*}
 
 
 
+\hypersetup{pageanchor=true}
 \tableofcontents
 
 \thispagestyle{plain}
@@ -141,10 +143,6 @@ l@{\hspace{0.2cm}}p{0.38\textwidth}@{}}
 \input{4 Results and Analysis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{5 Discussion}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{6 Conclusion}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{7 Future Work}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\bibname}{References}
 \bibliographystyle{ieeetr-doi-url}

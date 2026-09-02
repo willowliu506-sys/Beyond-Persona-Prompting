@@ -41,7 +41,7 @@ Low--High extreme flips & 0 \\
 \renewcommand{\arraystretch}{1.15}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.09\textwidth}>{\raggedright\arraybackslash}p{0.07\textwidth}>{\raggedright\arraybackslash}p{0.08\textwidth}>{\raggedright\arraybackslash}p{0.08\textwidth}>{\raggedright\arraybackslash}p{0.20\textwidth}>{\raggedright\arraybackslash}p{0.39\textwidth}@{}}
 \toprule
-\textbf{Question} & \textbf{Criterion} & \textbf{Human 1} & \textbf{Human 2} & \textbf{Disagreement category} & \textbf{Audit summary} \\
+\textbf{Question} & \makecell{\textbf{Crite-}\\\textbf{rion}} & \textbf{Human 1} & \textbf{Human 2} & \textbf{Disagreement category} & \textbf{Audit summary} \\
 \midrule
 \texttt{L01\_QC03} & \texttt{C1} & Absent & Correct & Required-component completeness & The answer described the financial system and three participant groups but did not explicitly include businesses. \\
 \texttt{L01\_QC08} & \texttt{C2} & Correct & Absent & Conceptual equivalence & The disagreement concerned whether asset allocation across classes sufficiently expresses diversification. \\
@@ -113,14 +113,14 @@ CPB High & 6.347 & 3.014 & 3.333 & 3.293 $[2.272,4.313]$ & 7/7 \\
 \section{Study 3 Baseline-Relative Outcome Details}
 \label{appendix:study3-outcome-details}
 
-\begin{sidewaystable}[p]
+\begin{table}[H]
 \centering
 \caption{Representation-level baseline-relative outcome changes by profile under distracted materials.}
 \label{tab:appendix-study3-outcome-changes}
 \small
 \setlength{\tabcolsep}{5pt}
 \renewcommand{\arraystretch}{1.12}
-\resizebox{0.94\textheight}{!}{%
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{llrrrrrrrrr}
 \toprule
 \textbf{Representation} & \textbf{Profile} & \textbf{Study 2 score} & \textbf{Study 3 score} & $\boldsymbol{\Delta}$ \textbf{Score} & \textbf{Study 2 SD} & \textbf{Study 3 SD} & $\boldsymbol{\Delta}$ \textbf{SD} & \textbf{Study 2 words} & \textbf{Study 3 words} & $\boldsymbol{\Delta}$ \textbf{Words} \\
@@ -136,11 +136,11 @@ CPB & B2 & 4.737 & 5.295 & 0.558 & 2.069 & 2.368 & 0.298 & 42.07 & 37.36 & $-4.7
 \bottomrule
 \end{tabular}
 }
-\end{sidewaystable}
+\end{table}
 
 \begin{table}[H]
 \centering
-\caption{Profile-specific within-representation score separation under distracted materials.}
+\caption[Profile-specific score separation in Study 3.]{Profile-specific within-representation score separation under distracted materials.}
 \label{tab:appendix-study3-score-separation}
 \scriptsize
 \setlength{\tabcolsep}{4pt}
@@ -245,6 +245,6 @@ CPB & B2 & High & $-1.163$ & $[-2.555,0.228]$ & $-0.302$ \\
 \begin{figure}[p]
     \centering
     \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter4/Study3_v3_Figure_7_SQ2_distracted_pdb_profiles.png}
-    \caption{Distracted-material PDB--performance profiles across multidimensional Study 3 learners.}
+    \caption[Distracted-material PDB profiles in Study 3.]{Distracted-material PDB--performance profiles across multidimensional Study 3 learners.}
     \label{fig:appendix-study3-distracted-pdb-profiles}
 \end{figure}

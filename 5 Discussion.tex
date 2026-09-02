@@ -1,49 +1,11 @@
-\chapter{Discussion} \label{Chap5}
+\chapter{Conclusions and Future Work} \label{Chap5}
 
-\section{Answering the Main Research Question}
+This study addressed a central learner-representation question: when learner characteristics are expected to influence information processing, knowledge formation, and downstream behaviour through the learning process, should they be expressed only as persona-level descriptions that directly condition model output, or can they instead be represented as explicit processing constraints acting at the corresponding functional process layer? Using ADHD-related Attention and Working-Memory characteristics as a controlled case, the thesis compared persona prompting with a Cognitive-Process-Based (CPB) representation and reached a qualified affirmative answer to the Main Research Question.
 
-\mbox{}\par
+The results show that CPB translated predefined Attention and Working-Memory constraints into attributable information-state and knowledge-state changes, which subsequently produced task-sensitive behavioural patterns in the expected directions of controlled distraction and instructional processing demand. Persona prompting could specify different learner profiles explicitly, but those persona-level differences did not reliably produce the same process-sensitive effects. After Language Ability and Big-Five response-stage prompts were added, individual CPB assessment outcomes changed, while the established graded constraint structure and the distraction- and processing-demand-related aggregate patterns remained observable. Response-level variation and preservation of process-related behavioural structure are therefore compatible: different functional dimensions can influence different parts of a simulated learner without being jointly prescribed by a single monolithic persona prompt.
 
-\section{Interpreting the Cognitive-Process Results}
+The first contribution is consequently a form of \textit{functional learner representation}. CPB separates selected process-relevant learner characteristics from descriptive instructions about how a student should appear. These characteristics instead change learner state through learning-process constraints, and the resulting state influences downstream behaviour. The second contribution is a validation framework aligned with that representation. Mechanism execution, information-state transitions, assessment outcomes, and process-sensitive behavioural patterns support different levels of claim. Traceability and an explicit knowledge state are not ends in themselves; they are methodological advantages of a process-based representation that make the relationship between behaviour and its formation inspectable, rather than requiring that process to be inferred backwards from final answers alone.
 
-\mbox{}\par
+The conclusions remain subject to clear scope limitations. ADHD cognition is substantially more complex than the Attention and Working-Memory mechanisms operationalised here. Both are bounded functional abstractions constructed for experimental control and are not equivalent to real human cognitive processes. PDB is a surprisal-based proxy for instructional processing demand rather than a direct measure of human cognitive load. The evaluation is limited to English finance materials, multi-round teaching, and short-answer assessment, and no real ADHD learner data were available to establish external behavioural validity. Future work should therefore evaluate distraction sensitivity, processing-demand sensitivity, and micro-to-macro behavioural patterns against real ADHD and NT learner data; progressively introduce more realistic probabilistic attention allocation, partial retention, interference, and dynamic processing mechanisms; and test generalisation across subject domains, task formats, and base models.
 
-\section{What Persona Prompting Can and Cannot Represent}
-
-\mbox{}\par
-
-\section{Factorised Student Representation}
-
-\mbox{}\par
-
-\section{Implications for LLM-Based Learner Simulation}
-
-\mbox{}\par
-
-\subsection{From Persona Description to Functional Representation}
-
-\mbox{}\par
-
-\subsection{Learner Models May Need to Be Factorised Rather Than Monolithic}
-
-\mbox{}\par
-
-\subsection{Evaluation Should Target Learning Processes and Outcomes, Not Only Persona Plausibility}
-
-\mbox{}\par
-
-\subsection{Traceability May Be Important for Scientific Uses of Synthetic Learners}
-
-\mbox{}\par
-
-\subsection{Implications for Educational Use}
-
-\mbox{}\par
-
-\section{Strengths and Limitations}
-
-\mbox{}\par
-
-\section{Ethical Interpretation}
-
-\mbox{}\par
+The thesis does not argue that CPB should replace persona prompting universally. Its broader conclusion is that learner representation should match the functional level at which a characteristic is expected to operate. Persona prompting may be sufficient when a characteristic primarily affects language expression or interaction style. When it is expected to change knowledge acquisition and subsequent task behaviour through the learning process, representing it at the corresponding processing layer and allowing behavioural differences to emerge from the resulting learner state offers a more theoretically aligned alternative to merely describing what the student is like. This provides a framework for future modular and functionally grounded LLM-based simulated learners that can be tested and refined further.
