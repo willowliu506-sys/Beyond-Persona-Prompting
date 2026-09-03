@@ -1299,19 +1299,7 @@ CPB Low、Medium和High因此是由Attention与WM参数联合构成的registered
 70\ \text{simulated-learner runs}.
 \]
 
-由于每次 run 覆盖七篇教材和全部 49 道问题，Study 2 共形成：
-
-\[
-70\times7=490
-\]
-
-个 lesson-level learning sessions，以及：
-
-\[
-70\times49=3,430
-\]
-
-份 assessment answers。All realised Attention and WM processing records, Available Inputs, Encoding outputs, and Explicit LTM states were retained for downstream matched analyses in Study 3. Prompt conditions 则保存完整的 round-wise classroom history 和各问题的独立 answer record。
+由于每次 run 覆盖七篇教材和全部 49 道问题，Study 2 共形成 \(70\times7=490\) 个 lesson-level learning sessions，以及 \(70\times49=3{,}430\) 份 assessment answers。All realised Attention and WM processing records, Available Inputs, Encoding outputs, and Explicit LTM states were retained for downstream matched analyses in Study 3. Prompt conditions 则保存完整的 round-wise classroom history 和各问题的独立 answer record。
 
 所有 3,430 份 answers 最终使用同一个冻结的 `qwen3.7-max` criterion-level LLM Judge 进行评分。
 
@@ -2347,7 +2335,7 @@ The Study 3 findings further suggest that persona- and process-based approaches 
 
 This thesis investigated how process-relevant learner characteristics should be represented in LLM-based student simulation. Using ADHD-related Attention and Working-Memory characteristics as controlled cases, CPB translated prespecified processing constraints into traceable learner-state changes and produced task-specific behavioural patterns that were systematically related to controlled distraction and instructional processing demand. Persona-level variation did not produce the same consistent process-sensitive patterns, while CPB’s main constraint structure remained observable after additional Language Ability and Big-Five attributes were introduced at the response stage.
 
-The central contribution is a **functionally grounded learner-representation approach**. Rather than expressing all learner characteristics through a single persona description, CPB separates process-relevant constraints, learner state, and response-stage attributes according to their functional roles. The findings support a conditional principle: **learner characteristics should be represented at the functional level at which they are expected to operate**. Persona prompting may be sufficient for characteristics mainly affecting expression or interaction style, whereas characteristics expected to shape learning and knowledge acquisition may require process- and state-level representation.
+The central contribution is a functionally grounded learner-representation approach. Rather than expressing all learner characteristics through a single persona description, CPB separates process-relevant constraints, learner state, and response-stage attributes according to their functional roles. The findings support a conditional principle: learner characteristics should be represented at the functional level at which they are expected to operate. Persona prompting may be sufficient for characteristics mainly affecting expression or interaction style, whereas characteristics expected to shape learning and knowledge acquisition may require process- and state-level representation.
 
 These conclusions remain limited by the study’s simplified Attention and Working-Memory operationalisations, the use of PDB as a surprisal-based proxy for processing demand, and the restricted experimental setting of English finance materials, short-answer assessment, and simulated learners. Future work should validate the observed patterns against ADHD and neurotypical learner data, develop richer processing mechanisms, and test the framework across tasks, domains, and models.
 
