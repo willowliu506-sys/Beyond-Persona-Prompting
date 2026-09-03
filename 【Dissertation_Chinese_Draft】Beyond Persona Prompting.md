@@ -2521,4 +2521,9 @@ Raw distraction cost is calculated as the clean-material Mean Checklist Score mi
 
 Source: `/Users/willow/Documents/Code/[Msc] ADHD Simulation/UCL_Master_s_Thesis_Qingqing/Figures/Chapter4/Study3_v3_Figure_7_SQ2_distracted_pdb_profiles.png`
 
+## Appendix B — Source Code
+
+The project source code and dissertation materials are available at:
+https://anonymous.4open.science/r/cpb-learner-simulation-E6F2
+
 ## References
