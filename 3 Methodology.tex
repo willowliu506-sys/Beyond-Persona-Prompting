@@ -1175,13 +1175,15 @@ S_{q,c,m,j}.
 
 $\bar S_{q,c,m}$ represents the mean assessment performance on question $q$ under a given learner and material condition. All higher-level summaries are based on this question-level mean, including the overall mean across all 49 questions, lesson-level means across the seven instructional materials, the mean across the 42 Independent Questions, and the mean across the seven cross-round Integrative Questions. Study 2 therefore uses the consistent aggregation order
 
-\[\small
+{\small
+\[
 \text{Run-level Score}
 \rightarrow
 \text{Question-level Mean}
 \rightarrow
 \text{Lesson / Question-Type / Overall Summary}.
 \]
+}
 
 Stability across the five independent runs of the same question is expressed using the question-level run-to-run SD:
 
@@ -1861,6 +1863,8 @@ Every formal student answer is scored by the frozen \texttt{qwen3.7-max} criteri
 
 GPT-2, BERTScore, and the Qwen Judge provide no information to the simulated student, and their outputs are not fed back into student generation. Likewise, DeepSeek cannot access reference answers, checklist criteria, or Judge outputs when generating student answers. The experimental pipeline therefore maintains functional separation among student generation, processing-demand annotation, semantic analysis, and outcome evaluation.
 
+\begingroup
+\setstretch{1.40}
 \subsection{Experiment Reproducibility}
 \label{subsec:experiment-reproducibility}
 
@@ -1882,4 +1886,5 @@ This study used only simulated learners and did not involve real students with A
 The CPB learners were not provided with an ADHD label, diagnostic description, or instruction to behave as an ADHD student. ADHD-related differences were instead operationalised through predefined information-processing constraints. This design reduces direct reliance on label-conditioned or stereotype-based role playing when testing the CPB mechanisms. It does not, however, eliminate all possible bias: the underlying LLM may still reflect biases from pretraining, and the selected mechanisms remain study-specific abstractions of a much more heterogeneous condition. Persona-prompted ADHD learners were retained only as a comparison representation and should likewise not be interpreted as clinically representative profiles.
 
 Accordingly, behavioural outcomes in this thesis are used only to evaluate the experimental representation mechanisms under controlled conditions. Lower assessment scores, greater distraction sensitivity, or stronger processing-demand effects are not treated as diagnostic markers or as evidence that a learner is ``more ADHD-like''. The simulations are not intended for diagnosis, learner classification, or direct educational decision-making. Claims are therefore limited to the computational behaviour, traceability, and theory-consistent patterns observed within the frozen experimental setting.
+\endgroup
 \fussy
