@@ -391,14 +391,14 @@ As illustrated in Figures~\ref{fig:cpb-learning-information-flow} and~\ref{fig:c
 
 As reviewed in Section~\ref{sec:adhd-learning-processes}, ADHD-related attentional differences can include increased susceptibility to task-irrelevant distraction, but the effects of distraction vary across learners and task conditions. The present study therefore models \textbf{susceptibility to controlled distraction} as a bounded functional abstraction rather than attempting to reproduce human attentional control as a whole. The implementation follows a simple principle: a distractor event is inserted immediately before a predefined assessment-relevant target sentence; when that distractor triggers the Attention Filter, the target sentence becomes unavailable for subsequent processing. Distraction is thereby represented through its downstream effect on information availability rather than through a persona-level instruction such as ``be easily distracted.''
 
+Figure~\ref{fig:attention-filter-decision-flow} summarises the control flow. For each Teaching Round, the mechanism first checks whether a frozen distractor assignment is present. If present, triggering is determined by the condition-specific Attention probability \(p^A_c\). A triggered distractor makes its predefined target sentence unavailable; otherwise, the instructional content is preserved. All branches produce the post-Attention state \(P_{r,c}\).
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.62\textwidth,trim=720bp 80bp 720bp 80bp,clip,keepaspectratio]{Figures/Chapter3/export/ch03_attention_filter_decision_flow.png}
     \caption{Attention Filter control flow.}
     \label{fig:attention-filter-decision-flow}
 \end{figure}
-
-Figure~\ref{fig:attention-filter-decision-flow} summarises the control flow. For each Teaching Round, the mechanism first checks whether a frozen distractor assignment is present. If present, triggering is determined by the condition-specific Attention probability \(p^A_c\). A triggered distractor makes its predefined target sentence unavailable; otherwise, the instructional content is preserved. All branches produce the post-Attention state \(P_{r,c}\).
 
 The affected instructional information is fixed before student simulation. Each Independent Question is already mapped to its supporting source sentence or sentences; one of these sentences is selected as the Attention target, and a bracketed distractor event is inserted immediately before it in the distracted version of the teaching material. Each assignment records \texttt{linked\_question\_id}, \texttt{distractor\_event}, and \texttt{target\_sentence\_id}. Integrative Questions do not receive additional independent distractor assignments. For example:
 
@@ -1874,6 +1874,7 @@ All statistical analyses were performed on these frozen outputs using fixed anal
 
 \subsection{Ethical Scope and Interpretation}
 \label{subsec:ethical-scope}
+\setstretch{1.30}
 
 This study used only simulated learners and did not involve real students with ADHD or any other neurodivergent condition. The experimental conditions should therefore be interpreted as computational models for controlled hypothesis testing rather than representations of individual learners or clinically valid models of ADHD. The selected Attention- and Working-Memory-related mechanisms were motivated by group-level evidence reviewed in Section~2.4, but neither mechanism is assumed to characterise all individuals with ADHD.
 

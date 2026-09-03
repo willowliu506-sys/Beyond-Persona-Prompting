@@ -636,11 +636,13 @@ Throughout the CPB pipeline, \(r\) indexes the frozen Teaching Round and \(c\) i
 
 As reviewed in Section 2.4, ADHD-related attentional differences can include increased susceptibility to task-irrelevant distraction, but the effects of distraction vary across learners and task conditions. The present study therefore models **susceptibility to controlled distraction** as a bounded functional abstraction rather than attempting to reproduce human attentional control as a whole. The implementation follows a simple principle: a distractor event is inserted immediately before a predefined assessment-relevant target sentence, and when that distractor triggers the Attention Filter, the target sentence becomes unavailable for subsequent processing. In this way, distraction is represented through its downstream effect on information availability rather than through a persona-level instruction such as “be easily distracted.”
 
+Figure 3.X summarises the control flow. For each Teaching Round, the mechanism first checks whether a frozen distractor assignment is present. If present, triggering is determined by the condition-specific Attention probability \(p^A_c\). A triggered distractor makes its predefined target sentence unavailable; otherwise, the instructional content is preserved. All branches produce the post-Attention state \(P_{r,c}\).
+
 ![Attention Filter decision flow](Figures/Chapter3/export/ch03_attention_filter_decision_flow.png)
 
 Source: /Users/willow/Documents/Code/[Msc] ADHD Simulation/UCL_Master_s_Thesis_Qingqing/Figures/Chapter3/export/ch03_attention_filter_decision_flow.png
 
-**Figure 3.X. Attention Filter control flow.** For each Teaching Round, the mechanism first checks whether a frozen distractor assignment is present. If present, triggering is determined by the condition-specific Attention probability \(p^A_c\). A triggered distractor makes its predefined target sentence unavailable; otherwise, the instructional content is preserved. All branches produce the post-Attention state \(P_{r,c}\).
+**Figure 3.X. Attention Filter control flow.**
 
 The affected instructional information is fixed before student simulation. Each Independent Question is already mapped to its supporting source sentence(s); one of these sentences is selected as the Attention target, and a bracketed distractor event is inserted immediately before it in the distracted version of the teaching material. Each assignment records `linked_question_id`, `distractor_event`, and `target_sentence_id`. Integrative Questions do not receive additional independent distractor assignments. For example:
 
@@ -2268,14 +2270,14 @@ SQ2沿用Study 2的两个process-sensitive components。Controlled-distraction c
 
 Figure 4.RQ3-4 shows whether the controlled-distraction patterns established in Study 2 remained observable after the response-stage profiles were added.
 
+Figure 4.RQ3-4显示，八个Prompt condition × profile cells的Raw distraction costs介于−0.299至0.231分。这里的正值表示distracted得分低于clean，而负值则表示加入干扰后得分反而提高。具体而言，A2 Moderate、A2 High和B1 Moderate的Raw costs分别为−0.027、−0.299和−0.177分，即这三组Prompt-ADHD learners在distracted materials下的平均得分略高于clean materials；其余组合的得分下降也仅为0.041–0.231分。所有95% confidence intervals均跨越0，说明无论是轻微下降还是反向提高，现有数据都不能将这些变化与0清晰区分。Appendix Table A.9进一步显示，每个cell仅有2–3篇教材呈现正向cost。因此，在加入Language Ability与Big-Five dimensions后，Prompt-ADHD不仅没有表现出稳定的distraction-associated performance loss，部分profile组合还出现了“有干扰反而得分更高”的反向结果，且整体方向在不同教材间不一致。
+
 ![Study 3 SQ2 Raw distraction costs](Figures/Chapter4/Study3_v3_Figure_5_SQ2_raw_distraction_costs_bars_only.png)
 
 
 **Figure 4.RQ3-4. Raw distraction costs across multidimensional Study 3 learner profiles.** Panel A presents Moderate- and High-Intensity Prompt-ADHD learners; Panel B presents CPB Low, Medium and High. A1–B2 define the four additional attribute profiles. Coloured bars report the overall question-level Raw distraction cost and black intervals show 95% confidence intervals. Positive values indicate lower performance under distracted materials. Panel-specific vertical scales preserve the visibility of the near-zero Prompt estimates.
 
 Source: `/Users/willow/Documents/Code/[Msc] ADHD Simulation/UCL_Master_s_Thesis_Qingqing/Figures/Chapter4/Study3_v3_Figure_5_SQ2_raw_distraction_costs_bars_only.png`
-
-Figure 4.RQ3-4显示，八个Prompt condition × profile cells的Raw distraction costs介于−0.299至0.231分。这里的正值表示distracted得分低于clean，而负值则表示加入干扰后得分反而提高。具体而言，A2 Moderate、A2 High和B1 Moderate的Raw costs分别为−0.027、−0.299和−0.177分，即这三组Prompt-ADHD learners在distracted materials下的平均得分略高于clean materials；其余组合的得分下降也仅为0.041–0.231分。所有95% confidence intervals均跨越0，说明无论是轻微下降还是反向提高，现有数据都不能将这些变化与0清晰区分。Appendix Table A.9进一步显示，每个cell仅有2–3篇教材呈现正向cost。因此，在加入Language Ability与Big-Five dimensions后，Prompt-ADHD不仅没有表现出稳定的distraction-associated performance loss，部分profile组合还出现了“有干扰反而得分更高”的反向结果，且整体方向在不同教材间不一致。
 
 CPB呈现了明显不同的pattern。四种profiles下，Low的Raw costs为0.912–1.347分，Medium为2.129–2.531分，High为2.810–3.286分，意味着全部12个CPB condition × profile组合在加入干扰后都出现了明确的得分下降。这些95% confidence intervals均完全高于0，且每个组合在全7篇教材中均呈现正向cost，说明该下降既能与0清晰区分，也不是由少数教材驱动。更重要的是，A1–B2的所有profiles都保持Low < Medium < High的distraction-cost梯度：constraint severity越高，distracted materials造成的performance loss越大。因此，额外profile dimensions虽然改变了具体effect magnitude，却没有消除CPB在Study 2中观察到的controlled-distraction sensitivity；这与Prompt branch中接近0、方向不稳定且部分反转的结果形成了清晰对照。完整估计值、confidence intervals及lesson coverage见Appendix Table A.9。
 
