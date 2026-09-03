@@ -40,6 +40,38 @@ Finally, I would like to thank UCL. Although my time here has been relatively sh
 
 ## Acronyms
 
+| Abbreviation | Full term |
+|---|---|
+| **AAR** | Attention-Stage Availability Ratio |
+| **ADHD** | Attention-Deficit/Hyperactivity Disorder |
+| **API** | Application Programming Interface |
+| **ATRF** | Attention Target-Removal Fidelity |
+| **BF** | Big Five |
+| **CI** | Confidence Interval |
+| **CPB** | Cognitive-Process-Based |
+| **DR** | Design Requirement |
+| **E2ESR** | End-to-End Semantic Recall |
+| **ER** | Complete Equality Rate |
+| **ESR** | Encoding Semantic Recall |
+| **FIFO** | First-In, First-Out |
+| **FRF** | FIFO Rule Fidelity |
+| **ICC** | Intraclass Correlation Coefficient |
+| **LLM** | Large Language Model |
+| **LTM** | Long-Term Memory |
+| **MAE** | Mean Absolute Error |
+| **NTPR** | Non-Target Preservation Rate |
+| **NT** | Neurotypical; used only in the Prompt-NT reference-condition label |
+| **OCR** | Ordering Consistency Rate |
+| **PDB** | Processing Demand Bits |
+| **RQ** | Research Question |
+| **SD** | Standard Deviation |
+| **SQ** | Subquestion |
+| **SWAR** | Source-Word Availability Ratio |
+| **VR** | Validation Requirement |
+| **WM** | Working Memory |
+| **WMAR** | Working-Memory-Stage Availability Ratio |
+| **WMTA** | Working-Memory Trigger Agreement |
+
 ## Contents
 
 ## 1 Introduction
@@ -247,7 +279,7 @@ Taken together, these gaps suggest that the challenge is not only **how learner 
 教学过程应形成一个与完整教学上下文区分、由前序 processing results 产生，并可在后续 assessment questions 中冻结复用的 learner-specific knowledge state。这样可以区分原始教学信息与学习后实际可用的信息，并使后续回答受到此前形成的 learning state 约束，而不是重新访问完整 source context。
 
 **DR3 — Controllable and Traceable Process-State Transitions.**  
-目标 processing mechanisms 应能够被明确操纵，其输入、输出以及对 downstream information state 的影响应可定位、可归因和可审计。Mechanism-specific attribution 主要建立在各机制直接产生的 state transitions 及其传播记录之上；当多个 mechanisms 在同一 experimental condition 中联合变化时，downstream behavioural differences 应归因于该 registered constraint configuration，而不进一步解释为某一单独 mechanism 的独立因果效应。
+目标 processing mechanisms 应能够被明确操纵，其输入、输出以及对 downstream information state 的影响应可定位、可归因和可审计。Mechanism-specific attribution 主要建立在各机制直接产生的 state transitions 及其传播记录之上；当多个 mechanisms 在同一 experimental condition 中联合变化时，downstream behavioural differences 应归因于该 frozen joint-constraint configuration，而不进一步解释为某一单独 mechanism 的独立因果效应。
 
 **DR4 — Factorised Representation of Heterogeneous Learner Characteristics.**  
 具有不同 functional roles 的 learner characteristics 应能够按照其作用阶段在 architecture 中分层配置和组合，使 process-related constraints、learner knowledge state 与 response-stage attributes 不必全部编码在单一 persona representation 中。该要求不假设这些 dimensions 在统计或心理层面完全独立，也不将 architecture-level factorisation 直接解释为新增 attributes 已得到忠实模拟；其目的在于明确 representation locus 与作用阶段，从而支持 controlled manipulation 与结果解释。
@@ -255,7 +287,7 @@ Taken together, these gaps suggest that the challenge is not only **how learner 
 除 representation 本身外，本研究进一步提出三项 validation requirements，以确保上述 design requirements 能够由与其 claim level 相匹配的证据进行检验。
 
 **VR1 — Progressive and Claim-Matched Validation.**  
-不同层级的 simulation claims 应使用对应层级的证据进行验证。Mechanism-level validation 首先检查 registered processing rules 是否按设计执行，并进一步检验这些 operations 是否产生预期的 state transitions；在此基础上，再评估不同 representations 是否形成 task-specific behavioural differentiation 以及对 controlled distraction 和 instructional processing demand 的 sensitivity；最后检查 response-stage attributes 加入后 assessment outcomes 如何变化，以及此前识别出的 constraint-related aggregate patterns 是否仍然可观察。由此形成从 `mechanism → state → behaviour → attribute extension` 的递进 validation sequence。
+不同层级的 simulation claims 应使用对应层级的证据进行验证。Mechanism-level validation 首先检查 prespecified processing rules 是否按设计执行，并进一步检验这些 operations 是否产生预期的 state transitions；在此基础上，再评估不同 representations 是否形成 task-specific behavioural differentiation 以及对 controlled distraction 和 instructional processing demand 的 sensitivity；最后检查 response-stage attributes 加入后 assessment outcomes 如何变化，以及此前识别出的 constraint-related aggregate patterns 是否仍然可观察。由此形成从 `mechanism → state → behaviour → attribute extension` 的递进 validation sequence。
 
 **VR2 — Matched Representation-Level Comparison.**  
 Process-based representation 应与具有代表性的 persona baseline 在尽可能共享的 experimental conditions 下比较，包括 instructional materials、underlying student model、assessment questions 与 scoring framework。同时，需要明确两种 simulation architectures 中由 representation design 本身造成的必要差异，例如 assessment 阶段的信息访问方式，以避免仅根据跨 representation 的绝对 performance difference 推断 validity。
@@ -265,7 +297,7 @@ Assessment 与 scoring procedure 应建立在冻结、source-grounded 且可审�
 
 这些 requirements 与本文后续实验设计形成直接对应关系：DR1 支撑 process-relevant learner characteristics 在 learning pipeline 中的 functional operationalisation；DR2 与 DR3 分别要求形成独立 learner state 并保留其形成过程的 trace；DR4 支持在保持 cognitive-processing representation 的同时加入其他 response-stage learner attributes。相应地，VR1–VR3 分别规定了 progressive validation、matched representation comparison 以及 auditable outcome evaluation 的证据要求。
 
-综合而言，这些 requirements 共同导向本文提出的 Cognitive-Process-Based（CPB）learner representation。CPB 并不试图构建完整的人类认知架构或临床 ADHD 模型，而是针对选定的 ADHD-related learning characteristics，建立一个 **process-controllable、state-explicit、source-traceable and functionally factorised** 的 simulation framework。Chapter 3 将据此说明具体 operationalisation，并通过三个递进 Studies 分别检验 registered mechanism execution 与 state transitions、comparative task-specific behavioural sensitivity，以及 response-stage attribute additions 后的 constraint-pattern retention。
+综合而言，这些 requirements 共同导向本文提出的 Cognitive-Process-Based（CPB）learner representation。CPB 并不试图构建完整的人类认知架构或临床 ADHD 模型，而是针对选定的 ADHD-related learning characteristics，建立一个 **process-controllable、state-explicit、source-traceable and functionally factorised** 的 simulation framework。Chapter 3 将据此说明具体 operationalisation，并通过三个递进 Studies 分别检验 prespecified mechanism execution 与 state transitions、comparative task-specific behavioural sensitivity，以及 response-stage attribute additions 后的 constraint-pattern retention。
 
 ## 3  Materials and Methods
 
@@ -288,6 +320,8 @@ This overarching question is addressed through three research questions with dis
 
 > **RQ3 — Constraint-Pattern Retention under Attribute Additions:**  
 > When Language Ability and Big-Five prompt dimensions are added at the response stage, how do assessment outcomes change, and do CPB's previously established constraint-related aggregate patterns remain observable?
+
+Table 3.X maps each research question to its evidential role, corresponding experimental study, core comparison, and primary evidence.
 
 **Table 3.X. Mapping of research questions to experimental studies and evidence**
 
@@ -616,7 +650,7 @@ Finance examines how money is obtained, managed, moved, and used.
 Finance helps individuals and organizations understand sources and uses of cash and make decisions when outcomes are uncertain.
 ```
 
-Here, the sentence following the bracketed distractor is the frozen target. The associated assessment question is not provided to the student model during learning, and the Attention mechanism does not dynamically select information based on the later question. The term *question-targeted* therefore refers only to the preregistered alignment between the distractor, the affected source evidence, and the subsequent assessment item.
+Here, the sentence following the bracketed distractor is the frozen target. The associated assessment question is not provided to the student model during learning, and the Attention mechanism does not dynamically select information based on the later question. The term *question-targeted* therefore refers only to the predefined and frozen alignment between the distractor, the affected source evidence, and the subsequent assessment item.
 
 For an eligible distractor in Teaching Round \(r\), repeated run \(j\), and condition \(c\), the trigger decision is sampled as
 
@@ -705,6 +739,8 @@ CI_{95\%}
 
 As reviewed in Section 2.4, Working Memory (WM) is a limited processing system involved in maintaining and manipulating task-relevant information, and ADHD-related WM differences may become more consequential as processing demands increase. The present study therefore models **sensitivity to instructional processing demand** as a bounded functional abstraction rather than attempting to reproduce human Working Memory as a whole. Within CPB, the WM mechanism operates after Attention: when the frozen processing demand of a Teaching Round exceeds the capacity threshold assigned to the current condition, the earliest instructional sentence still available after Attention is made unavailable before Knowledge Encoding.
 
+Figure 3.X illustrates how the frozen round-level processing demand and condition-specific WM capacity determine whether information is further restricted before Knowledge Encoding.
+
 ![Working-Memory mechanism flow](Figures/Chapter3/export/ch03_working_memory_mechanism_flow.png)
 
 **Figure 3.X. Working-Memory mechanism flow.** Frozen source-round demand \(D(R_r)\) is compared with the condition-specific threshold \(C^{WM}_c\). When demand exceeds capacity, the earliest sentence remaining in \(P_{r,c}\) is removed before the resulting Available Input \(A_{r,c}\) proceeds to Knowledge Encoding.
@@ -751,7 +787,7 @@ where Attention determines what information remains available before WM processi
 
 #### 3.4.3 Knowledge Encoding
 
-##### 3.4.1 Knowledge Encoding Implementation
+##### 3.4.3.1 Knowledge Encoding Implementation
 
 As reviewed in Section 2.5, information that remains available after Attention and Working-Memory processing is conceptually distinct from a persistent learner knowledge state. CPB therefore includes a separate Knowledge-Encoding stage between Available Input and Explicit LTM. Encoding is not manipulated as an additional ADHD-specific mechanism; instead, all learner conditions use the same Encoder procedure so that differences in downstream knowledge state can be interpreted relative to the information that actually reaches Encoding. For Teaching Round \(r\) and condition \(c\), the transformation is represented as \[ A_{r,c} \xrightarrow{\mathrm{Encoding}} L_{r,c}, \] where \(A_{r,c}\) is the Available Input remaining after Attention and Working-Memory processing and \(L_{r,c}\) is the resulting Explicit LTM entry. 
 
@@ -851,18 +887,20 @@ Study 1 对应 RQ1，检验 CPB processing pipeline 是否能够按照预定义�
 
 为回答这一问题，Study 1 将 RQ1 拆分为两个 Subquestions。SQ1 检验 Attention 和 Working-Memory mechanisms 是否按照注册规则正确执行；SQ2 进一步检验这些机制是否在预期 processing stages 产生可归因的信息状态变化，并沿 pipeline 传播至最终 Explicit LTM。
 
+Table 3.X summarises the validation focus and evidence sought for the two Study 1 subquestions.
+
 **Table 3.X. Subquestions and validation focus for Study 1**
 
 | Subquestion | Validation Focus                              | Evidence Sought                                              |
 | ----------- | --------------------------------------------- | ------------------------------------------------------------ |
-| **SQ1**     | Mechanism execution                           | Whether the registered Attention and WM rules trigger and execute correctly |
+| **SQ1**     | Mechanism execution                           | Whether the prespecified Attention and WM rules trigger and execute correctly |
 | **SQ2**     | Information-state transitions and propagation | Whether stage-specific changes are attributable and traceable, and whether they propagate through Available Input to Explicit LTM |
 
 **SQ1 — Mechanism Execution**
 
-> **Do the Attention and Working-Memory mechanisms execute their registered rules correctly?**
+> **Do the Attention and Working-Memory mechanisms execute their prespecified rules correctly?**
 
-SQ1 examines whether Attention triggering and target removal follow the predefined rules while preserving non-target instructional information, and whether WM overflow and FIFO-style removal occur only when the registered capacity constraint is exceeded.
+SQ1 examines whether Attention triggering and target removal follow the predefined rules while preserving non-target instructional information, and whether WM overflow and FIFO-style removal occur only when the calibrated and frozen capacity threshold is exceeded.
 
 **SQ2 — Traceable Information-State Transitions and Propagation**
 
@@ -882,7 +920,7 @@ L_{r,c}
 
 shows the intended stage-specific transitions. The analysis first identifies the local changes introduced by Attention, Working-Memory Processing and Encoding, and then examines how Attention- and WM-related removals jointly produce the Available Input state and whether the resulting information differences remain observable after encoding in Explicit LTM.
 
-As illustrated in Figure 3.X, SQ1 validates the execution of the registered Attention and Working-Memory rules, whereas SQ2 traces stage-specific information-state transitions and their cumulative propagation to Explicit LTM; the corresponding evaluation measures are defined in Section 3.5.1.3.
+As illustrated in Figure 3.X, SQ1 validates the execution of the prespecified Attention and Working-Memory rules, whereas SQ2 traces stage-specific information-state transitions and their cumulative propagation to Explicit LTM; the corresponding evaluation measures are defined in Section 3.5.1.3.
 
 ![Study 1 mechanism-execution and information-state validation scope](</Users/willow/Documents/Code/[Msc] ADHD Simulation/UCL_Master_s_Thesis_Qingqing/Figures/Chapter3/export/ch03_study1_ltm_validation_logic.png>)
 
@@ -902,7 +940,7 @@ Overall, Study 1 distinguishes correct mechanism execution from the resulting tr
 
 该设计产生四个实验条件，如 Table 3.X 所示：A1W0 和 A0W1 分别隔离 Attention 与 WM 的独立作用，A1W1 检验两个机制按照 CPB processing order 连续启用时的累计作用，而 A0W0 则提供不包含 Attention- 或 WM-related information restriction 的 reference condition。其目的不是构造不同程度的 ADHD severity，而是通过明确的机制边界条件最大化 **mechanism identifiability**。
 
-**Table 3.X. Registered mechanism parameters for the Study 1 factorial conditions**
+**Table 3.X. Frozen mechanism parameters for the Study 1 factorial conditions**
 
 | Condition | Attention \(p^A_c\) | WM status | WM capacity \(C^{WM}_c\) (bits) | Above capacity in 42-question calibration set | Validation purpose |
 |---|---:|---|---:|---:|---|
@@ -1175,7 +1213,7 @@ AAR、WMAR、ESR、SWAR 和 E2ESR 均先在 lesson level 计算。每个 conditi
 | Subquestion | Evidence Level            | Validation Target               | Measure     | Interpretation                                               |
 | ----------- | ------------------------- | ------------------------------- | ----------- | ------------------------------------------------------------ |
 | **SQ1**     | Mechanism execution       | Attention execution             | ATRF / NTPR | Whether intended Attention targets are removed while non-target information is preserved |
-| **SQ1**     | Mechanism execution       | WM execution                    | WMTA / FRF  | Whether WM triggers at the registered threshold and applies the correct within-round removal rule |
+| **SQ1**     | Mechanism execution       | WM execution                    | WMTA / FRF  | Whether WM triggers at the calibrated and frozen threshold and applies the correct within-round removal rule |
 | **SQ2**     | Stage-specific transition | \(S_r \rightarrow P_{r,c}\)     | AAR         | Proportion of Source information remaining available after Attention |
 | **SQ2**     | Stage-specific transition | \(P_{r,c} \rightarrow A_{r,c}\) | WMAR        | Proportion of post-Attention information remaining available after WM |
 | **SQ2**     | Stage-specific transition | \(A_{r,c} \rightarrow L_{r,c}\) | ESR         | Semantic correspondence between actual Encoder input and generated Explicit LTM |
@@ -1196,7 +1234,7 @@ Study 2 对应 RQ2，比较 persona prompting 与 CPB 两种 learner representat
 
 > **Under distracted materials, do the manipulated learner conditions produce systematic within-representation differences in assessment performance under Prompt-based and CPB-based simulation?**
 
-SQ1 在共同的 distracted-material condition 下包含两个平行的 representation-internal branches。Prompt branch 检验 Prompt-NT、Moderate-Intensity Prompt-ADHD 和 High-Intensity Prompt-ADHD 是否形成与 persona intensity 对应的 performance ordering；CPB branch 检验 CPB Zero、Low、Medium 和 High 是否随 registered constraint severity 增强形成 graded performance response。该 Subquestion 只回答得分表现、run-to-run variability 和 response length 是否随各自 manipulation 系统变化，不把较低绝对分数直接解释为更符合 ADHD cognitive mechanisms，也不依据 Prompt 与 CPB 的绝对得分高低进行跨 representation 判断。Clean-material results 保留用于 SQ2 的 material-condition comparison 与主要 processing-demand analysis，不作为 SQ1 的独立 differentiation evidence。
+SQ1 在共同的 distracted-material condition 下包含两个平行的 representation-internal branches。Prompt branch 检验 Prompt-NT、Moderate-Intensity Prompt-ADHD 和 High-Intensity Prompt-ADHD 是否形成与 persona intensity 对应的 performance ordering；CPB branch 检验 CPB Zero、Low、Medium 和 High 是否随 frozen constraint-severity level 增强形成 graded performance response。该 Subquestion 只回答得分表现、run-to-run variability 和 response length 是否随各自 manipulation 系统变化，不把较低绝对分数直接解释为更符合 ADHD cognitive mechanisms，也不依据 Prompt 与 CPB 的绝对得分高低进行跨 representation 判断。Clean-material results 保留用于 SQ2 的 material-condition comparison 与主要 processing-demand analysis，不作为 SQ1 的独立 differentiation evidence。
 
 **SQ2 — ADHD-Theory-Consistent Process Sensitivity**
 
@@ -1223,7 +1261,7 @@ Source: `/Users/willow/Documents/Code/[Msc] ADHD Simulation/UCL_Master_s_Thesis_
 
 Figure 3.X展示了Study 2 WM capacity thresholds在42道Independent Questions所对应source Teaching Rounds的冻结PDB distribution上的校准方式。CPB High、Medium和Low分别采用lower-tertile、median和upper-tertile boundaries，因此依次有28/42、21/42和14/42个source rounds超过相应capacity。该设计在保持instructional materials不变的情况下，使更强的constraint condition覆盖更多assessment-relevant source rounds，从而建立递进增强的WM-restriction exposure。图中校准决定的是各condition中有多少source rounds满足WM restriction的触发条件，而不是预先假定这些限制必然造成相同比例的得分下降；其对Explicit LTM和assessment performance的实际影响由后续实验结果检验。
 
-**Table 3.X. Learner conditions and registered CPB process parameters in Study 2**
+**Table 3.X. Learner conditions and frozen CPB process parameters in Study 2**
 
 | Learner condition | Representation | Representation-specific manipulation | Attention \(p^A_c\) | WM capacity \(C^{WM}_c\) (bits) | Above capacity in 42-question calibration set |
 |---|---|---|---:|---:|---:|
@@ -1235,7 +1273,7 @@ Figure 3.X展示了Study 2 WM capacity thresholds在42道Independent Questions�
 | **CPB Medium** | CPB | Medium joint processing constraint | 0.50 | 321.9937895 (\(Q_{1/2}\)) | 21/42 |
 | **CPB High** | CPB | High joint processing constraint | 0.80 | 246.9297100 (\(Q_{1/3}\)) | 28/42 |
 
-For CPB Zero, \(10^{10}\) bits is an effectively non-binding implementation sentinel used while WM removal is disabled, rather than a meaningful capacity estimate. For the constrained conditions, increasing registered constraint severity combines a higher Attention trigger probability with a lower WM capacity:
+For CPB Zero, \(10^{10}\) bits is an effectively non-binding implementation sentinel used while WM removal is disabled, rather than a meaningful capacity estimate. For the constrained conditions, progressively stronger frozen constraint levels combine a higher Attention trigger probability with a lower WM capacity:
 
 \[
 C^{WM}_{\mathrm{Low}}
@@ -1491,7 +1529,7 @@ d_{\ell,a,b,m}
 d_{\ell,a,b,m}.
 \]
 
-七个lesson-specific differences \(d_{\ell,a,b,m}\) 作为计算总体contrast与paired lesson bootstrap的配对分析单位，不在Results中逐项制表。各教材的实际均值与跨教材ordering分别由lesson-level score figure和Lesson OCR/ER报告；Table 4.RQ2-3仅报告七篇教材等权汇总的总体contrast \(\Delta_{a,b,m}\) 及其95% confidence interval，用于量化condition differences的总体幅度与不确定性。
+七个lesson-specific differences \(d_{\ell,a,b,m}\) 作为计算总体contrast与paired lesson bootstrap的配对分析单位，不在Results中逐项制表。各教材的实际均值与跨教材ordering分别由lesson-level score figure和Lesson OCR/ER报告；Table 4.6仅报告七篇教材等权汇总的总体contrast \(\Delta_{a,b,m}\) 及其95% confidence interval，用于量化condition differences的总体幅度与不确定性。
 
 正值表示severity较高的condition具有较低的lesson-level Mean Checklist Score。Prompt branch报告\(\Delta_{\mathrm{NT-Mod}}\)、\(\Delta_{\mathrm{Mod-High}}\)和\(\Delta_{\mathrm{NT-High}}\)；CPB branch报告\(\Delta_{\mathrm{Zero-Low}}\)、\(\Delta_{\mathrm{Low-Medium}}\)、\(\Delta_{\mathrm{Medium-High}}\)和\(\Delta_{\mathrm{Zero-High}}\)。所有 SQ1 contrasts 仅在 distracted materials 下计算，并报告raw Checklist Score difference及95% confidence interval，不转换为相对于baseline的百分比。
 
@@ -1759,7 +1797,7 @@ Study 3 将4种 Language Ability–Big-Five attribute profiles（A1、A2、B1和
 
 对于CPB branch，Study 3保留Section 3.5.2.2中注册的CPB参数，并按对应material condition、constraint level和run逐一匹配，复用Study 2中已冻结的Attention、WM、Encoding与Explicit LTM trajectory，而不重新抽样learning-stage mechanisms。因此，匹配conditions不仅具有相同的Attention trigger probability、WM capacity和random seed，也具有相同的实际Attention/WM触发结果及被保留或移除的信息；这些结果以sentence IDs和processing logs保留。A1–B2 profiles仅在memory-constrained answer-generation stage加入，从而在保持既有CPB learning state不变的条件下检验新增profile dimensions对回答层行为的影响。
 
-##### **3.5.3.3 Evaluation Measures **
+##### 3.5.3.3 Evaluation Measures
 
 Study 3直接沿用Study 2（Section 3.5.2.3）定义的五次运行question-level aggregation procedure，以及Checklist Score、sample SD、Mean Answer Words、OCR、ER和continuous PDB measures，不在本节重复定义。SQ1固定使用distracted materials，以匹配Study 2 SQ1的分析范围；SQ2使用clean与distracted materials进行controlled-distraction comparison，并以clean materials开展主要continuous PDB analysis。
 
@@ -1915,9 +1953,9 @@ DeepSeek V4-Flash 在本研究中承担两个相互区分但模型配置一致�
 
 模拟学生回答的 DeepSeek 请求统一设置为 `temperature=0.0`，最大输出长度为1,200 tokens；Knowledge Encoder 同样设置为 `temperature=0.0`，但最大输出长度限制为500 tokens。所有请求均采用非流式生成、180秒超时和最多三次请求重试。Encoder 被要求仅总结实际收到的 classroom information，不得补充外部知识，并仅返回一条不包含标题、列表或附加说明的纯文本 memory entry。当某个 Teaching Round 在 Attention 和 WM processing 后没有剩余 Available Input 时，该轮不调用 Encoder，也不生成 LTM entry。对于完全相同的 Available Input、Encoder prompt 和模型配置，系统使用 content-addressed cache 复用已生成的 encoding result，以避免同一输入因重复生成而在不同 CPB conditions 中产生额外差异。
 
-`temperature=0.0` 用于减少与实验操纵无关的生成变化，但不被视为模型输出具有数学确定性的保证。DeepSeek请求没有传递固定生成 seed，而且远程 API 服务仍可能受到后端实现和推理环境变化的影响。因此，Studies 2 and 3 对每个 learner condition 执行五次独立运行，并基于已保存的运行结果估计 Mean Checklist Score、sample SD 和其他 run-to-run variability measures。重复运行和统计不确定性的具体处理在 Section 3.6.3 中说明。
+`temperature=0.0` 用于减少与实验操纵无关的生成变化，但不被视为模型输出具有数学确定性的保证。DeepSeek请求没有传递固定生成 seed，而且远程 API 服务仍可能受到后端实现和推理环境变化的影响。因此，Studies 2 and 3 对每个 learner condition 执行五次独立运行，并基于已保存的运行结果估计 Mean Checklist Score、sample SD 和其他 run-to-run variability measures。重复运行和统计不确定性的具体处理在 Section 3.6.2 中说明。
 
-除生成模型外，本研究使用 GPT-2 small 作为 PDB 的冻结离线概率估计器。本研究使用 Hugging Face 发布的 OpenAI GPT-2 small 模型及其配套 tokenizer。模型权重、tokenizer和推理配置在全部 PDB 计算中保持固定。GPT-2 不参与学生回答或 LTM 生成，而是以 measurement instrument 的形式对每个 Teaching Round 独立计算 cumulative surprisal。模型上下文在每个 Teaching Round 开始时重置，并使用不计分的边界 token 初始化；round 内的两至三句话则共享连续上下文。该配置确保 PDB 是冻结的材料级 annotation，而不是由特定模拟学生运行动态产生的变量。PDB 的公式、模型选择依据和 estimator-sensitivity analysis 已在 Section 3.2.2 和 Section 3.5.1 中说明。
+除生成模型外，本研究使用 GPT-2 small 作为 PDB 的冻结离线概率估计器。本研究使用 Hugging Face 发布的 OpenAI GPT-2 small 模型及其配套 tokenizer。模型权重、tokenizer和推理配置在全部 PDB 计算中保持固定。GPT-2 不参与学生回答或 LTM 生成，而是以 measurement instrument 的形式对每个 Teaching Round 独立计算 cumulative surprisal。模型上下文在每个 Teaching Round 开始时重置，并使用不计分的边界 token 初始化；round 内的两至三句话则共享连续上下文。该配置确保 PDB 是冻结的材料级 annotation，而不是由特定模拟学生运行动态产生的变量。PDB 的 measurement basis 与 round-level operationalisation 分别在 Sections 3.2.2.1 和 3.2.2.2 中说明，estimator-sensitivity analysis 则见 Section 3.2.2.3。
 
 Study 1 中的 Encoding Semantic Recall（ESR）与E2ESR Source-to-LTM semantic correspondence使用BERTScore的官方实现，并采用`microsoft/deberta-xlarge-mnli`作为contextual-embedding model [zhang2019bertscore]。所有比较均报告Recall component，关闭inverse-document-frequency weighting（`idf=False`），并启用baseline rescaling。该模型仅用于对已保存文本开展离线embedding-based semantic-correspondence analysis，不参与Attention、WM、Knowledge Encoding或assessment answering，也不执行proposition-level knowledge-retention判断。具体的reference–candidate direction和指标解释已在Study 1的Evaluation Measures中定义。
 
@@ -1931,9 +1969,9 @@ Reproducibility was addressed through frozen experimental inputs, controlled sto
 
 All formal experiments used the same frozen instructional and assessment resources, including the seven lessons, 83 Teaching Rounds, 49 assessment questions, source mappings, reference answers, checklist criteria, prompts, and Study-specific configurations. Relevant files and configurations were versioned and recorded with content hashes. Learner conditions, material conditions, repetition counts, Attention probabilities, Working-Memory capacities, and run-specific seeds were fixed before execution, allowing every output to be linked to its corresponding Study, condition, run, and input version.
 
-Three sources of stochasticity were treated separately. CPB Attention triggering was part of the experimental manipulation and used frozen run seeds, so the same registered configuration reproduced the same Attention trajectory. Student answering and Knowledge Encoding used fixed generation settings, including `temperature = 0`, but no claim of deterministic regeneration is made because remote API execution remains outside experimental control; repeated runs were therefore used to characterise run-to-run variation. Bootstrap seeds were independent of both processes and controlled only offline statistical resampling.
+Three sources of stochasticity were treated separately. CPB Attention triggering was part of the experimental manipulation and used frozen run seeds, so the same frozen experimental configuration reproduced the same Attention trajectory. Student answering and Knowledge Encoding used fixed generation settings, including `temperature = 0`, but no claim of deterministic regeneration is made because remote API execution remains outside experimental control; repeated runs were therefore used to characterise run-to-run variation. Bootstrap seeds were independent of both processes and controlled only offline statistical resampling.
 
-Accordingly, persisted outputs rather than repeated API calls formed the primary reproducibility record. Each run retained the relevant classroom context or CPB processing logs, Available Input, Explicit LTM, assessment answers, criterion-level Judge outputs, question-level scores, and associated metadata. Identical CPB Encoding inputs reused the same cached Encoding result, preventing equivalent learning states from diverging through repeated API calls. Run manifests, output hashes, and integrity audits were used to verify that the registered runs, answers, processing records, memory states, and Judge results were complete before inclusion in analysis. Study 3 additionally verified the correspondence between matched CPB trajectories and their Study 2 baselines.
+Accordingly, persisted outputs rather than repeated API calls formed the primary reproducibility record. Each run retained the relevant classroom context or CPB processing logs, Available Input, Explicit LTM, assessment answers, criterion-level Judge outputs, question-level scores, and associated metadata. Identical CPB Encoding inputs reused the same cached Encoding result, preventing equivalent learning states from diverging through repeated API calls. Run manifests, output hashes, and integrity audits were used to verify that the prespecified runs, answers, processing records, memory states, and Judge results were complete before inclusion in analysis. Study 3 additionally verified the correspondence between matched CPB trajectories and their Study 2 baselines.
 
 All statistical analyses were performed on these frozen outputs using fixed analysis configurations and version-recorded software dependencies. Bootstrap procedures used prespecified resampling units and fixed analysis seeds, allowing reported confidence intervals and derived statistics to be recomputed from the same stored data. Reproducibility in this study therefore refers to **reconstructing the experimental procedure, tracing results to frozen inputs and persisted outputs, and repeating downstream analyses**, rather than guaranteeing that future calls to the same remote LLM API will reproduce identical text.
 
@@ -2058,6 +2096,8 @@ Table 4.RQ2-1同时显示，三个Prompt conditions在五次运行中均具有�
 
 CPB Zero的Overall Mean Question-Level Run SD同样较低，为0.262；加入processing constraints后，CPB Low、Medium和High则分别上升至1.967、2.388和1.853，表明受约束conditions产生了更明显的run-to-run score variability。该指标并不随constraint severity严格单调增加，Medium最高而High低于Low和Medium。Medium较高的SD与Attention trigger在\(p=0.50\)时具有最大的Bernoulli variance，以及其居中的WM capacity threshold一致；但当前分析没有分离两项机制对variability的独立贡献，也不将这一描述性对应解释为Medium最高SD的已验证因果机制。总体而言，SD在此仅描述重复运行稳定性，不作为performance ordering或ADHD-mechanism fidelity的直接指标。
 
+Figure 4.RQ2-2 reports Mean Answer Words across lessons and question scopes to examine whether the observed score patterns were accompanied by systematic differences in response length.
+
 ![Study 2 SQ1 Mean Answer Words under distracted materials](Figures/Chapter4/Study2_v2_Figure_SQ1_mean_answer_words_bars.png)
 
 **Figure 4.RQ2-2. Mean Answer Words under distracted materials.** Panel A presents Prompt NT, Moderate-Intensity Prompt-ADHD and High-Intensity Prompt-ADHD; Panel B presents CPB Zero, Low, Medium and High. Bars report Mean Answer Words for L01–L07, the overall 49-question set, and the Independent and Integrative Question subsets. Numerical labels report the corresponding means, and the vertical dashed line separates lesson-level results from summary scopes.
@@ -2070,6 +2110,8 @@ Figure 4.RQ2-2显示，Prompt learners的回答总体明显长于CPB learners：
 
 Table 4.RQ2-1与Figure 4.RQ2-2的联合结果不支持“回答越长便自动获得越高Checklist Score”的简单解释。CPB Zero平均仅回答33.46词，约为Prompt-NT的80.84词的41%，但其Mean Checklist Score达到9.374，与Prompt learners的9.837至9.871较为接近，说明较短回答仍可能覆盖大部分checklist criteria。与此同时，CPB从Zero到High的平均回答词数由33.46增加至43.43，而得分却由9.374下降至3.014，词数与得分的变化方向相反。这些描述性结果削弱了response verbosity能够单独解释condition-level score differences的可能性；但由于本研究未在控制回答内容后直接估计word count对Judge score的独立影响，因此不据此声称Judge对回答长度完全不敏感或已证明词数维度上的统计公平性。
 
+Cross-material differentiation was evaluated from two complementary perspectives. Table 4.RQ2-2 reports whether the expected condition ordering was preserved and whether apparent ordering was driven by complete ties. Table 4.6 then quantifies the magnitude and uncertainty of the corresponding paired lesson-level differences.
+
 **Table 4.RQ2-2. Lesson- and question-level OCR and Complete Equality Rate under distracted materials**
 
 | Representation | Lesson OCR | Lesson ER | Question OCR | Question ER |
@@ -2077,7 +2119,7 @@ Table 4.RQ2-1与Figure 4.RQ2-2的联合结果不支持“回答越长便自动�
 | Prompt | 71.43% (5/7) | 42.86% (3/7) | 95.92% (47/49) | 87.76% (43/49) |
 | CPB | 100.00% (7/7) | 0.00% (0/7) | 77.55% (38/49) | 6.12% (3/49) |
 
-**Table 4.RQ2-3. Overall paired lesson contrasts**
+**Table 4.6. Overall paired lesson contrasts under distracted materials**
 
 | Representation | Contrast | Overall \(\Delta\) | 95% CI |
 |---|---|---:|---:|
@@ -2093,7 +2135,7 @@ Table 4.RQ2-2显示，CPB在全部7篇教材中均保持Zero ≥ Low ≥ Medium 
 
 Question-level results进一步揭示了两种方法的不同模式：CPB有38/49道题满足预期排序，Question OCR为77.55%，意味着其余11道题存在局部次序偏离，因此High constraint学生在每一道题上的得分并不必然低于较低constraint levels。不过，这些单题波动在lesson aggregation后仍形成100%的跨教材梯度。Prompt则有47/49道题满足non-increasing ordering，表面上具有更高的Question OCR，然而其中87.76%的题目在三个conditions上完全同分，因此这种高question-level ordering并未转化为lesson-level或overall performance上的明显等级差异。换言之，CPB虽然在单题层面存在stochastic reversals，聚合后却形成了实际分离的稳定梯度；Prompt虽然在单题层面呈现较高的ordering consistency，但该结果主要由完全同分构成，聚合后仍未形成可辨识的等级分离。
 
-Table 4.RQ2-3进一步量化了ordering所对应的总体得分幅度。Prompt的三个overall paired lesson contrasts仅为0.007至0.034分，实际幅度接近于零；NT–Moderate和NT–High的95% CIs均跨越零，Moderate–High的区间下界也为零，因此没有形成清晰的等级分离。相比之下，CPB的三个相邻等级差分别为2.857、1.837和1.667分，Zero–High差异达到6.361分，所有95% CIs均完全高于零，表明不同constraint levels之间具有明确的总体得分差异。结合Table 4.RQ2-2中100%的CPB Lesson OCR和0%的Lesson ER，这一contrast pattern同时具有跨教材一致性与实际分离幅度；Prompt则未形成同等清晰的等级结构。
+Table 4.6进一步量化了ordering所对应的总体得分幅度。Prompt的三个overall paired lesson contrasts仅为0.007至0.034分，实际幅度接近于零；NT–Moderate和NT–High的95% CIs均跨越零，Moderate–High的区间下界也为零，因此没有形成清晰的等级分离。相比之下，CPB的三个相邻等级差分别为2.857、1.837和1.667分，Zero–High差异达到6.361分，所有95% CIs均完全高于零，表明不同constraint levels之间具有明确的总体得分差异。结合Table 4.RQ2-2中100%的CPB Lesson OCR和0%的Lesson ER，这一contrast pattern同时具有跨教材一致性与实际分离幅度；Prompt则未形成同等清晰的等级结构。
 
 总体而言，SQ1显示两种representations形成了不同的组内表现模式。Prompt learners的得分普遍偏高接近满分，且不同persona intensities之间主要表现为完全同分或幅度很小且缺乏跨教材一致性的差异，没有形成清晰、稳定的assessment-performance differentiation。相比之下，CPB constraint levels在所有教材中形成了方向一致、实际分离且幅度明确的graded performance structure。尽管受约束conditions在单题和重复运行层面存在stochastic variability，但在Lesson层面汇总后表现出了清晰明显的梯度和固定模式。因此，对于SQ1的直接回答是：在distracted materials下，CPB形成了系统且可辨识的组内performance differentiation，而persona prompting未形成同等清晰的等级分离。
 
@@ -2127,6 +2169,8 @@ CPB Zero的Raw distraction cost仅为0.041，其confidence interval跨越0，说
 
 **Processing-demand component**
 
+Figure 4.RQ2-4 visualises the relationship between source-round PDB and question performance under clean and distracted materials, with the clean-material relationships providing the primary evidence.
+
 ![Study 2 SQ2 clean and distracted PDB performance profiles](Figures/Chapter4/Study2_v2_Figure_4_SQ2_combined_pdb_profiles.png)
 
 **Figure 4.RQ2-4. Clean- and distracted-material PDB–performance profiles.** Points report five-run question-level Mean Checklist Scores for the 42 Independent Questions; lines show fitted linear relationships between source-round Processing Demand Bits and performance. Panels A and B present the Prompt conditions under clean and distracted materials, respectively; Panels C and D present the corresponding CPB conditions.
@@ -2135,7 +2179,7 @@ Source: `/Users/willow/Documents/Code/[Msc] ADHD Simulation/UCL_Master_s_Thesis_
 
 Figure 4.RQ2-4检验performance是否随source-round PDB增加而下降。Clean-material Panels A和C构成主要证据：三个Prompt conditions均接近ceiling且拟合线近似水平，CPB Zero也未呈现明显关系，而CPB Low、Medium和High均表现为PDB越高、得分越低。因此，清晰的负向PDB–performance relationship只在启用processing constraints后出现。
 
-Distracted-material Panels B和D呈现相同的方向性对照：Prompt拟合线仍近似水平，受约束CPB conditions仍呈负向关系，但question-level scores更加分散。
+Distracted-material Panels B和D呈现相同的方向性对照：Prompt拟合线仍近似水平，受约束CPB conditions仍呈负向关系，但question-level scores更加分散。Table 4.RQ2-5 subsequently quantifies the primary clean-material relationships using fitted slopes, reference-adjusted contrasts, confidence intervals, and Spearman correlations.
 
 **Table 4.RQ2-5. Primary clean-material PDB–performance estimates**
 
@@ -2205,6 +2249,8 @@ Figure 4.RQ3-3比较两种Prompt-ADHD conditions和三种CPB constraint conditio
 
 将Figure 4.RQ3-3与得分结果联合观察，Prompt A2和B2的明显缩短同时伴随Mean Checklist Score下降，但回答长度并不能单独解释全部performance change：Prompt A1在回答变长后得分基本不变，而CPB B2在回答缩短的同时得分反而提高。因此，Mean Answer Words在此仅用于说明新增profiles如何改变response form，不被解释为knowledge gain、learning effectiveness或profile fidelity。完整representation-level absolute values与deltas见Appendix Table A.7。
 
+Table 4.RQ3-1 reports profile-specific lesson- and question-level OCR and Complete Equality Rate, together with their changes from the matched Study 2 baselines.
+
 **Table 4.RQ3-1. Profile-specific Lesson/Question OCR and Complete Equality Rate under distracted materials**
 
 | Representation | Profile | Lesson OCR | Δ Lesson OCR | Lesson ER | Δ Lesson ER | Question OCR | Δ Question OCR | Question ER | Δ Question ER |
@@ -2232,6 +2278,7 @@ SQ2沿用Study 2的两个process-sensitive components。Controlled-distraction c
 
 **Controlled-distraction component**
 
+Figure 4.RQ3-4 shows whether the controlled-distraction patterns established in Study 2 remained observable after the response-stage profiles were added.
 
 ![Study 3 SQ2 Raw distraction costs](Figures/Chapter4/Study3_v3_Figure_5_SQ2_raw_distraction_costs_bars_only.png)
 
@@ -2245,6 +2292,8 @@ Figure 4.RQ3-4显示，八个Prompt condition × profile cells的Raw distraction
 CPB呈现了明显不同的pattern。四种profiles下，Low的Raw costs为0.912–1.347分，Medium为2.129–2.531分，High为2.810–3.286分，意味着全部12个CPB condition × profile组合在加入干扰后都出现了明确的得分下降。这些95% confidence intervals均完全高于0，且每个组合在全7篇教材中均呈现正向cost，说明该下降既能与0清晰区分，也不是由少数教材驱动。更重要的是，A1–B2的所有profiles都保持Low < Medium < High的distraction-cost梯度：constraint severity越高，distracted materials造成的performance loss越大。因此，额外profile dimensions虽然改变了具体effect magnitude，却没有消除CPB在Study 2中观察到的controlled-distraction sensitivity；这与Prompt branch中接近0、方向不稳定且部分反转的结果形成了清晰对照。完整估计值、confidence intervals及lesson coverage见Appendix Table A.9。
 
 **Processing-demand component**
+
+Figure 4.RQ3-5 shows the clean-material PDB–performance relationships for each Study 3 profile and learner condition.
 
 ![Study 3 SQ2 clean-material PDB performance profiles](Figures/Chapter4/Study3_v3_Figure_6_SQ2_clean_pdb_profiles.png)
 
@@ -2266,29 +2315,41 @@ Taken together, RQ3 shows that adding Language Ability and Big-Five response-sta
 
 ### 4.4 Summary of Findings and Discussion
 
-综合三个研究问题，本研究关注的并不是CPB是否简单地产生更大的分数差异，而是persona prompting与process-based representation是否形成不同性质的simulated-student behaviour。Persona prompting主要通过显式learner descriptions规定目标学生的身份与行为特征，而CPB则将部分ADHD-related characteristics操作化为Attention与Working-Memory constraints，使其首先改变学习过程中可用的信息和形成的Explicit LTM，再影响后续assessment response。
+The three studies collectively examine a learner-representation question rather than simply whether one simulation architecture produces larger score differences than another. As argued in Chapter 2, the central issue is whether learner characteristics that are expected to affect learning processes can be represented in a way that produces corresponding changes in learner state and downstream behaviour, rather than being expressed only through persona-level descriptions. The findings are therefore interpreted in relation to the process–state distinction, the functional boundary of persona prompting, and the claim-matched validation requirements developed in Sections 2.2–2.7. Throughout this discussion, implementation fidelity, rule-consistent propagation, task-bounded behavioural sensitivity, and external human validity are treated as distinct levels of evidence. Accordingly, the comparison is interpreted conditionally rather than as a general competition between persona- and process-based representation.
 
-RQ1表明，CPB中的Attention与WM mechanisms能够按照冻结规则执行，并分别在预期processing stages产生可定位的信息损失；这些restriction共同决定Available Input，并继续反映在Source与最终Explicit LTM之间的semantic correspondence中，而shared Encoder对其实际接收到的信息保持描述上相近的semantic correspondence。由此，CPB形成了具有明确processing history且能够限制后续回答的learner-specific knowledge state。需要强调的是，这里验证的是预定义operational mechanisms的implementation fidelity与traceability；Attention removal和WM capacity/FIFO-style restriction是为了experimental control与stage attribution而采用的functional abstractions，并不意味着其已经与真实ADHD cognitive processes等价。
+#### 4.4.1 Interpretation of the Main Findings
 
-RQ2进一步表明，这种process-based representation在当前任务中比persona prompting更一致地产生了与目标ADHD-related hypotheses方向相符的task-specific behaviour。Prompt ADHD相对于Prompt NT既没有形成稳定且跨教材一致的额外distraction cost，也没有表现出明确的negative PDB–performance relationship；受约束CPB learners则相对于CPB Zero表现出随constraint增强的distraction-associated performance loss，并在processing constraints启用后持续呈现higher PDB对应lower performance的关系。总体performance structure与此一致：Prompt conditions普遍接近ceiling且persona-intensity separation有限，而CPB形成了跨教材保持的graded constraint pattern。因此，CPB中的score differentiation并非仅表现为任意的performance gradient，而与针对Attention和WM hypotheses设计的task manipulations呈现系统关联。由于PDB本身参与WM constraint rule，其结果应理解为processing-demand constraint传播到downstream behaviour的证据，而不是对human working-memory demand的独立验证。
+Study 1 provides evidence primarily for the process- and learner-state principles motivated in Section 2.5 and formalised as design requirements in Section 2.7. Earlier learner-modelling traditions distinguish between instructional experience, changing learner state, and subsequent performance [corbett-anderson-1995-knowledge; abdelrahman-etal-2023-knowledge], while process-oriented models further emphasise the value of relating observable outcomes to intermediate operations [anderson-etal-1995-cognitive]. CPB operationalised this distinction explicitly: Attention and Working-Memory constraints altered identifiable information states before Knowledge Encoding, and the resulting Explicit LTM provided a persistent downstream state from which assessment responses were generated. The contribution of Study 1 is therefore not simply that information was removed under constrained conditions, but that the path from source information to post-Attention input, Available Input, and subsequent knowledge state remained inspectable. This addresses the learner-state and transparency problems identified in Chapter 2 by providing a process-to-state trace rather than requiring the origin of an assessment error to be inferred retrospectively from the final answer. However, the high implementation fidelity observed in Study 1 establishes correspondence with the prespecified computational rules, not with human ADHD cognition. The Attention and WM operations remain bounded functional abstractions whose demonstrated value lies in controllability and attribution.
 
-这一对照也反映了两种simulation路径的机制差异。Persona prompting直接将目标learner characteristics置于response-generation context中，而CPB并不直接规定具体task outcome，其behavioural consequences是在Attention与WM constraints改变information availability和Explicit LTM之后产生的。不过，Prompt learners在assessment时能够重新访问完整教学上下文，而CPB只能依赖Explicit LTM，因此Prompt的ceiling pattern可能部分受到full-context access影响，而CPB中的upstream information loss则会持续限制后续回答。当前结果因此应理解为两套完整simulation architectures的比较，而不能把所有差异单独归因于persona versus process representation。
+Study 2 addresses the representational distinction raised in Section 2.2. Persona prompting provides a flexible means of conditioning learner identity, ability, and behavioural tendencies, and previous studies have shown that profile or persona instructions can alter generated responses and interactional behaviour [benedetto-etal-2024-using; liu-etal-2024-personality]. What remains less clear is whether descriptive alignment reliably produces persistent, process-specific learning consequences. Existing studies show that general-purpose LLMs can exceed intended learner ability levels and that prompting alone does not consistently reproduce linguistic, behavioural, and cognitive aspects of learner behaviour [wu-etal-2025-embracing; scarlatos-etal-2026-simulated]. In the present comparison, increasing ADHD persona intensity produced little systematic differentiation in assessment performance: the Prompt conditions remained close to ceiling and showed limited sensitivity to either controlled distraction or instructional processing demand. In contrast, CPB produced a graded performance structure together with consistent distraction-associated costs and negative relationships between processing demand and performance once the corresponding constraints were active. These patterns are directionally consistent with the distraction- and Working-Memory-related relationships reviewed in Section 2.4 [pelham-etal-2011-distractors; kofler2010adhd; sweller-etal-2019-cognitive]. More importantly, they illustrate a different form of behavioural organisation. Within CPB, the constraints altered the information available before answering, allowing differences in later performance to emerge through changes in learner state rather than through an instruction to express a more severe profile. The resulting contrast is therefore specific to **process-sensitive learning consequences**: it does not imply that persona prompting cannot shape observable learner behaviour, but shows that descriptive persona variation and process-stage constraint variation need not produce equivalent patterns of acquired knowledge and task performance.
 
-OCR与Equality Rate进一步显示，两种representations形成了不同的micro–macro performance structure。Prompt虽然具有较高的question-level ordering coverage，但大量ordering来自conditions完全同分，因此未稳定形成实际的lesson-level separation；CPB则在individual items上存在更多local reversals，却在lesson aggregation后形成一致且实际分离的constraint gradient。换言之，Prompt更接近high apparent item-level ordering with limited aggregate differentiation，而CPB表现为micro-level variability与macro-level regularity并存。由于缺乏真实learner benchmark，目前不能据此判断这一structure是否更接近真实ADHD behaviour。
+Study 3 extends this interpretation to the multidimensional representation problem identified in Sections 2.2, 2.3, and 2.7. Learner characteristics such as personality, language ability, cognitive processing, and acquired knowledge may influence behaviour through different functional pathways, yet persona-based student simulation can encode several such dimensions within a common global profile [liu-etal-2024-personality]. Adding Language Ability and Big-Five instructions at the response stage changed individual assessment outcomes, response length, and run-to-run variability, but did not eliminate the previously established CPB constraint gradient or its aggregate distraction- and processing-demand-related patterns. This provides evidence for the operational feasibility of the architectural factorisation proposed by DR4: response-stage attributes can modify the expression of an answer without necessarily replacing the learning-stage state from which that answer is generated.
 
-RQ3进一步表明，Language Ability与Big-Five additions能够改变具体assessment outcomes、response length和run-to-run variability，但没有消除Study 2已经建立的CPB graded performance、controlled-distraction sensitivity及总体negative PDB–performance pattern。因此，response-stage attributes能够改变individual outputs，同时既有constraint-related aggregate structure仍然保持可辨识；这一结果支持的是pattern retention，而不是对新增Language Ability或Big-Five characteristics本身的独立fidelity validation。
+The Study 3 evidence must nevertheless be interpreted narrowly. The study demonstrates constraint-pattern retention under attribute additions; it does not establish that the Language Ability or Big-Five profiles were faithfully simulated because those attributes were not independently evaluated. Moreover, Study 3 reused the pre-generated CPB learning trajectories from Study 2 and held them fixed across the additional response-stage profiles. Preservation of the underlying learning-stage structure was therefore partly supported by design. Study 3 tests whether response-stage additions disrupt the downstream observability of previously established constraint-related patterns, rather than whether the learning-stage process structure remains independently invariant under changes to the simulation as a whole.
 
-综合而言，本研究对Main RQ给出了有条件的肯定回答：CPB能够形成可追踪的processing-state changes，并在当前任务中比persona prompting更一致地表现出与controlled distraction和processing demand方向相符的task-specific behavioural sensitivity，而这些既有constraint-related patterns在加入额外response-stage attributes后仍然保持可观察。当前证据因此支持CPB在所操作化的ADHD-related processes上具有mechanistic traceability、theory-direction-consistent task sensitivity与constraint-pattern retention，但不能直接等同于对真实ADHD cognition或human behavioural fidelity的验证。
+#### 4.4.2 Alternative Explanations and Evidential Boundaries
+
+The process-sensitive findings must be interpreted in relation to how the underlying constructs were operationalised. Attention-related loss occurred because controlled distractors were prespecified and aligned with assessment-relevant source sentences, and triggered distractors made the corresponding target information unavailable. The resulting distraction cost therefore shows that the implemented Attention manipulation propagated to downstream knowledge states and assessment performance in the intended direction. It does not independently establish hard deletion as a psychologically faithful model of human attentional disruption. This distinction is consistent with the literature reviewed in Section 2.4, which supports differential susceptibility to distraction while also showing that distractor effects vary across tasks and conditions rather than producing deterministic information loss [pelham-etal-2011-distractors; schneidt2018distraction; van2007distraction].
+
+The interpretation of Processing Demand Bits requires a similar distinction. PDB directly enters the WM overflow rule and is subsequently used to examine the relationship between instructional processing demand and performance. A negative PDB–performance relationship under constrained conditions therefore demonstrates that the demand-sensitive rule propagated through the CPB pipeline; it is not an independent validation of PDB as a measure of human cognitive load. Furthermore, because PDB accumulates token-level surprisal, part of its variation reflects instructional length as well as probabilistic unexpectedness. The observed relationship should consequently be interpreted as sensitivity to the study-specific PDB operationalisation rather than to a pure measure of cognitive difficulty. The theoretical motivation is narrower: ADHD-related WM differences can become more pronounced as processing demands increase, while instructional learning more generally can become constrained when demand exceeds available WM resources [kofler2010adhd; sweller-etal-2019-cognitive]. Overall, these findings support implementation fidelity, rule-consistent state propagation, and task-bounded behavioural sensitivity, while external cognitive validity remains a separate empirical question.
+
+A second evidential boundary concerns the comparison between Prompt and CPB as complete simulation architectures. The two approaches share instructional materials, the underlying student model, assessment questions, and scoring procedures. In the present implementation, however, they differ in answer-stage information access: Prompt learners retain the accumulated classroom context, whereas CPB learners answer from Explicit LTM produced by the learning pipeline. This distinction is particularly relevant because learner-modelling research treats learning as a changing learner state rather than unrestricted access to all prior information [abdelrahman-etal-2023-knowledge; corbett-anderson-1995-knowledge], while recent LLM learner-simulation work similarly highlights the distinction between simulated learner knowledge and the broader capabilities or accessible information of the underlying model [yuan-etal-2026-towards]. Full-context access may therefore allow Prompt learners to recover instructional information irrespective of whether persona descriptions imply weaker learning, while information removed upstream in CPB remains unavailable during assessment. The near-ceiling Prompt results consequently cannot be attributed to persona representation alone, just as the larger CPB differentiation cannot be interpreted as an isolated causal advantage of process representation. The comparison instead demonstrates how the two implemented representation architectures, including their different learner-state and information-access assumptions, organise assessment behaviour.
+
+Evaluation uncertainty provides an additional boundary. As emphasised in Section 2.6, structured and decomposed LLM-based evaluation can improve auditability, but LLM judgements do not automatically align with human evaluation and remain subject to evaluator-specific uncertainty [hashemi-etal-2024-llm; lee-etal-2025-checkeval]. The operational Judge was highly repeatable, but it showed only moderate agreement with the two human raters and applied a systematically stricter scoring boundary. In addition, the human validation sample consisted largely of near-ceiling baseline responses rather than the full distribution of shorter and more fragmented CPB answers. Blinding reduces the risk that condition information directly influences scoring, but it does not establish that Judge error remains constant across answer types or score ranges. Together with the limited set of seven English-language finance lessons, these factors constrain the interpretation and generalisability of the absolute Checklist Scores. The strongest behavioural evidence in the present study therefore lies in directional patterns that remained consistent across runs and materials, rather than in treating individual model-derived scores as interchangeable with human grades.
+
+#### 4.4.3 Implications for Learner Representation
+
+The broader implication follows this conditional interpretation. The findings do not suggest that process-based representation should replace persona prompting in every student-simulation setting. Instead, they support the principle derived from the research gaps and design requirements in Section 2.7 that **the representation locus should be matched to the functional role through which a learner characteristic is expected to influence behaviour**. Persona prompting provides a direct and flexible interface for characteristics expressed through generated responses [tseng-etal-2024-two; wang-etal-2024-rolellm], and existing student-simulation studies show that profile dimensions such as ability, language ability, and personality can produce observable differences in generated behaviour [benedetto-etal-2024-using; liu-etal-2024-personality]. When a characteristic is instead theoretically expected to influence how instructional information is processed, retained, and subsequently available for assessment, the findings of the present study suggest that an explicit process and learner-state pathway can provide greater observability and attribution of its downstream consequences.
+
+The Study 3 findings further suggest that persona- and process-based approaches need not be mutually exclusive. Process-relevant constraints, persistent learner state, and response-level attributes can occupy different functional layers within a factorised simulated-learner architecture. This interpretation is consistent with the broader process- and state-based modelling tradition reviewed in Section 2.5, which distinguishes instructional experience, intermediate processing, persistent learner state, and later behaviour [anderson-etal-1995-cognitive; abdelrahman-etal-2023-knowledge]. Within the controlled experimental setting, CPB provides initial evidence for the feasibility of this design through traceable mechanism execution, rule-consistent state propagation, task-bounded behavioural sensitivity, and retention of aggregate constraint patterns under response-stage attribute additions. These forms of evidence support the proposed representation principle within the current materials, tasks, models, and operational definitions. They do not establish behavioural or cognitive correspondence with real ADHD learners. External validation against ADHD and neurotypical learner data is therefore required before the observed patterns can be interpreted as evidence of human learner fidelity.
 
 ## 5 Conclusions and Future Work
 
-本研究围绕一个核心的 learner-representation 问题展开：当 learner characteristics 预期通过 learning process 影响 information processing、knowledge formation 和 downstream behaviour 时，应如何在 LLM student simulation 中表示这些 characteristics？以 ADHD-related Attention 和 Working-Memory characteristics 为受控案例，本文比较了 persona prompting 与 Cognitive-Process-Based（CPB）representation，并对 Main Research Question 给出了有条件的肯定回答。实验表明，CPB 能够将预定义的 processing constraints 转化为可归因的 information- and knowledge-state changes，并形成与 controlled distraction 和 instructional processing demand 方向一致的 task-sensitive behavioural patterns；相比之下，persona-level differences 未稳定转化为同类型的 process-sensitive effects。加入 Language Ability 和 Big-Five response-stage prompts 后，CPB 的具体 assessment outcomes 虽发生变化，但既有的 graded constraint structure 及相关 aggregate patterns 仍保持可观察。
+This thesis addressed a central learner-representation question: when learner characteristics are expected to influence information processing, knowledge formation, and downstream behaviour through the learning process, how should they be represented in LLM-based student simulation? Using ADHD-related Attention and Working-Memory characteristics as controlled cases, the findings provide a qualified answer. CPB translated prespecified processing constraints into traceable information- and knowledge-state changes and produced task-bounded behavioural patterns that were systematically related to controlled distraction and instructional processing demand. Comparable persona-level variation did not produce the same consistent process-sensitive patterns, while the main CPB constraint structure remained observable after additional Language Ability and Big-Five attributes were introduced at the response stage.
 
-本文的主要贡献在于提出一种 **functionally grounded learner representation**：将部分 process-relevant characteristics 从直接规定“学生应该怎样表现”的 persona instructions 中分离，使其通过 learning-process constraints 改变 learner state，再由 resulting state 影响 downstream behaviour。在此基础上，本文进一步建立了与 representation claim 相匹配的 progressive validation framework，从 mechanism execution 和 information-state transitions 逐步延伸到 task-sensitive behaviour 与 attribute-extension analysis。Explicit knowledge state 和 traceability 因而主要作为这种 process-based representation 的方法学优势，使 behavioural outcomes 能够与其形成过程建立可检查的对应关系。
+The main contribution is therefore a **functionally grounded approach to learner representation**. Rather than requiring all learner characteristics to be expressed through a single persona description, CPB separates process-relevant constraints, persistent learner state, and response-stage attributes according to their functional roles. The accompanying validation framework similarly distinguishes mechanism execution, state transition, downstream behavioural sensitivity, and attribute extension rather than treating persona plausibility or final task performance as sufficient evidence for all claims. More broadly, the findings support a conditional representation principle: **the representation locus should be matched to the functional level at which a learner characteristic is expected to operate**. Persona prompting may remain appropriate for characteristics primarily affecting expression or interaction style, whereas characteristics expected to shape learning and knowledge acquisition may benefit from explicit process- and state-level representation.
 
-这些结论仍受到明确的 scope 限制。Attention 和 Working Memory 只是 ADHD cognition 的有限 functional abstractions，并不能代表完整或临床真实的 ADHD learning process；PDB 也只是基于 surprisal 构建的 instructional processing-demand proxy，而非 human cognitive load 的直接测量。本研究同时局限于英文 finance materials、多轮教学和 short-answer assessment，且尚未使用真实 ADHD learner data 建立 external behavioural validity。Future work 应进一步结合真实 ADHD 与 NT learner data 验证 distraction- and processing-demand-related patterns，细化 probabilistic attention allocation、partial retention、interference 和 dynamic processing mechanisms，并扩展至不同学科、任务形式和基础模型。
-
-总体而言，本研究并不主张以 CPB 全面取代 persona prompting。更重要的启示是：**learner representation 应与 learner characteristic 预期发挥作用的 functional level 相匹配。** 对主要影响语言表达或互动风格的 characteristics，persona prompting 可能已经足够；而对于预期通过 learning process 改变 knowledge acquisition 和 subsequent task behaviour 的 characteristics，让 behavioural differences 从相应的 process constraints 和 resulting learner state 中产生，为构建更加 modular、functionally grounded 的 LLM simulated learners 提供了一条值得进一步验证的路径。
+These conclusions remain bounded by the present operationalisations and experimental scope. Attention and Working Memory were implemented as limited functional abstractions rather than complete models of ADHD cognition, and PDB represents a study-specific surprisal-based proxy for instructional processing demand rather than human cognitive load. The experiments were also restricted to English finance materials, multi-round instruction, short-answer assessment, and simulated rather than human learners. Future work should therefore validate the observed distraction- and processing-demand-related patterns against ADHD and neurotypical learner data, develop richer probabilistic and dynamic processing mechanisms, and test the framework across domains, tasks, and underlying models. Such validation is necessary before CPB-related behavioural patterns can be interpreted as evidence of human learner fidelity, but the present study provides a basis for developing more modular and functionally grounded LLM simulated learners.
 
 ## Appendices
 

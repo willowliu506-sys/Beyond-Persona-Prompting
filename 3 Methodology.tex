@@ -23,6 +23,8 @@ This overarching question is addressed through three research questions with dis
 \textbf{RQ3---Constraint-Pattern Retention under Attribute Additions:} When Language Ability and Big-Five prompt dimensions are added at the response stage, how do assessment outcomes change, and do CPB's previously established constraint-related aggregate patterns remain observable?
 \end{quote}
 
+Table~\ref{tab:rq-study-mapping} maps each research question to its evidential role, corresponding experimental study, core comparison, and primary evidence.
+
 \begin{table}[H]
 \centering
 \caption{Mapping of research questions to experimental studies and evidence.}
@@ -88,6 +90,7 @@ Rounds were assigned identifiers of the form \texttt{R01}, \texttt{R02}, and so 
 This study examines how ADHD-related learner representations process information during controlled classroom learning. The subsequent experiments therefore require a common material-level variable representing the relative processing demand imposed by different Teaching Rounds. This variable serves two functions. First, it provides the shared demand reference for the Working-Memory processing-capacity manipulation described in Section 3.4.2. Second, it provides a continuous material-level variable for analysing whether question performance in Studies 2 and 3 changes systematically with instructional processing demand. A \textbf{Processing Demand Bits (PDB)} value was therefore computed and frozen for every Teaching Round and held constant across all learner conditions.
 
 \subsubsection{Measurement Basis}
+\label{subsubsec:pdb-measurement-basis}
 
 Word count alone is insufficient for this purpose. Teaching Rounds of similar length may differ in processing demand because their text differs in predictability; surface length therefore cannot distinguish between instructional inputs that are equally long but differently demanding to process. The present study consequently uses surprisal as the basis of its instructional processing-demand annotation. Surprisal measures how unpredictable a linguistic unit is given its preceding context. For model token $x_t$ at position $t$, surprisal is defined as:
 
@@ -102,6 +105,7 @@ Surprisal has long been used in probabilistic accounts of incremental language p
 The measure is suitable for the present study because Teaching Rounds are organised as continuous, locally coherent instructional inputs. Summing token-level surprisal within a Teaching Round retains two material properties relevant to processing demand: the amount of linguistic input in the round and the difficulty of predicting that input from its within-round context. It therefore provides a richer material-side reference than word count alone. Surprisal does not, however, capture every contributor to cognitive demand, including prior knowledge, discourse comprehension, dependency retrieval, or conceptual complexity. PDB is consequently treated as a \textbf{computational proxy for relative instructional processing demand}, rather than as a direct measure of human cognitive load.
 
 \subsubsection{Round-Level Operationalisation}
+\label{subsubsec:pdb-round-operationalisation}
 
 Each Teaching Round $R_i$ receives an independent PDB value calculated by summing the surprisal of all model tokens in the round:
 
@@ -124,6 +128,7 @@ R_i \longrightarrow D_\theta(R_i).
 Because PDB is cumulative, it necessarily contains a text-length component. Across the 83 frozen Teaching Rounds, GPT-2 PDB and surface word count had a Spearman correlation of $\rho=0.727$. Longer rounds therefore tended to have higher cumulative demand, but the two measures were not equivalent: differences in conditional predictability produced different PDB values among rounds of similar length. Word count and PDB were consequently retained together to describe surface length and language-model-based cumulative processing demand, respectively.
 
 \subsubsection{Estimator-Sensitivity Analysis}
+\label{subsubsec:pdb-estimator-sensitivity}
 
 Surprisal is not a textual property that exists independently of its probability model. Models may produce different estimates because they differ in training corpus, tokenisation, context representation, and architecture. To test whether the relative instructional-demand structure used in this study depended excessively on GPT-2, a heterogeneous estimator---a fixed-discount interpolated Kneser--Ney word trigram---was used for sensitivity analysis. The trigram model was trained on the Brown and Reuters corpora and, like GPT-2, reset its context at every Teaching-Round boundary.
 
@@ -183,7 +188,7 @@ Following the rubric-based and structured criterion-level evaluation principles 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter3/export/ch03_criterion_scoring_pipeline.pdf}
-    \caption{Frozen criterion-level scoring and validation pipeline.}
+    \caption{Frozen criterion-level scoring and validation pipeline. Each assessment question is represented by a frozen, source-grounded rubric decomposed into atomic checklist criteria. A pointwise LLM Judge assigns structured criterion-level labels, which are converted into the final Checklist Score through deterministic programmatic aggregation; human validation and repeatability testing are conducted separately to evaluate the scoring procedure.}
     \label{fig:criterion-scoring-pipeline}
 \end{figure}
 
@@ -408,7 +413,7 @@ Finance examines how money is obtained, managed, moved, and used.
 Finance helps individuals and organizations understand sources and uses of cash and make decisions when outcomes are uncertain.
 \end{quote}
 
-Here, the sentence following the bracketed distractor is the frozen target. The associated assessment question is not provided to the student model during learning, and the Attention mechanism does not dynamically select information based on the later question. The term \textit{question-targeted} therefore refers only to the preregistered alignment between the distractor, the affected source evidence, and the subsequent assessment item.
+Here, the sentence following the bracketed distractor is the frozen target. The associated assessment question is not provided to the student model during learning, and the Attention mechanism does not dynamically select information based on the later question. The term \textit{question-targeted} therefore refers only to the predefined and frozen alignment between the distractor, the affected source evidence, and the subsequent assessment item.
 
 For an eligible distractor in Teaching Round \(r\), repeated run \(j\), and condition \(c\), the trigger decision is sampled as
 
@@ -499,6 +504,8 @@ This choice does not imply that hard deletion has been validated as the psycholo
 \label{sec:wm-mechanism-implementation}
 
 As reviewed in Section~\ref{sec:adhd-learning-processes}, Working Memory (WM) is a limited processing system involved in maintaining and manipulating task-relevant information, and ADHD-related WM differences may become more consequential as processing demands increase. The present study therefore models \textbf{sensitivity to instructional processing demand} as a bounded functional abstraction rather than attempting to reproduce human Working Memory as a whole. Within CPB, the WM mechanism operates after Attention: when the frozen processing demand of a Teaching Round exceeds the capacity threshold assigned to the current condition, the earliest instructional sentence still available after Attention is made unavailable before Knowledge Encoding.
+
+Figure~\ref{fig:working-memory-mechanism-flow} illustrates how the frozen round-level processing demand and condition-specific WM capacity determine whether information is further restricted before Knowledge Encoding.
 
 \begin{figure}[H]
     \centering
@@ -672,7 +679,9 @@ Study 1 addresses RQ1 by examining whether the CPB processing pipeline produces 
 \textbf{RQ1---Mechanism:} Does the CPB processing pipeline execute its intended rules and produce traceable transitions from instructional information, through attention, working-memory processing and encoding, to Explicit LTM?
 \end{quote}
 
-To answer this question, Study 1 divides RQ1 into two subquestions. SQ1 examines whether the Attention and Working-Memory mechanisms execute their registered rules correctly. SQ2 then examines whether these mechanisms produce attributable information-state changes at the intended processing stages and whether those changes propagate through the pipeline to the final Explicit LTM.
+To answer this question, Study 1 divides RQ1 into two subquestions. SQ1 examines whether the Attention and Working-Memory mechanisms execute their prespecified rules correctly. SQ2 then examines whether these mechanisms produce attributable information-state changes at the intended processing stages and whether those changes propagate through the pipeline to the final Explicit LTM.
+
+Table~\ref{tab:study1-subquestions} summarises the validation focus and evidence sought for the two Study 1 subquestions.
 
 \begin{table}[H]
 \centering
@@ -685,7 +694,7 @@ To answer this question, Study 1 divides RQ1 into two subquestions. SQ1 examines
 \toprule
 \textbf{Subquestion} & \textbf{Validation focus} & \textbf{Evidence sought} \\
 \midrule
-\textbf{SQ1} & Mechanism execution & Whether the registered Attention and WM rules trigger and execute correctly \\
+\textbf{SQ1} & Mechanism execution & Whether the prespecified Attention and WM rules trigger and execute correctly \\
 \textbf{SQ2} & Information-state transitions and propagation & Whether stage-specific changes are attributable and traceable, and whether they propagate through Available Input to Explicit LTM \\
 \bottomrule
 \end{tabular}
@@ -694,10 +703,10 @@ To answer this question, Study 1 divides RQ1 into two subquestions. SQ1 examines
 \paragraph{SQ1---Mechanism Execution.}
 
 \begin{quote}
-\textbf{Do the Attention and Working-Memory mechanisms execute their registered rules correctly?}
+\textbf{Do the Attention and Working-Memory mechanisms execute their prespecified rules correctly?}
 \end{quote}
 
-SQ1 examines whether Attention triggering and target removal follow the predefined rules while preserving non-target instructional information, and whether WM overflow and FIFO-style removal occur only when the registered capacity constraint is exceeded.
+SQ1 examines whether Attention triggering and target removal follow the predefined rules while preserving non-target instructional information, and whether WM overflow and FIFO-style removal occur only when the calibrated and frozen capacity threshold is exceeded.
 
 \paragraph{SQ2---Traceable Information-State Transitions and Propagation.}
 
@@ -719,7 +728,7 @@ L_{r,c}.
 
 shows the intended stage-specific transitions. The analysis first identifies the local changes introduced by Attention, Working-Memory Processing, and Encoding, and then examines how Attention- and WM-related removals jointly produce the Available Input state and whether the resulting information differences remain observable after encoding in Explicit LTM.
 
-As illustrated in Figure~\ref{fig:study1-validation-logic}, SQ1 validates the execution of the registered Attention and Working-Memory rules, whereas SQ2 traces stage-specific information-state transitions and their cumulative propagation to Explicit LTM. The corresponding evaluation measures are defined in Section~\ref{subsubsec:study1-measures}.
+As illustrated in Figure~\ref{fig:study1-validation-logic}, SQ1 validates the execution of the prespecified Attention and Working-Memory rules, whereas SQ2 traces stage-specific information-state transitions and their cumulative propagation to Explicit LTM. The corresponding evaluation measures are defined in Section~\ref{subsubsec:study1-measures}.
 
 \begin{figure}[H]
     \centering
@@ -745,7 +754,7 @@ This design produces four experimental conditions, as shown in Table~\ref{tab:st
 
 \begin{table}[H]
 \centering
-\caption{Registered mechanism parameters for the Study 1 factorial conditions.}
+\caption{Frozen mechanism parameters for the Study 1 factorial conditions.}
 \label{tab:study1-conditions}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
@@ -764,7 +773,7 @@ This design produces four experimental conditions, as shown in Table~\ref{tab:st
 
 Study 1 implements these OFF/ON manipulations using deterministic boundary parameters. Under the mechanism rules defined in Sections~3.4.1 and~3.4.2, Attention ON uses $p^A_c=1$, causing every eligible distractor to trigger the Attention Filter so that target localisation and removal can be tested directly. Attention OFF uses $p^A_c=0$ and produces no Attention-attributed removal. WM ON uses the median boundary of the frozen PDB distribution, $C^{WM}_c=321.9937895$ bits; within the calibration set comprising the source rounds associated with the 42 Independent Questions, 21 source rounds exceed this threshold. The 21/42 value describes threshold calibration, whereas the actual number of WM triggers across the complete Teaching Phase is a mechanism-execution result for SQ1. WM OFF uses $10^{10}$ bits as an effectively non-binding implementation sentinel and disables WM removal. Use of the median boundary enables Study 1 to validate deterministically the same WM rule used by the Study 2 Medium condition. Study 1 itself terminates at Explicit LTM and does not analyse answer performance. These parameters establish mechanism-validation boundary conditions and do not represent ADHD severity or the attention and working-memory capacity of real individuals.
 
-Under A1W1, the two mechanisms execute sequentially in the registered CPB order:
+Under A1W1, the two mechanisms execute sequentially in the predefined CPB order:
 
 \[
 S_r
@@ -774,7 +783,7 @@ P_{r,c}
 A_{r,c}.
 \]
 
-Attention first determines which instructional sentences remain available after distraction. WM can then restrict only this remaining information. Its trigger decision still uses the Teaching Round's frozen $D(R_r)$; PDB is not recalculated after Attention removal. A1W1 therefore represents the cumulative operation of two registered mechanisms in a fixed order rather than a separate joint mechanism.
+Attention first determines which instructional sentences remain available after distraction. WM can then restrict only this remaining information. Its trigger decision still uses the Teaching Round's frozen $D(R_r)$; PDB is not recalculated after Attention removal. A1W1 therefore represents the cumulative operation of two predefined mechanisms in a fixed order rather than a separate joint mechanism.
 
 Except for the Attention and WM states, all learning-stage components are held constant across the four conditions. Every condition uses the same frozen Teaching Rounds, distractor assignments, student-model configuration, and Knowledge Encoder. In particular, although A0W0 disables the Attention and WM constraints, it still undergoes normal Knowledge Encoding and is therefore defined as an \textit{encoding-only reference}, rather than a perfect-memory condition.
 
@@ -785,7 +794,7 @@ Study 1 uses seven frozen instructional materials, with each of the four $2\time
 \subsubsection{Evaluation Measures}
 \label{subsubsec:study1-measures}
 
-To answer SQ1 and SQ2, Study 1 uses two connected validation domains. SQ1 uses implementation-fidelity measures to check whether Attention and Working Memory trigger and execute according to the preregistered rules. SQ2 then combines stage-specific transition measures with cumulative-propagation measures to test whether the resulting information-state changes can be located and attributed, and whether they are reflected in the embedding-based semantic correspondence between the final Explicit LTM and the Source.
+To answer SQ1 and SQ2, Study 1 uses two connected validation domains. SQ1 uses implementation-fidelity measures to check whether Attention and Working Memory trigger and execute according to the prespecified rules. SQ2 then combines stage-specific transition measures with cumulative-propagation measures to test whether the resulting information-state changes can be located and attributed, and whether they are reflected in the embedding-based semantic correspondence between the final Explicit LTM and the Source.
 
 Text-quantity availability measures use deterministic $\operatorname{WordCount}(X)$ calculations that count instructional content only and exclude distractor labels, control markers, and other experimental prompt text. The counts describe how much instructional information remains available before and after different processing stages; they are not interpreted as real human attention levels, working-memory capacities, or percentages of knowledge retention.
 
@@ -835,7 +844,7 @@ N^{\mathrm{expected}}_{r,c}
 
 Values closer to 1 indicate fewer unintended Attention removals; $NTPR_c=1$ means that all non-target information was correctly preserved. ATRF and NTPR therefore assess correct removal and correct preservation separately.
 
-WM execution is also assessed using two complementary measures. \textbf{Working-Memory Trigger Agreement (WMTA)} quantifies whether the trigger status in the execution log agrees with the registered capacity rule:
+WM execution is also assessed using two complementary measures. \textbf{Working-Memory Trigger Agreement (WMTA)} quantifies whether the trigger status in the execution log agrees with the prespecified capacity-threshold rule:
 
 \[
 WMTA_c
@@ -1022,7 +1031,7 @@ The two validation domains and the stage-specific and cumulative evidence levels
 \makecell{\textbf{Sub-}\\\textbf{question}} & \textbf{Evidence level} & \textbf{Validation target} & \textbf{Measure} & \textbf{Interpretation} \\
 \midrule
 \textbf{SQ1} & Mechanism execution & Attention execution & ATRF / NTPR & Whether intended Attention targets are removed while non-target information is preserved \\
-\textbf{SQ1} & Mechanism execution & WM execution & WMTA / FRF & Whether WM triggers at the registered threshold and applies the correct within-round removal rule \\
+\textbf{SQ1} & Mechanism execution & WM execution & WMTA / FRF & Whether WM triggers at the calibrated and frozen threshold and applies the correct within-round removal rule \\
 \textbf{SQ2} & Stage-specific transition & $S_r\rightarrow P_{r,c}$ & AAR & Proportion of Source information remaining available after Attention \\
 \textbf{SQ2} & Stage-specific transition & $P_{r,c}\rightarrow A_{r,c}$ & WMAR & Proportion of Post-Attention information remaining available after WM \\
 \textbf{SQ2} & Stage-specific transition & $A_{r,c}\rightarrow L_{r,c}$ & ESR & Semantic correspondence between actual Encoder input and generated Explicit LTM \\
@@ -1055,7 +1064,7 @@ To answer this question, Study 2 divides RQ2 into two progressive subquestions. 
 \textbf{Under distracted materials, do the manipulated learner conditions produce systematic within-representation differences in assessment performance under Prompt-based and CPB-based simulation?}
 \end{quote}
 
-SQ1 contains two parallel, representation-internal branches under the common distracted-material condition. The Prompt branch examines whether Prompt-NT, Moderate-Intensity Prompt-ADHD, and High-Intensity Prompt-ADHD form a performance ordering corresponding to persona intensity. The CPB branch examines whether CPB Zero, Low, Medium, and High form a graded performance response as registered constraint severity increases. This subquestion asks only whether scores, run-to-run variability, and response length change systematically with each manipulation. It does not interpret a lower absolute score as inherently more consistent with ADHD cognitive mechanisms, and it does not compare the absolute Prompt and CPB scores to make a cross-representation judgement. Clean-material results are retained for the material-condition comparison and primary processing-demand analysis in SQ2, rather than treated as independent differentiation evidence for SQ1.
+SQ1 contains two parallel, representation-internal branches under the common distracted-material condition. The Prompt branch examines whether Prompt-NT, Moderate-Intensity Prompt-ADHD, and High-Intensity Prompt-ADHD form a performance ordering corresponding to persona intensity. The CPB branch examines whether CPB Zero, Low, Medium, and High form a graded performance response as the frozen constraint-severity level increases. This subquestion asks only whether scores, run-to-run variability, and response length change systematically with each manipulation. It does not interpret a lower absolute score as inherently more consistent with ADHD cognitive mechanisms, and it does not compare the absolute Prompt and CPB scores to make a cross-representation judgement. Clean-material results are retained for the material-condition comparison and primary processing-demand analysis in SQ2, rather than treated as independent differentiation evidence for SQ1.
 
 \paragraph{SQ2---ADHD-Theory-Consistent Process Sensitivity.}
 
@@ -1077,7 +1086,7 @@ Each instructional material contains six Independent Questions and one cross-rou
 
 The persona-prompted branch comprised Prompt-NT and two Prompt-ADHD intensity conditions. The Prompt-ADHD descriptions used the text-based educational prompts provided by Gonnermann-Müller et al. \cite{gonnermann-muller-etal-2026-adhd-persona}. They retained the same ADHD-related behavioural content while varying intensity through frequency terms. The Moderate-Intensity condition primarily used terms such as \textit{sometimes}, \textit{occasionally}, and \textit{somewhat}; the High-Intensity condition primarily used terms such as \textit{often}, \textit{frequently}, and \textit{regularly}. Prompt-NT contained no ADHD-specific cognitive description and served as the persona-prompted reference condition.
 
-The CPB branch comprised Zero, Low, Medium, and High. CPB Zero retained Teaching-Round processing, shared Knowledge Encoding, Explicit LTM accumulation, and memory-constrained answering while disabling both information-loss mechanisms. It therefore served as the \textit{zero-constraint CPB reference}. It produced no Attention- or WM-attributed information loss but retained the complete CPB architecture. Low, Medium, and High jointly varied Attention-trigger probability and WM-capacity threshold to impose progressively stronger processing constraints. Figure~\ref{fig:study2-wm-calibration} and Table~\ref{tab:study2-conditions} show, respectively, the basis for selecting the WM thresholds and the registered parameters for all learner conditions.
+The CPB branch comprised Zero, Low, Medium, and High. CPB Zero retained Teaching-Round processing, shared Knowledge Encoding, Explicit LTM accumulation, and memory-constrained answering while disabling both information-loss mechanisms. It therefore served as the \textit{zero-constraint CPB reference}. It produced no Attention- or WM-attributed information loss but retained the complete CPB architecture. Low, Medium, and High jointly varied Attention-trigger probability and WM-capacity threshold to impose progressively stronger processing constraints. Figure~\ref{fig:study2-wm-calibration} and Table~\ref{tab:study2-conditions} show, respectively, the calibration basis for the WM thresholds and the frozen parameter values for all learner conditions.
 
 \begin{figure}[H]
     \centering
@@ -1090,7 +1099,7 @@ Figure~\ref{fig:study2-wm-calibration} shows the calibration of the Study 2 WM-c
 
 \begin{table}[H]
 \centering
-\caption{Learner conditions and registered CPB process parameters in Study 2.}
+\caption{Learner conditions and frozen CPB process parameters in Study 2.}
 \label{tab:study2-conditions}
 \tiny
 \setlength{\tabcolsep}{2pt}
@@ -1110,7 +1119,7 @@ Figure~\ref{fig:study2-wm-calibration} shows the calibration of the Study 2 WM-c
 \end{tabularx}
 \end{table}
 
-For CPB Zero, $10^{10}$ bits is an effectively non-binding implementation sentinel used while WM removal is disabled, rather than a meaningful capacity estimate. For the constrained conditions, increasing registered constraint severity combines a higher Attention-trigger probability with a lower WM capacity:
+For CPB Zero, $10^{10}$ bits is an effectively non-binding implementation sentinel used while WM removal is disabled, rather than a meaningful capacity estimate. For the constrained conditions, progressively stronger frozen constraint levels combine a higher Attention-trigger probability with a lower WM capacity:
 
 \[
 C^{WM}_{\mathrm{Low}}
@@ -1120,7 +1129,7 @@ C^{WM}_{\mathrm{Medium}}
 C^{WM}_{\mathrm{High}}.
 \]
 
-CPB Low, Medium, and High are therefore registered experimental constraint levels jointly constituted by the Attention and WM parameters, rather than clinically calibrated ADHD severity categories. Because both parameters change with severity, Study 2 tests their combined behavioural consequences and does not estimate the independent causal contribution of Attention or WM.
+CPB Low, Medium, and High are therefore predefined and frozen experimental constraint levels jointly constituted by the Attention and WM parameters, rather than clinically calibrated ADHD severity categories. Because both parameters change with severity, Study 2 tests their combined behavioural consequences and does not estimate the independent causal contribution of Attention or WM.
 
 Both material conditions were derived from the same seven frozen instructional materials. The clean condition used instructional text without distractor events, whereas the distracted condition used instructional text containing frozen distractor events at the predefined mapped locations. Both simulated-student representations used DeepSeek V4 Flash as the student model and shared the same frozen instructional materials, assessment questions, and scoring framework. Their Assessment Phases followed their respective representation architectures: Prompt learners answered from the frozen complete post-exposure conversation context, whereas CPB learners answered only from the frozen Explicit LTM.
 
@@ -1362,7 +1371,7 @@ and the equally weighted summary across the seven lessons is
 d_{\ell,a,b,m}.
 \]
 
-The seven lesson-specific differences $d_{\ell,a,b,m}$ are the paired analysis units for calculating the overall contrast and paired lesson bootstrap; they are not individually tabulated in the Results. Actual lesson means and their ordering across lessons are reported through the lesson-level score figure and Lesson OCR/ER. Table 4.RQ2-3 reports only the equally weighted overall contrast $\Delta_{a,b,m}$ and its 95\% confidence interval, quantifying the overall magnitude and uncertainty of the condition difference.
+The seven lesson-specific differences $d_{\ell,a,b,m}$ are the paired analysis units for calculating the overall contrast and paired lesson bootstrap; they are not individually tabulated in the Results. Actual lesson means and their ordering across lessons are reported through the lesson-level score figure and Lesson OCR/ER. Table~\ref{tab:rq2-paired-contrasts} reports only the equally weighted overall contrast $\Delta_{a,b,m}$ and its 95\% confidence interval, quantifying the overall magnitude and uncertainty of the condition difference.
 
 A positive value means that the higher-severity condition has a lower lesson-level Mean Checklist Score. The Prompt branch reports $\Delta_{\mathrm{NT-Mod}}$, $\Delta_{\mathrm{Mod-High}}$, and $\Delta_{\mathrm{NT-High}}$. The CPB branch reports $\Delta_{\mathrm{Zero-Low}}$, $\Delta_{\mathrm{Low-Medium}}$, $\Delta_{\mathrm{Medium-High}}$, and $\Delta_{\mathrm{Zero-High}}$. All SQ1 contrasts are calculated only under distracted materials and are reported as raw Checklist Score differences with 95\% confidence intervals, rather than percentages relative to baseline.
 
@@ -1665,7 +1674,7 @@ and are defined in Table~\ref{tab:study3-attribute-profiles}.
 
 Study 3 crosses the four Language Ability--Big-Five attribute profiles (A1, A2, B1, and B2) with the five learner types and uses the same seven frozen instructional materials as Study 2. All Prompt-ADHD and CPB learners are run under both clean and distracted materials, with five repetitions in every learner-type $\times$ profile $\times$ material-condition cell. The Prompt branch therefore contains $2\times4\times2\times5=80$ runs, and the CPB branch contains $3\times4\times2\times5=120$ runs. Study 3 comprises 200 simulated-learner runs, 1,400 lesson-level learning sessions, and 9,800 answers and Judge scores. Each of the clean and distracted arms contains 100 runs, 700 lesson-level learning sessions, and 4,900 answers. Apart from the addition of Language Ability and Big-Five dimensions, the experimental procedure, frozen instructional materials, and Judge procedure are the same as in Study 2.
 
-For the CPB branch, Study 3 retains the CPB parameters registered in Section~\ref{subsubsec:study2-conditions} and reuses the Attention, WM, Encoding, and Explicit LTM trajectories already frozen in Study 2, matched individually by material condition, constraint level, and run, rather than resampling the learning-stage mechanisms. Matched conditions therefore share not only the same Attention-trigger probability, WM capacity, and random seed, but also the same realised Attention and WM trigger decisions and the same retained or removed information. These outcomes are preserved through sentence identifiers and processing logs. The A1--B2 profiles are introduced only at the memory-constrained answer-generation stage, allowing response-stage effects of the additional profile dimensions to be examined while the existing CPB learning state remains fixed.
+For the CPB branch, Study 3 retains the CPB parameters frozen in Section~\ref{subsubsec:study2-conditions} and reuses the Attention, WM, Encoding, and Explicit LTM trajectories already frozen in Study 2, matched individually by material condition, constraint level, and run, rather than resampling the learning-stage mechanisms. Matched conditions therefore share not only the same Attention-trigger probability, WM capacity, and random seed, but also the same realised Attention and WM trigger decisions and the same retained or removed information. These outcomes are preserved through sentence identifiers and processing logs. The A1--B2 profiles are introduced only at the memory-constrained answer-generation stage, allowing response-stage effects of the additional profile dimensions to be examined while the existing CPB learning state remains fixed.
 
 \subsubsection{Evaluation Measures}
 \label{subsubsec:study3-measures}
@@ -1823,7 +1832,7 @@ This study assigns simulated-student generation, Knowledge Encoding, instruction
 \scriptsize
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.2}
-\begin{tabular}{p{0.18\textwidth} p{0.22\textwidth} p{0.28\textwidth} p{0.23\textwidth}}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.18\textwidth} >{\raggedright\arraybackslash}p{0.22\textwidth} p{0.28\textwidth} p{0.23\textwidth}}
 \toprule
 \textbf{Component} & \textbf{Model or requested identifier} & \textbf{Primary role} & \textbf{Frozen settings} \\
 \midrule
@@ -1842,9 +1851,9 @@ DeepSeek V4-Flash has two distinct roles in this study that share the same model
 
 DeepSeek requests for simulated-student answering use \texttt{temperature=0.0} and a maximum output of 1,200 tokens. The Knowledge Encoder also uses \texttt{temperature=0.0}, with a maximum output of 500 tokens. All requests use non-streaming generation, a 180-second timeout, and at most three request retries. The Encoder is instructed to summarise only the classroom information it actually receives, not to add external knowledge, and to return one plain-text memory entry without a heading, list, or supplementary commentary. If no Available Input remains after Attention and WM processing in a Teaching Round, the Encoder is not called and no LTM entry is generated. For identical Available Input, Encoder prompt, and model configuration, the system reuses a previously generated encoding through a content-addressed cache to prevent repeated generation from introducing additional differences across equivalent CPB conditions.
 
-The setting \texttt{temperature=0.0} is used to reduce generation variation unrelated to the experimental manipulation, but it is not treated as a mathematical guarantee of deterministic output. DeepSeek requests do not pass a fixed generation seed, and the remote API service may still be affected by changes in backend implementation and inference environment. Studies 2 and 3 therefore execute five independent runs for every learner condition and estimate Mean Checklist Score, sample SD, and other run-to-run variability measures from the stored outputs. The treatment of repeated runs and statistical uncertainty is described in Section~3.6.3.
+The setting \texttt{temperature=0.0} is used to reduce generation variation unrelated to the experimental manipulation, but it is not treated as a mathematical guarantee of deterministic output. DeepSeek requests do not pass a fixed generation seed, and the remote API service may still be affected by changes in backend implementation and inference environment. Studies 2 and 3 therefore execute five independent runs for every learner condition and estimate Mean Checklist Score, sample SD, and other run-to-run variability measures from the stored outputs. The treatment of repeated runs and statistical uncertainty is described in Section~\ref{subsec:experiment-reproducibility}.
 
-In addition to the generative models, GPT-2 small is used as the frozen offline probability estimator for PDB. The study uses the OpenAI GPT-2 small model released through Hugging Face and its corresponding tokenizer. Model weights, tokenizer, and inference configuration remain fixed for all PDB calculations. GPT-2 does not participate in student answering or LTM generation. It acts as a measurement instrument that calculates cumulative surprisal separately for each Teaching Round. Model context is reset at the start of every round and initialised with an unscored boundary token; the two or three sentences within the round share a continuous context. This configuration makes PDB a frozen material-level annotation rather than a variable generated dynamically by a particular simulated-student run. The PDB formula, rationale for model selection, and estimator-sensitivity analysis are described in Sections~3.2.2 and~3.5.1.
+In addition to the generative models, GPT-2 small is used as the frozen offline probability estimator for PDB. The study uses the OpenAI GPT-2 small model released through Hugging Face and its corresponding tokenizer. Model weights, tokenizer, and inference configuration remain fixed for all PDB calculations. GPT-2 does not participate in student answering or LTM generation. It acts as a measurement instrument that calculates cumulative surprisal separately for each Teaching Round. Model context is reset at the start of every round and initialised with an unscored boundary token; the two or three sentences within the round share a continuous context. This configuration makes PDB a frozen material-level annotation rather than a variable generated dynamically by a particular simulated-student run. The measurement basis and round-level operationalisation of PDB are described in Sections~\ref{subsubsec:pdb-measurement-basis} and~\ref{subsubsec:pdb-round-operationalisation}, respectively, while the estimator-sensitivity analysis is reported in Section~\ref{subsubsec:pdb-estimator-sensitivity}.
 
 Encoding Semantic Recall (ESR) and E2ESR Source-to-LTM semantic correspondence in Study 1 use the official BERTScore implementation with \path{microsoft/deberta-xlarge-mnli} as the contextual-embedding model \cite{zhang2019bertscore}. Every comparison reports the Recall component, disables inverse-document-frequency weighting (\texttt{idf=False}), and enables baseline rescaling. This model is used only for offline embedding-based semantic-correspondence analysis of stored text. It does not participate in Attention, WM, Knowledge Encoding, or assessment answering, and it does not perform proposition-level judgements of knowledge retention. The reference--candidate direction and measure interpretation are defined in the Study 1 Evaluation Measures.
 
@@ -1859,9 +1868,9 @@ Reproducibility was addressed through frozen experimental inputs, controlled sto
 
 All formal experiments used the same frozen instructional and assessment resources, including the seven lessons, 83 Teaching Rounds, 49 assessment questions, source mappings, reference answers, checklist criteria, prompts, and Study-specific configurations. Relevant files and configurations were versioned and recorded with content hashes. Learner conditions, material conditions, repetition counts, Attention probabilities, Working-Memory capacities, and run-specific seeds were fixed before execution, allowing every output to be linked to its corresponding Study, condition, run, and input version.
 
-Three sources of stochasticity were treated separately. CPB Attention triggering was part of the experimental manipulation and used frozen run seeds, so the same registered configuration reproduced the same Attention trajectory. Student answering and Knowledge Encoding used fixed generation settings, including \texttt{temperature = 0}, but no claim of deterministic regeneration is made because remote API execution remains outside experimental control; repeated runs were therefore used to characterise run-to-run variation. Bootstrap seeds were independent of both processes and controlled only offline statistical resampling.
+Three sources of stochasticity were treated separately. CPB Attention triggering was part of the experimental manipulation and used frozen run seeds, so the same frozen experimental configuration reproduced the same Attention trajectory. Student answering and Knowledge Encoding used fixed generation settings, including \texttt{temperature = 0}, but no claim of deterministic regeneration is made because remote API execution remains outside experimental control; repeated runs were therefore used to characterise run-to-run variation. Bootstrap seeds were independent of both processes and controlled only offline statistical resampling.
 
-Accordingly, persisted outputs rather than repeated API calls formed the primary reproducibility record. Each run retained the relevant classroom context or CPB processing logs, Available Input, Explicit LTM, assessment answers, criterion-level Judge outputs, question-level scores, and associated metadata. Identical CPB Encoding inputs reused the same cached Encoding result, preventing equivalent learning states from diverging through repeated API calls. Run manifests, output hashes, and integrity audits were used to verify that the registered runs, answers, processing records, memory states, and Judge results were complete before inclusion in analysis. Study 3 additionally verified the correspondence between matched CPB trajectories and their Study 2 baselines.
+Accordingly, persisted outputs rather than repeated API calls formed the primary reproducibility record. Each run retained the relevant classroom context or CPB processing logs, Available Input, Explicit LTM, assessment answers, criterion-level Judge outputs, question-level scores, and associated metadata. Identical CPB Encoding inputs reused the same cached Encoding result, preventing equivalent learning states from diverging through repeated API calls. Run manifests, output hashes, and integrity audits were used to verify that the prespecified runs, answers, processing records, memory states, and Judge results were complete before inclusion in analysis. Study 3 additionally verified the correspondence between matched CPB trajectories and their Study 2 baselines.
 
 All statistical analyses were performed on these frozen outputs using fixed analysis configurations and version-recorded software dependencies. Bootstrap procedures used prespecified resampling units and fixed analysis seeds, allowing reported confidence intervals and derived statistics to be recomputed from the same stored data. Reproducibility in this study therefore refers to \textbf{reconstructing the experimental procedure, tracing results to frozen inputs and persisted outputs, and repeating downstream analyses}, rather than guaranteeing that future calls to the same remote LLM API will reproduce identical text.
 
