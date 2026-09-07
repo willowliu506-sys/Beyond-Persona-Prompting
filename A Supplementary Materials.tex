@@ -7,6 +7,8 @@
 \let\thetable\thefigure
 \makeatother
 
+\begingroup
+\setstretch{1.0}
 \section{Processing-Demand Estimator Sensitivity}
 \label{appendix:pdb-sensitivity}
 
@@ -16,7 +18,7 @@
 \label{tab:appendix-pdb-sensitivity}
 \small
 \setlength{\tabcolsep}{8pt}
-\renewcommand{\arraystretch}{1.15}
+\renewcommand{\arraystretch}{1.05}
 \begin{tabular*}{0.82\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.58\textwidth}r@{}}
 \toprule
 \textbf{Validation metric} & \textbf{Result} \\
@@ -44,7 +46,7 @@ Low--High extreme flips & 0 \\
 \label{tab:appendix-human-disagreement-audit}
 \scriptsize
 \setlength{\tabcolsep}{2pt}
-\renewcommand{\arraystretch}{1.15}
+\renewcommand{\arraystretch}{1.05}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.09\textwidth}>{\raggedright\arraybackslash}p{0.07\textwidth}>{\raggedright\arraybackslash}p{0.08\textwidth}>{\raggedright\arraybackslash}p{0.08\textwidth}>{\raggedright\arraybackslash}p{0.20\textwidth}>{\raggedright\arraybackslash}p{0.39\textwidth}@{}}
 \toprule
 \textbf{Question} & \makecell{\textbf{Crite-}\\\textbf{rion}} & \textbf{Human 1} & \textbf{Human 2} & \textbf{Disagreement category} & \textbf{Audit summary} \\
@@ -60,6 +62,7 @@ Low--High extreme flips & 0 \\
 \vspace{2pt}
 \parbox{\textwidth}{\footnotesize\textit{Note.} This audit characterises the semantic boundary underlying each original disagreement. It does not overwrite either rater's independent label or construct a forced consensus reference.}
 \end{table}
+\endgroup
 
 \section{LLM Judge Prompt}
 \label{appendix:llm-judge-prompt}
@@ -156,8 +159,8 @@ CPB & B2 & 4.737 & 5.295 & 0.558 & 2.069 & 2.368 & 0.298 & 42.07 & 37.36 & $-4.7
 \textbf{Representation} & \textbf{Profile} & \textbf{Contrast} & \textbf{Study 2 difference} & \textbf{Study 3 difference} & \textbf{Difference change} \\
 \midrule
 Prompt & A1 & Moderate--High & 0.027 & 0.218 & 0.190 \\
-Prompt & A2 & Moderate--High & 0.027 & 0.027 & $-0.000$ \\
-Prompt & B1 & Moderate--High & 0.027 & 0.027 & $-0.000$ \\
+Prompt & A2 & Moderate--High & 0.027 & 0.027 & 0.000 \\
+Prompt & B1 & Moderate--High & 0.027 & 0.027 & 0.000 \\
 Prompt & B2 & Moderate--High & 0.027 & 0.333 & 0.306 \\
 CPB & A1 & Low--Medium & 1.837 & 1.952 & 0.116 \\
 CPB & A1 & Medium--High & 1.667 & 1.837 & 0.170 \\
@@ -251,6 +254,6 @@ CPB & B2 & High & $-1.163$ & $[-2.555,0.228]$ & $-0.302$ \\
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,keepaspectratio]{Figures/Chapter4/Study3_v3_Figure_7_SQ2_distracted_pdb_profiles.png}
-    \caption[Distracted-material PDB profiles in Study 3.]{Distracted-material PDB--performance profiles across multidimensional Study 3 learners.}
+    \caption[Distracted-material PDB profiles in Study 3.]{Distracted-material PDB--performance profiles with response-stage attribute additions.}
     \label{fig:appendix-study3-distracted-pdb-profiles}
 \end{figure}
